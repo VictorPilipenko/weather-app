@@ -108,7 +108,7 @@ export default class Table extends Component {
         <th
           ref={c => (this._headers[idx] = c)}
           key={idx}
-          style={{ width: col.width }}
+          style={{ width: col.width, visibility: col.visibility }}
           role="columnheader"
           scope="col"
           {...sortProps}
@@ -130,8 +130,8 @@ export default class Table extends Component {
       return (
         <tr key={getKeys(row)} {...trProps}>
           {columns.map((col, i) =>
-            <td key={i} className={getCellClass(col, row)}>
-              {getCellValue(col, row)}
+            <td key={i} className={getCellClass(col, row)} style={{ visibility: col.visibility }} >
+              {getCellValue(col, row)} 
             </td>,
           )}
         </tr>
@@ -154,7 +154,7 @@ export default class Table extends Component {
           {rows.length
             ? rows
             : <tr>
-                <td colSpan={columns.length} className="text-center">
+                <td colSpan={columns.length} className="text-center" >
                   No data
                 </td>
               </tr>}

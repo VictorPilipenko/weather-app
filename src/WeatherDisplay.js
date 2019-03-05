@@ -5,7 +5,7 @@ import DataTable from './Table/DataTable';
 class WeatherDisplay extends Component {
     state = {
         weatherCity: null,
-        weatherData: []
+        weatherData: [],
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -22,7 +22,7 @@ class WeatherDisplay extends Component {
         if (prevProps.myArray !== this.props.myArray) {
             this.apiRequestLoop(this.state.weatherCity.length).then(result =>
                 this.setState(prevState => (
-                    { weatherData: { ...prevState.weatherData,  result }}
+                    { weatherData: { ...prevState.weatherData, result } }
                 ))
             )
         }
@@ -54,6 +54,7 @@ class WeatherDisplay extends Component {
             this.state.weatherData.result.map((item, i) => {
                 data.push({
                     id: i,
+                    name: item.name,
                     current: item.main.temp,
                     high: item.main.temp_max,
                     low: item.main.temp_min
@@ -62,20 +63,23 @@ class WeatherDisplay extends Component {
         }
 
         const columns = [
-            { title: 'Current', prop: 'current' },
-            { title: 'High', prop: 'high' },
-            { title: 'Low', prop: 'low' },
+            { title: 'Name', prop: 'name' },
+            { title: 'Current temp', prop: 'current', visibility: this.props.isTitleCurrentChoice },
+            { title: 'High temp', prop: 'high', visibility: this.props.isHightCurrentChoice },
+            { title: 'Low temp', prop: 'low', visibility: this.props.isLowCurrentChoice },
         ];
         return (
-            <DataTable
-                className="container"
-                keys="id"
-                columns={columns}
-                initialData={data}
-                initialPageLength={5}
-                initialSortBy={{ prop: 'current', order: 'descending' }}
-                pageLengthOptions={[5, 20, 50]}
-            />
+            <>
+                <DataTable
+                    className="container"
+                    keys="id"
+                    columns={columns}
+                    initialData={data}
+                    initialPageLength={5}
+                    initialSortBy={{ prop: 'current', order: 'descending' }}
+                    pageLengthOptions={[5, 20, 50]}
+                />
+            </>
         )
     }
 }
