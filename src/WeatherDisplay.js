@@ -1,41 +1,82 @@
 import React, { Component } from 'react'
+import "./css.css";
+import DataTable from './Table/DataTable';
 
 class WeatherDisplay extends Component {
     state = {
-        weatherData: null
+        weatherCity: null,
+        weatherData: []
     };
 
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log("nextProps", nextProps, "\nprevState", prevState)
+        if (nextProps.myArray !== prevState.weatherCity)
+            return {
+                weatherCity: nextProps.myArray,
+            };
+        else
+            return null;
+    }
 
-    componentDidMount() {
-        console.log(this.props)
+    componentDidUpdate(prevProps) {
+        if (prevProps.myArray !== this.props.myArray) {
+            this.apiRequestLoop(this.state.weatherCity.length).then(result =>
+                this.setState(prevState => (
+                    { weatherData: { ...prevState.weatherData,  result }}
+                ))
+            )
+        }
+    }
 
-        const URL = `api.openweathermap.org/data/2.5/weather?lat=${this.props.lat}&lon=${this.props.lon}`;
-        // "&appid=b1b35bba8b434a28a0be2a3e1071ae5b&units=imperial";
-        fetch(URL).then(res => res.json())
-            .then(json => {
-                this.setState({
-                    weatherData: json
-                });
-            });
+    apiRequestLoop = inp => {
+        let promiseArray = [];
+        for (let i = 0; i < inp; i++) {
+            let dataUrlLoop = "http://api.openweathermap.org/data/2.5/weather?q=" +
+                this.state.weatherCity[i] +
+                "&APPID=b1b35bba8b434a28a0be2a3e1071ae5b";
+            promiseArray.push(
+                fetch(dataUrlLoop)
+                    .then(response => response.json())
+                    .then(data => {
+                        return data;
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+            );
+        }
+        return Promise.all(promiseArray)
     }
 
     render() {
-        const weatherData = this.state.weatherData;
-        if (!weatherData) return <>Loading</>;
-        const weather = weatherData.weather[0];
-        const iconUrl = "http://openweathermap.org/img/w/" + weather.icon + ".png";
+        const data = [];
+        if (this.state.weatherData.result) {
+            this.state.weatherData.result.map((item, i) => {
+                data.push({
+                    id: i,
+                    current: item.main.temp,
+                    high: item.main.temp_max,
+                    low: item.main.temp_min
+                });
+            })
+        }
+
+        const columns = [
+            { title: 'Current', prop: 'current' },
+            { title: 'High', prop: 'high' },
+            { title: 'Low', prop: 'low' },
+        ];
         return (
-            <>
-                <h1>
-                    {weather.main} in {weatherData.name}
-                    <img src={iconUrl} alt={weatherData.description} />
-                </h1>
-                <p>Current: {weatherData.main.temp}°</p>
-                <p>High: {weatherData.main.temp_max}°</p>
-                <p>Low: {weatherData.main.temp_min}°</p>
-                <p>Wind Speed: {weatherData.wind.speed} mi/hr</p>
-            </>
-        );
+            <DataTable
+                className="container"
+                keys="id"
+                columns={columns}
+                initialData={data}
+                initialPageLength={5}
+                initialSortBy={{ prop: 'current', order: 'descending' }}
+                pageLengthOptions={[5, 20, 50]}
+            />
+        )
     }
 }
 
