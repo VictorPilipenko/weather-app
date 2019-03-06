@@ -4,10 +4,10 @@ import WeatherDisplay from './WeatherDisplay'
 
 class App extends Component {
     state = {
-        
+
         activePlace: 0,
         value: `London\nBerlin`,
-        myArray: [],
+        arrayOfCityNames: [],
 
         isTitleCurrentChoice: 'visible',
         isCheckedTitleCurrentChoice: true,
@@ -27,7 +27,7 @@ class App extends Component {
         e.preventDefault();
         const arrayOfLines = this.state.value.split('\n');
         this.setState({
-            myArray: arrayOfLines
+            arrayOfCityNames: arrayOfLines
         });
     }
 
@@ -91,7 +91,7 @@ class App extends Component {
                 </div>
                 <div className="content">
                     <WeatherDisplay
-                        myArray={this.state.myArray}
+                        arrayOfCityNames={this.state.arrayOfCityNames}
 
                         isTitleCurrentChoice={this.state.isTitleCurrentChoice}
                         isCheckedTitleCurrentChoice={this.state.isCheckedTitleCurrentChoice}

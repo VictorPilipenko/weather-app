@@ -4,22 +4,22 @@ import DataTable from './Table/DataTable';
 
 class WeatherDisplay extends Component {
     state = {
-        weatherCity: null,
+        weatherCity: [],
         weatherData: [],
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
         console.log("nextProps", nextProps, "\nprevState", prevState)
-        if (nextProps.myArray !== prevState.weatherCity)
+        if (nextProps.arrayOfCityNames !== prevState.weatherCity)
             return {
-                weatherCity: nextProps.myArray,
+                weatherCity: nextProps.arrayOfCityNames,
             };
         else
             return null;
     }
 
     componentDidUpdate(prevProps) {
-        if (prevProps.myArray !== this.props.myArray) {
+        if (prevProps.arrayOfCityNames !== this.props.arrayOfCityNames) {
             this.apiRequestLoop(this.state.weatherCity.length).then(result =>
                 this.setState(prevState => (
                     { weatherData: { ...prevState.weatherData, result } }
