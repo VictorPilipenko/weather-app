@@ -4,9 +4,11 @@ import WeatherDisplay from './WeatherDisplay'
 
 class App extends Component {
     state = {
+        
         activePlace: 0,
         value: `London\nBerlin`,
         myArray: [],
+
         isTitleCurrentChoice: 'visible',
         isCheckedTitleCurrentChoice: true,
 
@@ -29,55 +31,26 @@ class App extends Component {
         });
     }
 
-    toggleCheckTitleCurrentChoice = () => {
-        this.state.isTitleCurrentChoice === 'visible' ?
+    toggle = name => {
+        this.state[`is${name}CurrentChoice`] === 'visible' ?
             this.setState({
-                isTitleCurrentChoice: 'hidden',
+                [`is${name}CurrentChoice`]: 'hidden',
             })
             :
             this.setState({
-                isTitleCurrentChoice: 'visible',
+                [`is${name}CurrentChoice`]: 'visible',
             })
 
         this.setState({
-            isCheckedTitleCurrentChoice: !this.state.isCheckedTitleCurrentChoice,
+            [`isChecked${name}CurrentChoice`]: !this.state[`isChecked${name}CurrentChoice`],
         });
-
-    };
-
-    toggleCheckHightCurrentChoice = () => {
-        this.state.isHightCurrentChoice === 'visible' ?
-            this.setState({
-                isHightCurrentChoice: 'hidden',
-            })
-            :
-            this.setState({
-                isHightCurrentChoice: 'visible',
-            })
-
-        this.setState({
-            isCheckedHightCurrentChoice: !this.state.isCheckedHightCurrentChoice,
-        });
-
-    };
-
-    toggleCheckLowCurrentChoice = () => {
-        this.state.isLowCurrentChoice === 'visible' ?
-            this.setState({
-                isLowCurrentChoice: 'hidden',
-            })
-            :
-            this.setState({
-                isLowCurrentChoice: 'visible',
-            })
-
-        this.setState({
-            isCheckedLowCurrentChoice: !this.state.isCheckedLowCurrentChoice,
-        });
-
     };
 
     render() {
+        const Title = "Title";
+        const Hight = "Hight";
+        const Low = "Low";
+
         return (
             <div className="grid-container">
                 <div className="header">
@@ -95,30 +68,31 @@ class App extends Component {
                     <div className='header-flex-items-second'>
                         <input type="checkbox" id="current" name="current"
                             checked={this.state.isCheckedTitleCurrentChoice}
-                            onClick={this.toggleCheckTitleCurrentChoice}
+                            onClick={() => this.toggle(Title)}
                         />
-                        <label style={{color:'cadetblue', margin: '10px'}} for="current">Current</label>
-                         <br />
-
-                   
-                        <input type="checkbox" id="hight" name="hight"
-                            checked={this.state.isCheckedHightCurrentChoice}
-                            onClick={this.toggleCheckHightCurrentChoice}
-                        />
-                        <label style={{color:'cadetblue', margin: '10px'}} for="hight">Hight</label>
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="current">Current</label>
                         <br />
 
-                   
+
+                        <input type="checkbox" id="hight" name="hight"
+                            checked={this.state.isCheckedHightCurrentChoice}
+                            onClick={() => this.toggle(Hight)}
+                        />
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="hight">Hight</label>
+                        <br />
+
+
                         <input type="checkbox" id="low" name="low"
                             checked={this.state.isCheckedLowCurrentChoice}
-                            onClick={this.toggleCheckLowCurrentChoice}
+                            onClick={() => this.toggle(Low)}
                         />
-                        <label style={{color:'cadetblue', margin: '10px'}} for="low">Low</label>
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="low">Low</label>
                     </div>
                 </div>
                 <div className="content">
                     <WeatherDisplay
                         myArray={this.state.myArray}
+
                         isTitleCurrentChoice={this.state.isTitleCurrentChoice}
                         isCheckedTitleCurrentChoice={this.state.isCheckedTitleCurrentChoice}
 

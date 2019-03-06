@@ -69,17 +69,15 @@ class WeatherDisplay extends Component {
             { title: 'Low temp', prop: 'low', visibility: this.props.isLowCurrentChoice },
         ];
         return (
-            <>
-                <DataTable
-                    className="container"
-                    keys="id"
-                    columns={columns}
-                    initialData={data}
-                    initialPageLength={5}
-                    initialSortBy={{ prop: 'current', order: 'descending' }}
-                    pageLengthOptions={[5, 20, 50]}
-                />
-            </>
+            <DataTable
+                className="container"
+                keys="id"
+                columns={columns}
+                initialData={data}
+                initialPageLength={5}
+                initialSortBy={{ prop: 'current', order: 'descending' }}
+                pageLengthOptions={[5, 20, 50]}
+            />
         )
     }
 }
