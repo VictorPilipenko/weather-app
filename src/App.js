@@ -5,18 +5,17 @@ import WeatherDisplay from './WeatherDisplay'
 class App extends Component {
     state = {
 
-        activePlace: 0,
-        value: `London\nBerlin`,
+        value: `London\nBerlin\nZaporizhzhya`,
         arrayOfCityNames: [],
 
-        isTitleCurrentChoice: 'visible',
-        isCheckedTitleCurrentChoice: true,
+        isCurrentChoice: 'visible',
+        isCheckedCurrentChoice: true,
 
-        isHightCurrentChoice: 'visible',
-        isCheckedHightCurrentChoice: true,
+        isHighChoice: 'visible',
+        isCheckedHighChoice: true,
 
-        isLowCurrentChoice: 'visible',
-        isCheckedLowCurrentChoice: true,
+        isLowChoice: 'visible',
+        isCheckedLowChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -25,30 +24,35 @@ class App extends Component {
 
     handleClick = e => {
         e.preventDefault();
-        const arrayOfLines = this.state.value.split('\n');
-        this.setState({
-            arrayOfCityNames: arrayOfLines
-        });
+        try {
+            const arrayOfLines = this.state.value.split('\n');
+            this.setState({
+                arrayOfCityNames: arrayOfLines
+            });
+        }
+        catch (e) {
+            console.log(e)
+        }
     }
 
     toggle = name => {
-        this.state[`is${name}CurrentChoice`] === 'visible' ?
+        this.state[`is${name}Choice`] === 'visible' ?
             this.setState({
-                [`is${name}CurrentChoice`]: 'hidden',
+                [`is${name}Choice`]: 'hidden',
             })
             :
             this.setState({
-                [`is${name}CurrentChoice`]: 'visible',
+                [`is${name}Choice`]: 'visible',
             })
 
         this.setState({
-            [`isChecked${name}CurrentChoice`]: !this.state[`isChecked${name}CurrentChoice`],
+            [`isChecked${name}Choice`]: !this.state[`isChecked${name}Choice`],
         });
     };
 
     render() {
-        const Title = "Title";
-        const Hight = "Hight";
+        const Current = "Current";
+        const High = "High";
         const Low = "Low";
 
         return (
@@ -67,23 +71,23 @@ class App extends Component {
 
                     <div className='header-flex-items-second'>
                         <input type="checkbox" id="current" name="current"
-                            checked={this.state.isCheckedTitleCurrentChoice}
-                            onClick={() => this.toggle(Title)}
+                            checked={this.state.isCheckedCurrentChoice}
+                            onClick={() => this.toggle(Current)}
                         />
                         <label style={{ color: 'cadetblue', margin: '10px' }} for="current">Current</label>
                         <br />
 
 
-                        <input type="checkbox" id="hight" name="hight"
-                            checked={this.state.isCheckedHightCurrentChoice}
-                            onClick={() => this.toggle(Hight)}
+                        <input type="checkbox" id="high" name="high"
+                            checked={this.state.isCheckedHighChoice}
+                            onClick={() => this.toggle(High)}
                         />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="hight">Hight</label>
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="high">High</label>
                         <br />
 
 
                         <input type="checkbox" id="low" name="low"
-                            checked={this.state.isCheckedLowCurrentChoice}
+                            checked={this.state.isCheckedLowChoice}
                             onClick={() => this.toggle(Low)}
                         />
                         <label style={{ color: 'cadetblue', margin: '10px' }} for="low">Low</label>
@@ -93,14 +97,14 @@ class App extends Component {
                     <WeatherDisplay
                         arrayOfCityNames={this.state.arrayOfCityNames}
 
-                        isTitleCurrentChoice={this.state.isTitleCurrentChoice}
-                        isCheckedTitleCurrentChoice={this.state.isCheckedTitleCurrentChoice}
+                        isCurrentChoice={this.state.isCurrentChoice}
+                        isCheckedCurrentChoice={this.state.isCheckedCurrentChoice}
 
-                        isHightCurrentChoice={this.state.isHightCurrentChoice}
-                        isCheckedHightCurrentChoice={this.state.isCheckedHightCurrentChoice}
+                        isHighChoice={this.state.isHighChoice}
+                        isCheckedHightChoice={this.state.isCheckedHightChoice}
 
-                        isLowCurrentChoice={this.state.isLowCurrentChoice}
-                        isCheckedLowCurrentChoice={this.state.isCheckedLowCurrentChoice}
+                        isLowChoice={this.state.isLowChoice}
+                        isCheckedLowChoice={this.state.isCheckedLowChoice}
                     />
                 </div>
                 <div className="menu">
