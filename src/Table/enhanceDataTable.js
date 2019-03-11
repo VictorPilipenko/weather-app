@@ -8,7 +8,6 @@ import {
   pageSizeChange,
 } from './actions';
 import { containsIgnoreCase } from './utils';
-import type { State } from './types';
 
 type Props = {
   pageLengthOptions: Array<number>,

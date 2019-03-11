@@ -59,7 +59,7 @@ export default class Pagination extends Component {
       }
       buttons.push(
         <li key={i} className={isCurrent ? 'active' : null}>
-          <a role="button" href="#" onClick={btnEvent} tabIndex="0">
+          <a role="button" href="_blank" onClick={btnEvent} tabIndex="0">
             <span>
               {i + 1}
             </span>
@@ -91,7 +91,7 @@ export default class Pagination extends Component {
       <li key="first" className={!isNotFirst ? 'disabled' : null}>
         <a
           role="button"
-          href="#"
+          href="_blank"
           tabIndex="0"
           onClick={firstHandler}
           aria-disabled={!isNotFirst}
@@ -103,7 +103,7 @@ export default class Pagination extends Component {
       <li key="prev" className={!isNotFirst ? 'disabled' : null}>
         <a
           role="button"
-          href="#"
+          href="_blank"
           tabIndex="0"
           onClick={prevHandler}
           aria-disabled={!isNotFirst}
@@ -118,7 +118,7 @@ export default class Pagination extends Component {
       <li key="next" className={!isNotLast ? 'disabled' : null}>
         <a
           role="button"
-          href="#"
+          href="_blank"
           tabIndex="0"
           onClick={nextHandler}
           aria-disabled={!isNotLast}
@@ -130,7 +130,7 @@ export default class Pagination extends Component {
       <li key="last" className={!isNotLast ? 'disabled' : null}>
         <a
           role="button"
-          href="#"
+          href="_blank"
           tabIndex="0"
           onClick={lastHandler}
           aria-disabled={!isNotLast}

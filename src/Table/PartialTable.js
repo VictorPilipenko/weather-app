@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 export default class PartialTable extends Component {
   render() {
     const {
-      onFilter,
+      // onFilter,
       onPageSizeChange,
       onPageNumberChange,
       onSort,
@@ -26,7 +26,7 @@ export default class PartialTable extends Component {
       pageNumber,
       totalPages,
       sortBy,
-      filterValues,
+      // filterValues,
     } = this.props.data;
 
     return (

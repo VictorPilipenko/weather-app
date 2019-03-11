@@ -55,10 +55,18 @@ class WeatherDisplay extends Component {
         const Current = "Current";
         const High = "High";
         const Low = "Low";
+        const paramsForExport = [Current, High, Low];
 
         const data = [];
         const dataForCSV = [];
         const dataForExcel = [];
+
+        let columnsForCVS = [
+            { label: 'Name', key: 'name' },
+            { label: 'Current temp', key: 'current' },
+            { label: 'High temp', key: 'high' },
+            { label: 'Low temp', key: 'low' },
+        ];
 
         if (this.state.weatherData.result) {
             this.state.weatherData.result.map((item, i) => {
@@ -77,72 +85,55 @@ class WeatherDisplay extends Component {
                     low: item.main.temp_min
                 });
 
-                // dataForExcel.push({
-                //     'Name': item.name,
-                //     'Current temp': item.main.temp,
-                //     'High temp': item.main.temp_max,
-                //     'Low temp': item.main.temp_min
-                // });
+                dataForExcel.push({
+                    'Name': item.name,
+                    'Current temp': item.main.temp,
+                    'High temp': item.main.temp_max,
+                    'Low temp': item.main.temp_min
+                });
             })
         }
 
         const preparationForExport = value => {
-            let sss = 0;
-            for (let i = 0; i < value.length; i++) {
+            for (let p = 0; p < value.length; p++) {
+                if (this.props[`is${value[p]}Choice`] === 'hidden') {
 
-                data.map(item => {
-
-                    //default
-                    dataForCSV.push({
-                        name: item.name
+                    dataForCSV.map(item => {
+                        if (value[p] === Current) {
+                            delete item.current
+                        }
+                        else if (value[p] === High) {
+                            delete item.high
+                        }
+                        else if (value[p] === Low) {
+                            delete item.low
+                        }
                     });
 
-                    dataForExcel.push({
-                        'Name': item.name
+                    columnsForCVS.map(item => {
+                        if (item.label.includes(value[p])) {
+                            delete item.label
+                        }
                     });
 
-                    if (this.props[`is${value[i]}Choice`] === 'visible') {
-                        if (value[i] === Current) {
-                            dataForCSV.push({
-                                current: item.current,
-                            });
-
-                            dataForExcel.push({
-                                'Current temp': item.current,
-                            });
+                    dataForExcel.map(item => {
+                        if (value[p] === Current) {
+                            delete item[`Current temp`]
                         }
-
-                        if (value[i] === High) {
-                            dataForCSV.push({
-                                high: item.high,
-                            });
-
-                            dataForExcel.push({
-                                'High temp': item.high,
-                            });
+                        else if (value[p] === High) {
+                            delete item[`High temp`]
                         }
-
-                        if (value[i] === Low) {
-                            dataForCSV.push({
-                                low: item.low
-                            });
-
-                            dataForExcel.push({
-                                'Low temp': item.low
-                            });
+                        else if (value[p] === Low) {
+                            delete item[`Low temp`]
                         }
-                    }
+                    });
 
-                })
+                }
             }
+            console.log(dataForCSV)
+            console.log(columnsForCVS)
+            console.log(dataForExcel)
         }
-
-        const columnsForCVS = [
-            { label: 'Name', key: 'name' },
-            { label: 'Current temp', key: 'current' },
-            { label: 'High temp', key: 'high' },
-            { label: 'Low temp', key: 'low' },
-        ];
 
         const columns = [
             { title: 'Name', prop: 'name' },
@@ -151,7 +142,7 @@ class WeatherDisplay extends Component {
             { title: 'Low temp', prop: 'low', visibility: this.props.isLowChoice },
         ];
 
-        // preparationForExport([Current, High, Low]);
+        preparationForExport(paramsForExport);
 
         return (
             <>

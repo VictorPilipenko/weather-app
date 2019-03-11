@@ -3,8 +3,8 @@
  */
 
 import { sort, filter } from './utils';
-import { ActionTypes, DOMAIN } from './actions';
-import type { State, Action, SortBy } from './types';
+import { ActionTypes, /*DOMAIN*/ } from './actions';
+import type { State, Action, /*SortBy*/ } from './types';
 
 const initialState: State = {
   initialized: false,
@@ -132,9 +132,10 @@ export function dataReducer(
 
     case ActionTypes.DATA_SORT:
       return dataSort(state, action);
+    default: return state;
   }
 
-  return state;
+  // return state;
 }
 
 export default function tableReducer(state: Object = {}, action: Action) {
@@ -152,7 +153,8 @@ export default function tableReducer(state: Object = {}, action: Action) {
         [table]: dataReducer(state[table], action),
       };
     }
+    default: return state
   }
 
-  return state;
+  // return state;
 }
