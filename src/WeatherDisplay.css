@@ -41,20 +41,10 @@
 
 .exportToCSVButton{
   background-color: darkcyan;
+  border-color: darkcyan;
 }
-
-/* .exportToCSVButton:hover,:active,:visited, :link{
-  text-decoration: none;
-  color: #fff;
-  cursor: pointer;
-}
-
-.exportToExcelButton:hover,:active,:visited, :link{
-  text-decoration: none;
-  color: #fff;
-  cursor: pointer;
-} */
 
 .exportToExcelButton{
   background-color: darkcyan;
+  border-color: darkcyan;
 }

@@ -42,6 +42,6 @@ export default  data => {
 
         let url = window.URL.createObjectURL(new Blob([s2ab(wbout)], {type:'application/octet-stream'}))
 
-        download(url, 'weather.xlsx')
+        download(url, 'domains.xlsx')
     })
 }

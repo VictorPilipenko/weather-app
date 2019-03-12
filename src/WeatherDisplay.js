@@ -185,7 +185,7 @@ class WeatherDisplay extends Component {
                 <div className="exportButtonsWrapper">
 
                     <CSVLink
-                        filename={"weather.csv"}
+                        filename={"domains.csv"}
                         data={dataForCSV}
                         headers={columnsForCVS}
                         className="btn btn-primary exportToCSVButton"
