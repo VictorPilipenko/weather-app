@@ -57,7 +57,7 @@ export default class PartialTable extends Component {
           style={{margin: "10px"}}
         />
 
-        <div className="col-xs-8">
+        <div className="col-xs-8" style={{ display: "flex" }}>
           <Pagination
             className="pagination pull-right"
             currentPage={pageNumber}
@@ -66,7 +66,7 @@ export default class PartialTable extends Component {
           />
         </div>
 
-        <div>
+        <div style={{ display: "flex", justifyContent: "flex-end"}}>
           <label htmlFor="page-menu">Page size:</label>
           <select
             id="page-menu"

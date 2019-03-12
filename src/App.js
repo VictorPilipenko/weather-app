@@ -5,17 +5,17 @@ import WeatherDisplay from './WeatherDisplay'
 class App extends Component {
     state = {
 
-        value: `London\nBerlin\nZaporizhzhya`,
-        arrayOfCityNames: [],
+        value: `google.com\nstackoverflow.com`,
+        arrayOfDomainNames: [],
 
-        isCurrentChoice: 'visible',
-        isCheckedCurrentChoice: true,
+        isCreateChoice: 'visible',
+        isCheckedCreateChoice: true,
 
-        isHighChoice: 'visible',
-        isCheckedHighChoice: true,
+        isUpdateChoice: 'visible',
+        isCheckedUpdateChoice: true,
 
-        isLowChoice: 'visible',
-        isCheckedLowChoice: true,
+        isExpiryChoice: 'visible',
+        isCheckedExpiryChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -26,8 +26,9 @@ class App extends Component {
         e.preventDefault();
         try {
             const arrayOfLines = this.state.value.split('\n');
+            let clearArrayOfLines = arrayOfLines.filter(element => element !== "");
             this.setState({
-                arrayOfCityNames: arrayOfLines
+                arrayOfDomainNames: clearArrayOfLines
             });
         }
         catch (e) {
@@ -51,64 +52,77 @@ class App extends Component {
     };
 
     render() {
-        const Current = "Current";
-        const High = "High";
-        const Low = "Low";
+        const Create = "Create";
+        const Update = "Update";
+        const Expiry = "Expiry";
+
 
         return (
             <div className="grid-container">
                 <div className="header">
                     <div className="header-flex-items-first">
+                        {/* три пробела перед и после*/}
+                        <span className="legendForTextarea">{'\u00A0'}{'\u00A0'}{'\u00A0'}Add domains{'\u00A0'}{'\u00A0'}{'\u00A0'}</span>
                         <textarea
                             value={this.state.value}
-                            placeholder="Enter city name here"
+                            placeholder="...one per line"
                             onChange={this.handleChange}
                             cols={50}
                             rows={5}
+                            className="textArea"
                         />
-                        <button className="button" onClick={this.handleClick} />
+                        <div className="buttonWrapper">
+                            <p className="countCities">{this.state.arrayOfDomainNames.length} domains added</p>
+                            <button className="buttonGetDomains" onClick={this.handleClick}>Push</button>
+                        </div>
+
                     </div>
 
                     <div className='header-flex-items-second'>
-                        <input type="checkbox" id="current" name="current"
-                            checked={this.state.isCheckedCurrentChoice}
-                            onClick={() => this.toggle(Current)}
+
+
+                        <input type="checkbox" id="create" name="create"
+                            checked={this.state.isCheckedCreateChoice}
+                            onClick={() => this.toggle(Create)}
                         />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="current">Current</label>
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
                         <br />
 
 
-                        <input type="checkbox" id="high" name="high"
-                            checked={this.state.isCheckedHighChoice}
-                            onClick={() => this.toggle(High)}
+                        <input type="checkbox" id="update" name="update"
+                            checked={this.state.isCheckedUpdateChoice}
+                            onClick={() => this.toggle(Update)}
                         />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="high">High</label>
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
                         <br />
 
 
-                        <input type="checkbox" id="low" name="low"
-                            checked={this.state.isCheckedLowChoice}
-                            onClick={() => this.toggle(Low)}
+                        <input type="checkbox" id="expiry" name="expiry"
+                            checked={this.state.isCheckedExpiryChoice}
+                            onClick={() => this.toggle(Expiry)}
                         />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="low">Low</label>
+                        <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+
+
                     </div>
                 </div>
                 <div className="content">
                     <WeatherDisplay
-                        arrayOfCityNames={this.state.arrayOfCityNames}
+                        arrayOfDomainNames={this.state.arrayOfDomainNames}
 
-                        isCurrentChoice={this.state.isCurrentChoice}
-                        isCheckedCurrentChoice={this.state.isCheckedCurrentChoice}
-
-                        isHighChoice={this.state.isHighChoice}
-                        isCheckedHightChoice={this.state.isCheckedHightChoice}
-
-                        isLowChoice={this.state.isLowChoice}
-                        isCheckedLowChoice={this.state.isCheckedLowChoice}
+                        isCreateChoice={this.state.isCreateChoice}
+                        isUpdateChoice={this.state.isUpdateChoice}
+                        isExpiryChoice={this.state.isExpiryChoice}
                     />
                 </div>
                 <div className="menu">
                     <div className="grid-container-menu">
+                        {/* <div class="banner">
+                            <div class="animated">
+                                <div class="text1">Только в этом месяце</div>
+                                <div class="text2">Скидки по 20%</div>
+                            </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="footer">

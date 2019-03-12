@@ -11,10 +11,10 @@ const getCellValue = ({ prop, defaultContent, render }, row) =>
   !isEmpty(prop) && isEmpty(row[prop])
     ? defaultContent
     : // Use the render function for the value.
-      render
+    render
       ? render(row[prop], row)
       : // Otherwise just return the value.
-        row[prop];
+      row[prop];
 
 const getCellClass = ({ prop, className }, row) =>
   !isEmpty(prop) && isEmpty(row[prop])
@@ -108,7 +108,7 @@ export default class Table extends Component {
         <th
           ref={c => (this._headers[idx] = c)}
           key={idx}
-          style={{ width: col.width, visibility: col.visibility }}
+          style={{ width: col.width, /*visibility: col.visibility*/ }}
           role="columnheader"
           scope="col"
           {...sortProps}
@@ -124,6 +124,7 @@ export default class Table extends Component {
     });
 
     const getKeys = Array.isArray(keys) ? keyGetter(keys) : simpleGet(keys);
+
     const rows = dataArray.map(row => {
       const trProps = buildRowOptions ? buildRowOptions(row) : {};
 
@@ -131,20 +132,75 @@ export default class Table extends Component {
         <tr key={getKeys(row)} {...trProps}>
           {columns.map((col, i) =>
             <td key={i} className={getCellClass(col, row)} style={{ visibility: col.visibility }} title={getCellValue(col, row)} >
-              {getCellValue(col, row)} 
+              {getCellValue(col, row)}
             </td>,
           )}
         </tr>
       );
     });
 
+
+
+
+    // удаление столбца по клику на ячейку
+    // window.onload = function () {
+    //   var table = document.getElementById('table');
+
+
+    //   table.onclick = function (e) {
+
+    //     var target = e.target;
+
+    //     while (target.nodeName !== 'TD') {
+
+    //       target = target.parentNode;
+
+    //     }
+
+    //     if (target.nodeName !== 'TD') {
+    //       return;
+    //     }
+
+    //     var parent = target.parentNode,
+    //       tdLength = parent.childNodes.length;
+
+    //     parent.parentNode.removeChild(parent);
+
+    //     target.rel = 'active';
+
+    //     for (var i = 0; i < tdLength; i++) {
+    //       if (parent.children[i].rel === 'active') {
+    //         removeTd(i);
+    //         break;
+    //       }
+    //     }
+
+    //   }
+
+
+    //   function removeTd(num) {
+
+    //     var tr = table.querySelectorAll('tr'),
+    //       trLength = tr.length;
+
+    //     for (var i = 0; i < trLength; i++) {
+    //       tr[i].removeChild(tr[i].children[num]);
+    //     }
+
+    //   }
+
+    // };
+
+
+
+
     return (
-      <table {...otherProps}>
+      <table {...otherProps} /*id="table"*/>
         {!sortBy
           ? null
           : <caption className="sr-only" role="alert" aria-live="polite">
-              {`Sorted by ${sortBy.prop}: ${sortBy.order} order`}
-            </caption>}
+            {`Sorted by ${sortBy.prop}: ${sortBy.order} order`}
+          </caption>}
         <thead>
           <tr>
             {headers}
@@ -154,10 +210,10 @@ export default class Table extends Component {
           {rows.length
             ? rows
             : <tr>
-                <td colSpan={columns.length} className="text-center" >
-                  No data
+              <td colSpan={columns.length} className="text-center" >
+                No data
                 </td>
-              </tr>}
+            </tr>}
         </tbody>
       </table>
     );

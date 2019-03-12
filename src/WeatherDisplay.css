@@ -29,3 +29,32 @@
 .sort-icon.sort-ascending:after  { content: '\f0de'; }
 .sort-icon.sort-descending:after { content: '\f0dd'; }
 .sort-icon.sort-none:after  { content: '\f0dc'; }
+
+.exportButtonsWrapper{
+  display: flex;
+  max-width: 265px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.exportToCSVButton{
+  background-color: darkcyan;
+}
+
+/* .exportToCSVButton:hover,:active,:visited, :link{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.exportToExcelButton:hover,:active,:visited, :link{
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+} */
+
+.exportToExcelButton{
+  background-color: darkcyan;
+}
