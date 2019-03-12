@@ -94,6 +94,18 @@ class WeatherDisplay extends Component {
             })
         }
 
+        Object.prototype.removeItem = function (key, value) {
+            if (value == undefined)
+                return;
+
+            for (var i in this) {
+                if (this[i][key] == value) {
+                    this.splice(i, 1);
+                }
+            }
+        };
+
+        // value[p]=Low; columnsForCVS = [{ key: 'low' }]
         const preparationForExport = value => {
             for (let p = 0; p < value.length; p++) {
                 if (this.props[`is${value[p]}Choice`] === 'hidden') {
@@ -112,7 +124,7 @@ class WeatherDisplay extends Component {
 
                     columnsForCVS.map(item => {
                         if (item.label.includes(value[p])) {
-                            delete item.label
+                            columnsForCVS.removeItem("key", value[p].toLowerCase());
                         }
                     });
 
