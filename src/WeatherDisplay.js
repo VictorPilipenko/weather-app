@@ -54,7 +54,8 @@ class WeatherDisplay extends Component {
         const Create = "Create";
         const Update = "Update";
         const Expiry = "Expiry";
-        const paramsForExport = [Create, Update, Expiry];
+        const Registrar = "Registrar";
+        const paramsForExport = [Create, Update, Expiry, Registrar];
 
         const data = [];
         const dataForCSV = [];
@@ -65,6 +66,7 @@ class WeatherDisplay extends Component {
             { label: 'Create date', key: 'create' },
             { label: 'Update date', key: 'update' },
             { label: 'Expiry date', key: 'expiry' },
+            { label: 'Registrar name', key: 'registrar' },
         ];
 
         if (this.state.domainsData.result) {
@@ -75,25 +77,25 @@ class WeatherDisplay extends Component {
                         name: item.domain_name,
                         create: item.create_date,
                         update: item.update_date,
-                        expiry: item.expiry_date
+                        expiry: item.expiry_date,
+                        registrar: item.domain_registrar.registrar_name,
                     });
 
                     dataForCSV.push({
                         name: item.domain_name,
                         create: item.create_date,
                         update: item.update_date,
-                        expiry: item.expiry_date
+                        expiry: item.expiry_date,
+                        registrar: item.domain_registrar.registrar_name,
                     });
 
                     dataForExcel.push({
                         'Domain name': item.domain_name,
                         'Create date': item.create_date,
                         'Update date': item.update_date,
-                        'Expiry date': item.expiry_date
+                        'Expiry date': item.expiry_date,
+                        'Registrar name': item.domain_registrar.registrar_name,
                     });
-
-                    console.log(data)
-
                 }
                 catch{
                     console.log("error")
@@ -129,6 +131,9 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Expiry) {
                                 delete item.expiry
                             }
+                            else if (value[p] === Registrar) {
+                                delete item.registrar
+                            }
                         });
 
                         columnsForCVS.map(item => {
@@ -147,6 +152,9 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Expiry) {
                                 delete item[`Expiry date`]
                             }
+                            else if (value[p] === Registrar) {
+                                delete item[`Registrar name`]
+                            }
                         });
 
                     }
@@ -155,9 +163,6 @@ class WeatherDisplay extends Component {
             catch{
                 console.log("error")
             }
-            // console.log(dataForCSV)
-            // console.log(columnsForCVS)
-            // console.log(dataForExcel)
         }
 
         const columns = [
@@ -166,6 +171,7 @@ class WeatherDisplay extends Component {
             { title: 'Create date', prop: 'create', visibility: this.props.isCreateChoice },
             { title: 'Update date', prop: 'update', visibility: this.props.isUpdateChoice },
             { title: 'Expiry date', prop: 'expiry', visibility: this.props.isExpiryChoice },
+            { title: 'Registrar name', prop: 'registrar', visibility: this.props.isRegistrarChoice },
         ];
 
         preparationForExport(paramsForExport);

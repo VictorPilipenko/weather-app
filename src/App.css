@@ -82,6 +82,12 @@ h3{
   border-radius: 15px 15px 0px 0px
 }
 
+.fieldsetApp{
+  /* display: flex; */
+  /* flex-direction: row; */
+  padding: 5px;
+}
+
 .buttonWrapper{
   display: flex;
   justify-content: flex-end;
@@ -101,8 +107,9 @@ h3{
 }
 
 .header-flex-items-second { 
-  font-size: 1.2em;
-  margin: 50px;
+  /* font-size: 1.2em; */
+  margin: 20px;
+  display: flex;
 }
 
 .grid-container-content {

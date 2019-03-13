@@ -5,7 +5,7 @@ import WeatherDisplay from './WeatherDisplay'
 class App extends Component {
     state = {
 
-        value: `google.com\nstackoverflow.com`,
+        value: `google.com`,
         arrayOfDomainNames: [],
 
         isCreateChoice: 'visible',
@@ -16,6 +16,10 @@ class App extends Component {
 
         isExpiryChoice: 'visible',
         isCheckedExpiryChoice: true,
+
+        //Registrar name
+        isRegistrarChoice: 'visible',
+        isCheckedRegistrarChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -51,10 +55,31 @@ class App extends Component {
         });
     };
 
+    // state = {
+    //     shown: true,
+    // };
+
+
+    // toggleShown() {
+    //     this.setState({
+    //         shown: !this.state.shown
+    //     });
+    // }
+
+
     render() {
+        // let shown = {
+        //     display: this.state.shown ? "block" : "none"
+        // };
+
+        // let hidden = {
+        //     display: this.state.shown ? "none" : "block"
+        // }
+
         const Create = "Create";
         const Update = "Update";
         const Expiry = "Expiry";
+        const Registrar = "Registrar";
 
 
         return (
@@ -80,29 +105,183 @@ class App extends Component {
 
                     <div className='header-flex-items-second'>
 
+                        <fieldset className="fieldsetApp">
+                            <legend>Technical metrics</legend>
 
-                        <input type="checkbox" id="create" name="create"
-                            checked={this.state.isCheckedCreateChoice}
-                            onClick={() => this.toggle(Create)}
-                        />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
-                        <br />
-
-
-                        <input type="checkbox" id="update" name="update"
-                            checked={this.state.isCheckedUpdateChoice}
-                            onClick={() => this.toggle(Update)}
-                        />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
-                        <br />
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
+                            <br />
 
 
-                        <input type="checkbox" id="expiry" name="expiry"
-                            checked={this.state.isCheckedExpiryChoice}
-                            onClick={() => this.toggle(Expiry)}
-                        />
-                        <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
+                            <br />
 
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="registrar">Registrar</label>
+                            <br />
+                        </fieldset>
+
+
+
+                        <fieldset className="fieldsetApp">
+                            <legend>Technical metrics</legend>
+
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
+                            <br />
+
+
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
+                            <br />
+
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="registrar">Registrar</label>
+                            <br />
+                        </fieldset>
+
+
+
+                        <fieldset className="fieldsetApp">
+                            <legend>Technical metrics</legend>
+
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
+                            <br />
+
+
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
+                            <br />
+
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="registrar">Registrar</label>
+                            <br />
+                        </fieldset>
+
+
+
+                        <fieldset className="fieldsetApp">
+                            <legend>Technical metrics</legend>
+
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
+                            <br />
+
+
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
+                            <br />
+
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="registrar">Registrar</label>
+                            <br />
+                        </fieldset>
+
+
+
+                        <fieldset className="fieldsetApp">
+                            <legend>Technical metrics</legend>
+
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
+                            <br />
+
+
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
+                            <br />
+
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="registrar">Registrar</label>
+                            <br />
+                        </fieldset>
 
                     </div>
                 </div>
@@ -113,6 +292,7 @@ class App extends Component {
                         isCreateChoice={this.state.isCreateChoice}
                         isUpdateChoice={this.state.isUpdateChoice}
                         isExpiryChoice={this.state.isExpiryChoice}
+                        isRegistrarChoice={this.state.isRegistrarChoice}
                     />
                 </div>
                 <div className="menu">
@@ -123,6 +303,42 @@ class App extends Component {
                                 <div class="text2">Скидки по 20%</div>
                             </div>
                         </div> */}
+
+                        <fieldset className="fieldsetApp">
+                            <legend>Technical metrics</legend>
+
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="create">Create</label>
+                            <br />
+
+
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="update">Update</label>
+                            <br />
+
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="expiry">Expiry</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                            />
+                            <label style={{ color: 'cadetblue', margin: '10px' }} for="registrar">Registrar</label>
+                            <br />
+                        </fieldset>
+
+
                     </div>
                 </div>
                 <div className="footer">
