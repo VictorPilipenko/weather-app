@@ -49,6 +49,7 @@ a{
   grid-area: content;
   background-color: #546e7a;
   /* background-color: darkseagreen; */
+  color: white;
 }
 
 .footer { 
@@ -65,7 +66,7 @@ h3{
   position: relative;
   height: 1fr;
   display: flex;
-  margin: 25px 0 0 25px;
+  margin: 25px;
   flex-direction: column;
 }
 
@@ -85,7 +86,7 @@ h3{
 .fieldsetApp{
   /* display: flex; */
   /* flex-direction: row; */
-  padding: 5px;
+  margin: 20px;
 }
 
 .buttonWrapper{
@@ -165,8 +166,9 @@ h3{
 .color55 {background-color: #4e342e;box-shadow: 0px 0px 38px -6px rgba(0,0,0,0.75);}
 
 .logo{
-  width: 100px;
+  width: 175px;
   height: 68px;
+  opacity: 0.1;
 }
 
 @keyframes text1

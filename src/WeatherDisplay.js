@@ -40,7 +40,9 @@ class WeatherDisplay extends Component {
                 fetch(dataUrlLoop)
                     .then(response => response.json())
                     .then(data => {
+                        console.log(data)
                         return data;
+
                     })
                     .catch(error => {
                         console.log(error.message)
@@ -70,7 +72,7 @@ class WeatherDisplay extends Component {
         ];
 
         if (this.state.domainsData.result) {
-            this.state.domainsData.result.map((item, i) => {
+            this.state.domainsData.result.forEach((item, i) => {
                 try {
                     data.push({
                         id: i,
@@ -103,13 +105,13 @@ class WeatherDisplay extends Component {
             })
         }
 
-        Object.prototype.removeItem = function (key, value) {
+        function removeItemInColumnsForCVS(key, value) {
             if (value === undefined)
                 return;
 
-            for (var i in this) {
-                if (this[i][key] === value) {
-                    this.splice(i, 1);
+            for (let i in columnsForCVS) {
+                if (columnsForCVS[i][key] === value) {
+                    columnsForCVS.splice(i, 1);
                 }
             }
         };
@@ -121,7 +123,7 @@ class WeatherDisplay extends Component {
                 for (let p = 0; p < value.length; p++) {
                     if (this.props[`is${value[p]}Choice`] === 'hidden') {
 
-                        dataForCSV.map(item => {
+                        dataForCSV.forEach(item => {
                             if (value[p] === Create) {
                                 delete item.create
                             }
@@ -136,13 +138,13 @@ class WeatherDisplay extends Component {
                             }
                         });
 
-                        columnsForCVS.map(item => {
+                        columnsForCVS.forEach(item => {
                             if (item.label.includes(value[p])) {
-                                columnsForCVS.removeItem("key", value[p].toLowerCase());
+                                removeItemInColumnsForCVS("key", value[p].toLowerCase());
                             }
                         });
 
-                        dataForExcel.map(item => {
+                        dataForExcel.forEach(item => {
                             if (value[p] === Create) {
                                 delete item[`Create date`]
                             }
@@ -176,6 +178,12 @@ class WeatherDisplay extends Component {
 
         preparationForExport(paramsForExport);
 
+        console.log(columnsForCVS)
+
+        const copy = JSON.parse(JSON.stringify(columnsForCVS));
+
+        console.log(copy)
+
         return (
             <>
                 <DataTable
@@ -185,7 +193,7 @@ class WeatherDisplay extends Component {
                     initialData={data}
                     initialPageLength={5}
                     // initialSortBy={{ prop: 'name', order: 'descending' }}
-                    pageLengthOptions={[5, 20, 50]}
+                    pageLengthOptions={[2, 3, 5]}
                 />
 
                 <div className="exportButtonsWrapper">
@@ -199,9 +207,9 @@ class WeatherDisplay extends Component {
                         Download CVS
                     </CSVLink>
 
-                    <a className="btn btn-primary exportToExcelButton" onClick={() => exportToExcel(dataForExcel)}>
+                    <button className="btn btn-primary exportToExcelButton" onClick={() => exportToExcel(dataForExcel)}>
                         Export to excel :)
-                    </a>
+                    </button>
                 </div>
             </>
         )

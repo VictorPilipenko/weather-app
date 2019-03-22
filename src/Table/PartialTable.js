@@ -72,6 +72,7 @@ export default class PartialTable extends Component {
             id="page-menu"
             value={pageSize}
             onChange={onPageSizeChange}
+            style={{color: "black"}}
           >
             {pageLengthOptions.map(opt =>
               <option key={opt} value={opt}>
