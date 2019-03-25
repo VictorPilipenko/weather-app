@@ -19,8 +19,7 @@
     "react-redux": "^6.0.1",
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
-    "rimraf": "^2.4.3",
-    "xlsx": "^0.14.1"
+    "xlsexport": "^1.5.2"
   },
   "scripts": {
     "start": "react-scripts start",

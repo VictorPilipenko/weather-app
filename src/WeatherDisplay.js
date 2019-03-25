@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import "./WeatherDisplay.css";
 import DataTable from './Table/DataTable';
 import { CSVLink } from "react-csv";
-import exportToExcel from './exportToExel';
-
+import xlsExport from 'xlsexport';
 
 class WeatherDisplay extends Component {
     state = {
@@ -12,7 +11,7 @@ class WeatherDisplay extends Component {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        // console.log("nextProps", nextProps, "\nprevState", prevState)
+        console.log("nextProps", nextProps, "\nprevState", prevState)
         if (nextProps.arrayOfDomainNames !== prevState.domainsNames)
             return {
                 domainsNames: nextProps.arrayOfDomainNames,
@@ -24,9 +23,12 @@ class WeatherDisplay extends Component {
     componentDidUpdate(prevProps) {
         if (prevProps.arrayOfDomainNames !== this.props.arrayOfDomainNames) {
             this.apiRequestLoop(this.state.domainsNames.length).then(result =>
-                this.setState(prevState => (
-                    { domainsData: { ...prevState.domainsData, result } }
-                ))
+                this.setState(prevState => ({
+                    domainsData: {
+                        ...prevState.domainsData,
+                        result
+                    }
+                }))
             )
         }
     }
@@ -42,7 +44,6 @@ class WeatherDisplay extends Component {
                     .then(data => {
                         console.log(data)
                         return data;
-
                     })
                     .catch(error => {
                         console.log(error.message)
@@ -57,7 +58,9 @@ class WeatherDisplay extends Component {
         const Update = "Update";
         const Expiry = "Expiry";
         const Registrar = "Registrar";
-        const paramsForExport = [Create, Update, Expiry, Registrar];
+        const Servers = 'Servers';
+        const Domain = 'Domain'
+        const paramsForExport = [Create, Update, Expiry, Registrar, Servers, Domain];
 
         const data = [];
         const dataForCSV = [];
@@ -69,6 +72,8 @@ class WeatherDisplay extends Component {
             { label: 'Update date', key: 'update' },
             { label: 'Expiry date', key: 'expiry' },
             { label: 'Registrar name', key: 'registrar' },
+            { label: 'Servers', key: 'servers' },
+            { label: 'Domain status', key: 'domain' },
         ];
 
         if (this.state.domainsData.result) {
@@ -81,6 +86,9 @@ class WeatherDisplay extends Component {
                         update: item.update_date,
                         expiry: item.expiry_date,
                         registrar: item.domain_registrar.registrar_name,
+                        servers: item.name_servers.join('\n'),
+                        domain: item.domain_status.join('\n'),
+
                     });
 
                     dataForCSV.push({
@@ -89,6 +97,8 @@ class WeatherDisplay extends Component {
                         update: item.update_date,
                         expiry: item.expiry_date,
                         registrar: item.domain_registrar.registrar_name,
+                        servers: item.name_servers,
+                        domain: item.domain_status,
                     });
 
                     dataForExcel.push({
@@ -97,6 +107,8 @@ class WeatherDisplay extends Component {
                         'Update date': item.update_date,
                         'Expiry date': item.expiry_date,
                         'Registrar name': item.domain_registrar.registrar_name,
+                        'Servers': item.name_servers,
+                        'Domain status': item.domain_status,
                     });
                 }
                 catch{
@@ -136,6 +148,12 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Registrar) {
                                 delete item.registrar
                             }
+                            else if (value[p] === Servers) {
+                                delete item.servers
+                            }
+                            else if (value[p] === Domain) {
+                                delete item.domain
+                            }
                         });
 
                         columnsForCVS.forEach(item => {
@@ -157,8 +175,13 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Registrar) {
                                 delete item[`Registrar name`]
                             }
+                            else if (value[p] === Servers) {
+                                delete item[`Servers`]
+                            }
+                            else if (value[p] === Domain) {
+                                delete item[`Domain status`]
+                            }
                         });
-
                     }
                 }
             }
@@ -174,15 +197,17 @@ class WeatherDisplay extends Component {
             { title: 'Update date', prop: 'update', visibility: this.props.isUpdateChoice },
             { title: 'Expiry date', prop: 'expiry', visibility: this.props.isExpiryChoice },
             { title: 'Registrar name', prop: 'registrar', visibility: this.props.isRegistrarChoice },
+            { title: 'Servers', prop: 'servers', visibility: this.props.isServersChoice },
+            { title: 'Domain status', prop: 'domain', visibility: this.props.isDomainChoice },
         ];
 
         preparationForExport(paramsForExport);
 
-        console.log(columnsForCVS)
+        const xls = new xlsExport(dataForExcel);
 
-        const copy = JSON.parse(JSON.stringify(columnsForCVS));
-
-        console.log(copy)
+        // console.log(columnsForCVS)
+        // const columnsForCVS_copy = JSON.parse(JSON.stringify(columnsForCVS));
+        // console.log(columnsForCVS_copy)
 
         return (
             <>
@@ -202,14 +227,20 @@ class WeatherDisplay extends Component {
                         filename={"domains.csv"}
                         data={dataForCSV}
                         headers={columnsForCVS}
-                        className="btn btn-primary exportToCSVButton"
+                        className="btn btn-primary"
                     >
                         Download CVS
                     </CSVLink>
 
-                    <button className="btn btn-primary exportToExcelButton" onClick={() => exportToExcel(dataForExcel)}>
+                    <button
+                        className="btn btn-primary"
+                        onClick={
+                            () => xls.exportToXLS('domains.xls')
+                        }
+                    >
                         Export to excel :)
                     </button>
+
                 </div>
             </>
         )

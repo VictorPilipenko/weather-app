@@ -21,6 +21,12 @@ class App extends Component {
         //Registrar name
         isRegistrarChoice: 'visible',
         isCheckedRegistrarChoice: true,
+
+        isServersChoice: 'visible',
+        isCheckedServersChoice: true,
+
+        isDomainstatusChoice: 'visible',
+        isCheckedDomainstatusChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -37,7 +43,7 @@ class App extends Component {
             });
         }
         catch (e) {
-            console.log(e)
+            console.log(e.message)
         }
     }
 
@@ -56,32 +62,13 @@ class App extends Component {
         });
     };
 
-    // state = {
-    //     shown: true,
-    // };
-
-
-    // toggleShown() {
-    //     this.setState({
-    //         shown: !this.state.shown
-    //     });
-    // }
-
-
     render() {
-        // let shown = {
-        //     display: this.state.shown ? "block" : "none"
-        // };
-
-        // let hidden = {
-        //     display: this.state.shown ? "none" : "block"
-        // }
-
         const Create = "Create";
         const Update = "Update";
         const Expiry = "Expiry";
         const Registrar = "Registrar";
-
+        const Servers = "Servers";
+        const Domainstatus = "Domainstatus";
 
         return (
             <div className="grid-container">
@@ -100,18 +87,15 @@ class App extends Component {
                         />
                         <div className="buttonWrapper">
                             <p className="countCities">{this.state.arrayOfDomainNames.length} domains added</p>
-                            <button className="buttonGetDomains" onClick={this.handleClick}>Push</button>
+                            <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
                         </div>
 
                          <img className="logo" src={logo} alt="logo" />
 
                     </div>
 
-                    <div className='header-flex-items-second'>
-
-                        
-
-                    </div>
+                    {/* <div className='header-flex-items-second'>
+                    </div> */}
                 </div>
                 <div className="content">
                     <WeatherDisplay
@@ -121,6 +105,8 @@ class App extends Component {
                         isUpdateChoice={this.state.isUpdateChoice}
                         isExpiryChoice={this.state.isExpiryChoice}
                         isRegistrarChoice={this.state.isRegistrarChoice}
+                        isServersChoice={this.state.isServersChoice}
+                        isDomainChoice={this.state.isDomainstatusChoice}
                     />
                 </div>
                 <div className="menu">
@@ -168,6 +154,22 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar</label>
                             <br />
+
+                            <input type="checkbox" id="servers" name="servers"
+                                checked={this.state.isCheckedServersChoice}
+                                onClick={() => this.toggle(Servers)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers</label>
+                            <br />
+
+                             <input type="checkbox" id="domainstatus" name="domainstatus"
+                                checked={this.state.isCheckedDomainstatusChoice}
+                                onClick={() => this.toggle(Domainstatus)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domainstatus">Domain status</label>
+                            <br />
                         </fieldset>
 
 
@@ -175,6 +177,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="footer">
+                    
                 </div>
             </div>
         );

@@ -1,12 +1,11 @@
 import orderBy from 'lodash/orderBy';
 import some from 'lodash/some';
-import type {SortBy, AppData, Value, Filters} from './types';
 
-export function sort({prop, order}: SortBy, data: AppData) {
+export function sort({prop, order}, data) {
   return orderBy(data, prop, order === 'descending' ? 'desc' : 'asc');
 }
 
-export function filter(filters: Filters, filterValues, data: AppData) {
+export function filter(filters, filterValues, data) {
   const filterAndVals = {};
   for (let key in filterValues) {
     filterAndVals[key] = {
@@ -23,7 +22,7 @@ export function filter(filters: Filters, filterValues, data: AppData) {
   ));
 }
 
-export function containsIgnoreCase(a: Value, b: Value) {
+export function containsIgnoreCase(a, b) {
   a = String(a).toLowerCase().trim();
   b = String(b).toLowerCase().trim();
   return b.indexOf(a) >= 0;

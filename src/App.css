@@ -72,6 +72,7 @@ h3{
 
 .textArea{
   min-width: 300px;
+  min-height: 100px;
   padding: 5px;
 }
 
@@ -105,6 +106,7 @@ h3{
   height: 50px;
   width: 100px;
   align-self: flex-end;
+  margin: 5px 0;
 }
 
 .header-flex-items-second { 
@@ -266,8 +268,23 @@ h3{
                           "."
                           "footer";
       grid-template-columns: 1fr;
-      grid-template-rows: 100px 5px 1fr 5px 1fr 5px 500px;
+      grid-template-rows: 1fr 5px 1fr 5px 1fr 5px 1fr;
   }
+
+  .header {
+    grid-area: header;
+    background-color: #37474f;
+    /* display: -webkit-flex; */
+    display: block;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* margin: 0 auto; */
+    /* text-align: center; */
+  }
+
+  /* .footer{
+    height: inherit;
+  } */
 
   .logo{
       display: none;

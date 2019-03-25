@@ -1,12 +1,7 @@
-/**
- * @flow
- */
-
 import { sort, filter } from './utils';
 import { ActionTypes, /*DOMAIN*/ } from './actions';
-import type { State, Action, /*SortBy*/ } from './types';
 
-const initialState: State = {
+const initialState = {
   initialized: false,
   initialData: [],
   data: [],
@@ -111,9 +106,9 @@ function dataLoaded(state, { payload: data }) {
 }
 
 export function dataReducer(
-  state: State = initialState,
-  action: Action,
-): State {
+  state = initialState,
+  action,
+) {
   switch (action.type) {
     case ActionTypes.INITIALIZE:
       return dataInit(state, action);
@@ -138,7 +133,7 @@ export function dataReducer(
   // return state;
 }
 
-export default function tableReducer(state: Object = {}, action: Action) {
+export default function tableReducer(state, action) {
   switch (action.type) {
     case ActionTypes.INITIALIZE:
     case ActionTypes.DATA_LOADED:

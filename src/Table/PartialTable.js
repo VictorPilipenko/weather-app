@@ -54,7 +54,7 @@ export default class PartialTable extends Component {
           buildRowOptions={buildRowOptions}
           sortBy={sortBy}
           onSort={onSort}
-          style={{margin: "10px"}}
+          style={{marginTop: "20px"}}
         />
 
         <div className="col-xs-8" style={{ display: "flex" }}>

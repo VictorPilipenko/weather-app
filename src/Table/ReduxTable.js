@@ -9,7 +9,7 @@ import {
   dataFilter,
 } from './actions';
 import { selectDataTable } from './selectors';
-import { containsIgnoreCase } from './utils';
+// import { containsIgnoreCase } from './utils';
 
 const defaultFilters = {
   globalSearch: { filter: containsIgnoreCase },

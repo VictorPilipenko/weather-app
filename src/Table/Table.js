@@ -6,7 +6,7 @@ const keyGetter = keys => data => keys.map(key => data[key]);
 
 const isEmpty = value => value == null || value === '';
 
-const getCellValue = ({ prop, defaultContent, render }, row) =>
+const getCellValue = ({ prop, defaultContent, render }, row) => 
   // Return `defaultContent` if the value is empty.
   !isEmpty(prop) && isEmpty(row[prop])
     ? defaultContent
@@ -131,8 +131,9 @@ export default class Table extends Component {
       return (
         <tr key={getKeys(row)} {...trProps}>
           {columns.map((col, i) =>
-            <td key={i} className={getCellClass(col, row)} style={{ visibility: col.visibility }} title={getCellValue(col, row)} >
+            <td key={i} className={getCellClass(col, row)} style={{ visibility: col.visibility, whiteSpace: 'pre-wrap' }} title={getCellValue(col, row)} >
               {getCellValue(col, row)}
+              <br />
             </td>,
           )}
         </tr>

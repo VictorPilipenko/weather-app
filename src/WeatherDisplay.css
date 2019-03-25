@@ -36,15 +36,5 @@
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto;
-}
-
-.exportToCSVButton{
-  background-color: darkcyan;
-  border-color: darkcyan;
-}
-
-.exportToExcelButton{
-  background-color: darkcyan;
-  border-color: darkcyan;
+  margin: 20px auto;
 }

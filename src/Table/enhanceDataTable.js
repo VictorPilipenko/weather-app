@@ -9,16 +9,6 @@ import {
 } from './actions';
 import { containsIgnoreCase } from './utils';
 
-type Props = {
-  pageLengthOptions: Array<number>,
-  initialData: Array<any>,
-  initialPageLength: number,
-  columns: Array<any>,
-  keys: Array<string>,
-  buildRowOptions: any,
-  filters: any,
-};
-
 const mapPropsToState = props => ({
   pageSize: props.initialPageLength,
   sortBy: props.initialSortBy,
@@ -34,7 +24,7 @@ export default function enhanceDataTable(ComposedComponent) {
       },
     };
 
-    constructor(props: Props) {
+    constructor(props) {
       super(props);
       this.state = dataReducer(
         mapPropsToState(props),
