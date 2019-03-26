@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import "./WeatherDisplay.css";
-import DataTable from './Table/DataTable';
+import  DataTable from './Table/DataTable';
 import { CSVLink } from "react-csv";
 import xlsExport from 'xlsexport';
 
@@ -212,7 +212,6 @@ class WeatherDisplay extends Component {
         return (
             <>
                 <DataTable
-                    className="container"
                     keys="id"
                     columns={columns}
                     initialData={data}

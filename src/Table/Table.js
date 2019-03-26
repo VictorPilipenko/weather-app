@@ -140,61 +140,6 @@ export default class Table extends Component {
       );
     });
 
-
-
-
-    // // удаление столбца по клику на ячейку
-    // window.onload = function () {
-    //   var table = document.getElementById('table');
-
-
-    //   table.onclick = function (e) {
-
-    //     var target = e.target;
-
-    //     while (target.nodeName !== 'TD') {
-
-    //       target = target.parentNode;
-
-    //     }
-
-    //     if (target.nodeName !== 'TD') {
-    //       return;
-    //     }
-
-    //     var parent = target.parentNode,
-    //       tdLength = parent.childNodes.length;
-
-    //     // parent.parentNode.removeChild(parent);
-
-    //     target.rel = 'active';
-
-    //     for (var i = 0; i < tdLength; i++) {
-    //       if (parent.children[i].rel === 'active') {
-    //         removeTd(i);
-    //         break;
-    //       }
-    //     }
-
-    //   }
-
-
-    //   function removeTd(num) {
-
-    //     var tr = table.querySelectorAll('tr'),
-    //       trLength = tr.length;
-
-    //     for (var i = 0; i < trLength; i++) {
-    //       tr[i].removeChild(tr[i].children[num]);
-    //     }
-
-    //   }
-
-    // };
-
-
-
-
     return (
       <table {...otherProps} /*id="table"*/>
         {!sortBy

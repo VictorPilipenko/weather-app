@@ -132,24 +132,3 @@ export function dataReducer(
 
   // return state;
 }
-
-export default function tableReducer(state, action) {
-  switch (action.type) {
-    case ActionTypes.INITIALIZE:
-    case ActionTypes.DATA_LOADED:
-    case ActionTypes.PAGE_NUMBER_CHANGE:
-    case ActionTypes.PAGE_SIZE_CHANGE:
-    case ActionTypes.DATA_FILTER:
-    case ActionTypes.DATA_SORT: {
-      const { meta: { table } } = action;
-
-      return {
-        ...state,
-        [table]: dataReducer(state[table], action),
-      };
-    }
-    default: return state
-  }
-
-  // return state;
-}

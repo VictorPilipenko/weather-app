@@ -5,7 +5,7 @@ import Pagination from './Pagination';
 export default class PartialTable extends Component {
   render() {
     const {
-      // onFilter,
+      onFilter,
       onPageSizeChange,
       onPageNumberChange,
       onSort,
@@ -26,26 +26,37 @@ export default class PartialTable extends Component {
       pageNumber,
       totalPages,
       sortBy,
-      // filterValues,
+      filterValues,
     } = this.props.data;
 
     return (
-      <div className="container">
-        {/* <div className="row">
+      <div className="container" style={{width: "96%"}}>
+        <div className="row">
           <div className="col-xs-4">
 
             <div>
-              <label htmlFor="search-field">Search:</label>
+              <label htmlFor="search-field" style={{
+                margin: "5px 5px 5px 0px",
+              }}>Search:</label>
               <input
                 id="search-field"
                 type="search"
+                placeholder="...find your domain"
+                spellcheck="false"
                 value={filterValues.globalSearch}
                 onChange={onFilter.bind(null, 'globalSearch')}
+                style={{
+                  color: "black",
+                  borderRadius: "4px",
+                  border: "none",
+                  outline: "none",
+                  padding: "0 0 0 5px",
+                }}
               />
             </div>
           </div>
 
-        </div> */}
+        </div>
         <Table
           className="table table-bordered"
           dataArray={page}
@@ -57,7 +68,7 @@ export default class PartialTable extends Component {
           style={{marginTop: "20px"}}
         />
 
-        <div className="col-xs-8" style={{ display: "flex" }}>
+        <div className="col-xs-4" style={{ display: "flex" }}>
           <Pagination
             className="pagination pull-right"
             currentPage={pageNumber}
