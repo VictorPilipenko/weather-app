@@ -83,7 +83,7 @@ class App extends Component {
                             cols={50}
                             rows={5}
                             className="textArea"
-                            spellcheck="false"
+                            spellCheck="false"
                         />
                         <div className="buttonWrapper">
                             <p className="countCities">{this.state.arrayOfDomainNames.length} domains added</p>

@@ -30,33 +30,38 @@ export default class PartialTable extends Component {
     } = this.props.data;
 
     return (
-      <div className="container" style={{width: "96%"}}>
+      <div className="container" style={{ width: "96%" }}>
+
         <div className="row">
-          <div className="col-xs-4">
-
-            <div>
-              <label htmlFor="search-field" style={{
+          <div
+            className="col-xs-4"
+            style={{
+              margin: "5px 0 0 0"
+            }}>
+            <label
+              htmlFor="search-field"
+              style={{
                 margin: "5px 5px 5px 0px",
-              }}>Search:</label>
-              <input
-                id="search-field"
-                type="search"
-                placeholder="...find your domain"
-                spellcheck="false"
-                value={filterValues.globalSearch}
-                onChange={onFilter.bind(null, 'globalSearch')}
-                style={{
-                  color: "black",
-                  borderRadius: "4px",
-                  border: "none",
-                  outline: "none",
-                  padding: "0 0 0 5px",
-                }}
-              />
-            </div>
+              }}
+            >Search:</label>
+            <input
+              id="search-field"
+              type="search"
+              placeholder="...find your domain"
+              spellCheck="false"
+              value={filterValues.globalSearch}
+              onChange={onFilter.bind(null, 'globalSearch')}
+              style={{
+                color: "black",
+                borderRadius: "4px",
+                border: "none",
+                outline: "none",
+                padding: "0 0 0 5px",
+              }}
+            />
           </div>
-
         </div>
+
         <Table
           className="table table-bordered"
           dataArray={page}
@@ -65,35 +70,56 @@ export default class PartialTable extends Component {
           buildRowOptions={buildRowOptions}
           sortBy={sortBy}
           onSort={onSort}
-          style={{marginTop: "20px"}}
+          style={{ marginTop: "20px" }}
         />
 
-        <div className="col-xs-4" style={{ display: "flex" }}>
-          <Pagination
-            className="pagination pull-right"
-            currentPage={pageNumber}
-            totalPages={totalPages}
-            onChangePage={onPageNumberChange}
-          />
-        </div>
-
-        <div style={{ display: "flex", justifyContent: "flex-end"}}>
-          <label htmlFor="page-menu">Page size:</label>
+        <div className="col-xs-4" style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "baseline",
+          float: "right",
+          paddingRight: "0px",
+        }}>
+          <label htmlFor="page-menu">Page size:{'\u00A0'}</label>
           <select
             id="page-menu"
             value={pageSize}
             onChange={onPageSizeChange}
-            style={{color: "black"}}
+            style={{
+              color: "black",
+              padding: "0px 5px 0px 10px",
+              borderRadius: "4px",
+              background: "#f8f8f8",
+              border: "none",
+              outline: "none",
+              display: "inline-block",
+              cursor: "pointer",
+            }}
           >
             {pageLengthOptions.map(opt =>
-              <option key={opt} value={opt}>
-                {opt === 0 ? 'All' : opt}
-              </option>,
-            )}
+                <option key={opt} value={opt}>
+                  {opt === 0 ? 'All' : opt}
+                </option>,
+              )}
           </select>
-        </div>
-
       </div>
+
+      <div
+        className="col-xs-4"
+        style={{
+          display: "flex",
+          paddingLeft: "0px",
+        }}
+      >
+        <Pagination
+          className="pagination pull-right"
+          currentPage={pageNumber}
+          totalPages={totalPages}
+          onChangePage={onPageNumberChange}
+        />
+      </div>
+
+      </div >
     );
   }
 }
