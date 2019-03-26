@@ -57,9 +57,14 @@ a{
 }
 
 .footer { 
-  grid-area: footer; 
-  background-color: #37474f; 
+  grid-area: footer;
+  background-color: #37474f;
   border-radius: 4px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 100px; */
 }
 
 h3{ 

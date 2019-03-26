@@ -36,7 +36,7 @@ export default class PartialTable extends Component {
           <div
             className="col-xs-4"
             style={{
-              margin: "5px 0 0 0"
+              margin: "15px 0 0 0"
             }}>
             <label
               htmlFor="search-field"

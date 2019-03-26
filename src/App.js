@@ -26,6 +26,12 @@ class App extends Component {
 
         isDomainChoice: 'table-cell',
         isCheckedDomainChoice: true,
+
+        isCompanyChoice: 'table-cell',
+        isCheckedCompanyChoice: true,
+
+        isCountryChoice: 'table-cell',
+        isCheckedCountryChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -68,6 +74,8 @@ class App extends Component {
         const Registrar = "Registrar";
         const Servers = "Servers";
         const Domain = "Domain";
+        const Company = 'Company';
+        const Country = 'Country';
 
         return (
             <div className="grid-container">
@@ -107,6 +115,8 @@ class App extends Component {
                         isRegistrarChoice={this.state.isRegistrarChoice}
                         isServersChoice={this.state.isServersChoice}
                         isDomainChoice={this.state.isDomainChoice}
+                        isCompanyChoice={this.state.isCompanyChoice}
+                        isCountryChoice={this.state.isCountryChoice}
                     />
                 </div>
                 <div className="menu">
@@ -126,7 +136,7 @@ class App extends Component {
                                 onClick={() => this.toggle(Create)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create date</label>
                             <br />
 
 
@@ -135,7 +145,7 @@ class App extends Component {
                                 onClick={() => this.toggle(Update)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update date</label>
                             <br />
 
 
@@ -144,7 +154,7 @@ class App extends Component {
                                 onClick={() => this.toggle(Expiry)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="expiry">Expiry</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="expiry">Expiry date</label>
                             <br />
 
                             <input type="checkbox" id="registrar" name="registrar"
@@ -152,7 +162,7 @@ class App extends Component {
                                 onClick={() => this.toggle(Registrar)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
                             <br />
 
                             <input type="checkbox" id="servers" name="servers"
@@ -160,7 +170,7 @@ class App extends Component {
                                 onClick={() => this.toggle(Servers)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers name</label>
                             <br />
 
                              <input type="checkbox" id="domain" name="domain"
@@ -170,11 +180,27 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domain">Domain status</label>
                             <br />
+
+                             <input type="checkbox" id="company" name="company"
+                                checked={this.state.isCheckedCompanyChoice}
+                                onClick={() => this.toggle(Company)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="company">Company name</label>
+                            <br />
+
+                             <input type="checkbox" id="country" name="country"
+                                checked={this.state.isCheckedCountryChoice}
+                                onClick={() => this.toggle(Country)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
+                            <br />
                         </fieldset>
                     </div>
                 </div>
                 <div className="footer">
-                    {/* содержание футера */}
+                    2019
                 </div>
             </div>
         );
