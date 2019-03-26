@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import WeatherDisplay from './WeatherDisplay'
-import logo from './Logo_Final-01.png'
+// import logo from './Logo_Final-01.png'
 
 class App extends Component {
     state = {
@@ -98,7 +98,7 @@ class App extends Component {
                             <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
                         </div>
 
-                         <img className="logo" src={logo} alt="logo" />
+                         {/* <img className="logo" src={logo} alt="logo" /> */}
 
                     </div>
 
@@ -165,6 +165,11 @@ class App extends Component {
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
                             <br />
 
+                        </fieldset>
+
+                        <fieldset className="fieldsetApp">
+                            <legend style={{color: "white"}}>Technical metrics</legend>
+
                             <input type="checkbox" id="servers" name="servers"
                                 checked={this.state.isCheckedServersChoice}
                                 onClick={() => this.toggle(Servers)}
@@ -196,6 +201,93 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
                             <br />
+                            
+                        </fieldset>
+                    </div>
+                </div>
+                <div className="menuf">
+                    <div className="grid-container-menu">
+                        {/* <div class="banner">
+                            <div class="animated">
+                                <div class="text1">Только в этом месяце</div>
+                                <div class="text2">Скидки по 20%</div>
+                            </div>
+                        </div> */}
+
+                       <fieldset className="fieldsetApp">
+                            <legend style={{color: "white"}}>Technical metrics</legend>
+
+                            <input type="checkbox" id="create" name="create"
+                                checked={this.state.isCheckedCreateChoice}
+                                onClick={() => this.toggle(Create)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create date</label>
+                            <br />
+
+
+                            <input type="checkbox" id="update" name="update"
+                                checked={this.state.isCheckedUpdateChoice}
+                                onClick={() => this.toggle(Update)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update date</label>
+                            <br />
+
+
+                            <input type="checkbox" id="expiry" name="expiry"
+                                checked={this.state.isCheckedExpiryChoice}
+                                onClick={() => this.toggle(Expiry)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="expiry">Expiry date</label>
+                            <br />
+
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
+                            <br />
+
+                        </fieldset>
+
+                        <fieldset className="fieldsetApp">
+                            <legend style={{color: "white"}}>Technical metrics</legend>
+
+                            <input type="checkbox" id="servers" name="servers"
+                                checked={this.state.isCheckedServersChoice}
+                                onClick={() => this.toggle(Servers)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers name</label>
+                            <br />
+
+                             <input type="checkbox" id="domain" name="domain"
+                                checked={this.state.isCheckedDomainChoice}
+                                onClick={() => this.toggle(Domain)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domain">Domain status</label>
+                            <br />
+
+                             <input type="checkbox" id="company" name="company"
+                                checked={this.state.isCheckedCompanyChoice}
+                                onClick={() => this.toggle(Company)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="company">Company name</label>
+                            <br />
+
+                             <input type="checkbox" id="country" name="country"
+                                checked={this.state.isCheckedCountryChoice}
+                                onClick={() => this.toggle(Country)}
+                                onChange={()=>{}}
+                            />
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
+                            <br />
+                            
                         </fieldset>
                     </div>
                 </div>

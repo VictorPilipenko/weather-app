@@ -36,7 +36,7 @@ export default class PartialTable extends Component {
           <div
             className="col-xs-4"
             style={{
-              margin: "15px 0 0 0"
+              margin: "15px 0 15px "
             }}>
             <label
               htmlFor="search-field"
@@ -60,6 +60,38 @@ export default class PartialTable extends Component {
               }}
             />
           </div>
+
+          <div className="col-xs-4" style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "baseline",
+            float: "right",
+            margin: "20px 0"
+          }}>
+            <label htmlFor="page-menu">Page size:{'\u00A0'}</label>
+            <select
+              id="page-menu"
+              value={pageSize}
+              onChange={onPageSizeChange}
+              style={{
+                color: "black",
+                padding: "0px 5px 0px 10px",
+                borderRadius: "4px",
+                background: "#f8f8f8",
+                border: "none",
+                outline: "none",
+                display: "inline-block",
+                cursor: "pointer",
+              }}
+            >
+              {pageLengthOptions.map(opt =>
+                <option key={opt} value={opt}>
+                  {opt === 0 ? 'All' : opt}
+                </option>,
+              )}
+            </select>
+          </div>
+
         </div>
 
         <Table
@@ -70,54 +102,23 @@ export default class PartialTable extends Component {
           buildRowOptions={buildRowOptions}
           sortBy={sortBy}
           onSort={onSort}
-          style={{ marginTop: "20px" }}
+          style={{ marginBottom: "0px" }}
         />
 
-        <div className="col-xs-4" style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          alignItems: "baseline",
-          float: "right",
-          paddingRight: "0px",
-        }}>
-          <label htmlFor="page-menu">Page size:{'\u00A0'}</label>
-          <select
-            id="page-menu"
-            value={pageSize}
-            onChange={onPageSizeChange}
-            style={{
-              color: "black",
-              padding: "0px 5px 0px 10px",
-              borderRadius: "4px",
-              background: "#f8f8f8",
-              border: "none",
-              outline: "none",
-              display: "inline-block",
-              cursor: "pointer",
-            }}
-          >
-            {pageLengthOptions.map(opt =>
-                <option key={opt} value={opt}>
-                  {opt === 0 ? 'All' : opt}
-                </option>,
-              )}
-          </select>
-      </div>
-
-      <div
-        className="col-xs-4"
-        style={{
-          display: "flex",
-          paddingLeft: "0px",
-        }}
-      >
-        <Pagination
-          className="pagination pull-right"
-          currentPage={pageNumber}
-          totalPages={totalPages}
-          onChangePage={onPageNumberChange}
-        />
-      </div>
+        <div
+          className="col-xs-4"
+          style={{
+            display: "flex",
+            paddingLeft: "0px",
+          }}
+        >
+          <Pagination
+            className="pagination pull-right"
+            currentPage={pageNumber}
+            totalPages={totalPages}
+            onChangePage={onPageNumberChange}
+          />
+        </div>
 
       </div >
     );
