@@ -9,24 +9,23 @@ class App extends Component {
         value: `google.com\ntrello.com\ngithub.com\nstackoverflow.com\nhabr.com`,
         arrayOfDomainNames: [],
 
-        isCreateChoice: 'visible',
+        isCreateChoice: 'table-cell',
         isCheckedCreateChoice: true,
 
-        isUpdateChoice: 'visible',
+        isUpdateChoice: 'table-cell',
         isCheckedUpdateChoice: true,
 
-        isExpiryChoice: 'visible',
+        isExpiryChoice: 'table-cell',
         isCheckedExpiryChoice: true,
 
-        //Registrar name
-        isRegistrarChoice: 'visible',
+        isRegistrarChoice: 'table-cell',
         isCheckedRegistrarChoice: true,
 
-        isServersChoice: 'visible',
+        isServersChoice: 'table-cell',
         isCheckedServersChoice: true,
 
-        isDomainstatusChoice: 'visible',
-        isCheckedDomainstatusChoice: true,
+        isDomainChoice: 'table-cell',
+        isCheckedDomainChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -48,13 +47,13 @@ class App extends Component {
     }
 
     toggle = name => {
-        this.state[`is${name}Choice`] === 'visible' ?
+        this.state[`is${name}Choice`] === 'table-cell' ?
             this.setState({
-                [`is${name}Choice`]: 'hidden',
+                [`is${name}Choice`]: 'none',
             })
             :
             this.setState({
-                [`is${name}Choice`]: 'visible',
+                [`is${name}Choice`]: 'table-cell',
             })
 
         this.setState({
@@ -68,7 +67,7 @@ class App extends Component {
         const Expiry = "Expiry";
         const Registrar = "Registrar";
         const Servers = "Servers";
-        const Domainstatus = "Domainstatus";
+        const Domain = "Domain";
 
         return (
             <div className="grid-container">
@@ -106,7 +105,7 @@ class App extends Component {
                         isExpiryChoice={this.state.isExpiryChoice}
                         isRegistrarChoice={this.state.isRegistrarChoice}
                         isServersChoice={this.state.isServersChoice}
-                        isDomainChoice={this.state.isDomainstatusChoice}
+                        isDomainChoice={this.state.isDomainChoice}
                     />
                 </div>
                 <div className="menu">
@@ -163,21 +162,18 @@ class App extends Component {
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers</label>
                             <br />
 
-                             <input type="checkbox" id="domainstatus" name="domainstatus"
-                                checked={this.state.isCheckedDomainstatusChoice}
-                                onClick={() => this.toggle(Domainstatus)}
+                             <input type="checkbox" id="domain" name="domain"
+                                checked={this.state.isCheckedDomainChoice}
+                                onClick={() => this.toggle(Domain)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domainstatus">Domain status</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domain">Domain status</label>
                             <br />
                         </fieldset>
-
-
-
                     </div>
                 </div>
                 <div className="footer">
-                    
+                    {/* содержание */}
                 </div>
             </div>
         );

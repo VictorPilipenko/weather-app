@@ -108,7 +108,7 @@ export default class Table extends Component {
         <th
           ref={c => (this._headers[idx] = c)}
           key={idx}
-          style={{ width: col.width, /*visibility: col.visibility*/ }}
+          style={{ width: col.width, display: col.display }}
           role="columnheader"
           scope="col"
           {...sortProps}
@@ -131,7 +131,7 @@ export default class Table extends Component {
       return (
         <tr key={getKeys(row)} {...trProps}>
           {columns.map((col, i) =>
-            <td key={i} className={getCellClass(col, row)} style={{ visibility: col.visibility, whiteSpace: 'pre-wrap' }} title={getCellValue(col, row)} >
+            <td key={i} className={getCellClass(col, row)} style={{ display: col.display, whiteSpace: 'pre-wrap' }} title={getCellValue(col, row)} >
               {getCellValue(col, row)}
               <br />
             </td>,
@@ -143,7 +143,7 @@ export default class Table extends Component {
 
 
 
-    // удаление столбца по клику на ячейку
+    // // удаление столбца по клику на ячейку
     // window.onload = function () {
     //   var table = document.getElementById('table');
 
@@ -165,7 +165,7 @@ export default class Table extends Component {
     //     var parent = target.parentNode,
     //       tdLength = parent.childNodes.length;
 
-    //     parent.parentNode.removeChild(parent);
+    //     // parent.parentNode.removeChild(parent);
 
     //     target.rel = 'active';
 

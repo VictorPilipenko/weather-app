@@ -133,7 +133,7 @@ class WeatherDisplay extends Component {
         const preparationForExport = value => {
             try {
                 for (let p = 0; p < value.length; p++) {
-                    if (this.props[`is${value[p]}Choice`] === 'hidden') {
+                    if (this.props[`is${value[p]}Choice`] === 'none') {
 
                         dataForCSV.forEach(item => {
                             if (value[p] === Create) {
@@ -193,12 +193,12 @@ class WeatherDisplay extends Component {
         const columns = [
             { title: 'Domain Name', prop: 'name' },
 
-            { title: 'Create date', prop: 'create', visibility: this.props.isCreateChoice },
-            { title: 'Update date', prop: 'update', visibility: this.props.isUpdateChoice },
-            { title: 'Expiry date', prop: 'expiry', visibility: this.props.isExpiryChoice },
-            { title: 'Registrar name', prop: 'registrar', visibility: this.props.isRegistrarChoice },
-            { title: 'Servers', prop: 'servers', visibility: this.props.isServersChoice },
-            { title: 'Domain status', prop: 'domain', visibility: this.props.isDomainChoice },
+            { title: 'Create date', prop: 'create', display: this.props.isCreateChoice },
+            { title: 'Update date', prop: 'update', display: this.props.isUpdateChoice },
+            { title: 'Expiry date', prop: 'expiry', display: this.props.isExpiryChoice },
+            { title: 'Registrar name', prop: 'registrar', display: this.props.isRegistrarChoice },
+            { title: 'Servers', prop: 'servers', display: this.props.isServersChoice },
+            { title: 'Domain status', prop: 'domain', display: this.props.isDomainChoice },
         ];
 
         preparationForExport(paramsForExport);
