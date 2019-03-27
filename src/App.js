@@ -32,6 +32,9 @@ class App extends Component {
 
         isCountryChoice: 'table-cell',
         isCheckedCountryChoice: true,
+
+        isRegisteredChoice: 'table-cell',
+        isCheckedRegisteredChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -76,6 +79,7 @@ class App extends Component {
         const Domain = "Domain";
         const Company = 'Company';
         const Country = 'Country';
+        const Registered = 'Registered';
 
         return (
             <div className="grid-container">
@@ -102,8 +106,9 @@ class App extends Component {
 
                     </div>
 
-                    {/* <div className='header-flex-items-second'>
-                    </div> */}
+                    <div className='header-flex-items-second'>
+                        {/* Реклама */}
+                    </div>
                 </div>
                 <div className="content">
                     <WeatherDisplay
@@ -117,6 +122,7 @@ class App extends Component {
                         isDomainChoice={this.state.isDomainChoice}
                         isCompanyChoice={this.state.isCompanyChoice}
                         isCountryChoice={this.state.isCountryChoice}
+                        isRegisteredChoice={this.state.isRegisteredChoice}
                     />
                 </div>
                 <div className="menu">
@@ -217,16 +223,16 @@ class App extends Component {
                        <fieldset className="fieldsetApp">
                             <legend style={{color: "white"}}>Technical metrics</legend>
 
-                            <input type="checkbox" id="create" name="create"
-                                checked={this.state.isCheckedCreateChoice}
-                                onClick={() => this.toggle(Create)}
+                            <input type="checkbox" id="registered" name="registered"
+                                checked={this.state.isCheckedRegisteredChoice}
+                                onClick={() => this.toggle(Registered)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create date</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registered">Registered?</label>
                             <br />
 
 
-                            <input type="checkbox" id="update" name="update"
+                            {/* <input type="checkbox" id="update" name="update"
                                 checked={this.state.isCheckedUpdateChoice}
                                 onClick={() => this.toggle(Update)}
                                 onChange={()=>{}}
@@ -249,14 +255,14 @@ class App extends Component {
                                 onChange={()=>{}}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
-                            <br />
+                            <br /> */}
 
                         </fieldset>
 
                         <fieldset className="fieldsetApp">
                             <legend style={{color: "white"}}>Technical metrics</legend>
 
-                            <input type="checkbox" id="servers" name="servers"
+                            {/* <input type="checkbox" id="servers" name="servers"
                                 checked={this.state.isCheckedServersChoice}
                                 onClick={() => this.toggle(Servers)}
                                 onChange={()=>{}}
@@ -286,7 +292,7 @@ class App extends Component {
                                 onChange={()=>{}}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
-                            <br />
+                            <br /> */}
                             
                         </fieldset>
                     </div>

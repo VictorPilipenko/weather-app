@@ -62,7 +62,8 @@ class WeatherDisplay extends Component {
         const Domain = 'Domain';
         const Company = 'Company';
         const Country = 'Country';
-        const paramsForExport = [Create, Update, Expiry, Registrar, Servers, Domain, Company, Country];
+        const Registered = 'Registered';
+        const paramsForExport = [Create, Update, Expiry, Registrar, Servers, Domain, Company, Country, Registered];
 
         const data = [];
         const dataForCSV = [];
@@ -78,6 +79,7 @@ class WeatherDisplay extends Component {
             { label: 'Domain status', key: 'domain' },
             { label: 'Company name', key: 'company' },
             { label: 'Country name', key: 'country' },
+            { label: 'Registered', key: 'registered' },
         ];
 
         if (this.state.domainsData.result) {
@@ -94,6 +96,7 @@ class WeatherDisplay extends Component {
                         domain: item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
                         company: item.registrant_contact === undefined ? 'no data' : item.registrant_contact.company_name,
                         country: item.registrant_contact === undefined ? 'no data' : item.registrant_contact.country_name,
+                        registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
                     });
 
                     dataForCSV.push({
@@ -106,6 +109,7 @@ class WeatherDisplay extends Component {
                         domain: item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
                         company: item.registrant_contact === undefined ? 'no data' : item.registrant_contact.company_name,
                         country: item.registrant_contact === undefined ? 'no data' : item.registrant_contact.country_name,
+                        registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
                     });
 
                     dataForExcel.push({
@@ -118,6 +122,7 @@ class WeatherDisplay extends Component {
                         'Domain status': item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
                         'Company name': item.registrant_contact === undefined ? 'no data' : item.registrant_contact.company_name,
                         'Country name': item.registrant_contact === undefined ? 'no data' : item.registrant_contact.country_name,
+                        "Registered": item.domain_registered === undefined ? 'no data' : item.domain_registered,
                     });
                 }
                 catch(e){
@@ -171,6 +176,9 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Country) {
                                 delete item.country
                             }
+                            else if (value[p] === Registered) {
+                                delete item.registered
+                            }
                         });
 
                         columnsForCVS.forEach(item => {
@@ -204,6 +212,9 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Country) {
                                 delete item['Country name']
                             }
+                            else if (value[p] === Registered) {
+                                delete item['Registered']
+                            }
                         });
                     }
                 }
@@ -224,6 +235,7 @@ class WeatherDisplay extends Component {
             { title: 'Domain status', prop: 'domain', display: this.props.isDomainChoice },
             { title: 'Company name', prop: 'company', display: this.props.isCompanyChoice },
             { title: 'Country name', prop: 'country', display: this.props.isCountryChoice },
+            { title: 'Registered', prop: 'registered', display: this.props.isRegisteredChoice },
         ];
 
         preparationForExport(paramsForExport);
@@ -238,7 +250,7 @@ class WeatherDisplay extends Component {
                     initialData={data}
                     initialPageLength={5}
                     // initialSortBy={{ prop: 'name', order: 'descending' }}
-                    pageLengthOptions={[2, 3, 5]}
+                    pageLengthOptions={[5, 20, 30]}
                 />
 
                 <div className="exportButtonsWrapper">

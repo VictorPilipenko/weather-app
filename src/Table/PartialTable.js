@@ -33,17 +33,35 @@ export default class PartialTable extends Component {
       <div className="container" style={{ width: "96%" }}>
 
         <div className="row">
+
           <div
             className="col-xs-4"
             style={{
-              margin: "15px 0 15px "
+              display: "flex",
+              // paddingLeft: "0px",
+            }}
+          >
+            <Pagination
+              className="pagination pull-right"
+              currentPage={pageNumber}
+              totalPages={totalPages}
+              onChangePage={onPageNumberChange}
+            />
+          </div>
+
+          <div
+            className="col-xs-4"
+            style={{
+              margin: "15px 0",
+              display: 'flex',
+              justifyContent: 'center',
             }}>
             <label
               htmlFor="search-field"
               style={{
                 margin: "5px 5px 5px 0px",
               }}
-            >Search:</label>
+            ></label>
             <input
               id="search-field"
               type="search"
@@ -57,6 +75,7 @@ export default class PartialTable extends Component {
                 border: "none",
                 outline: "none",
                 padding: "0 0 0 5px",
+                textAlign: 'center',
               }}
             />
           </div>
@@ -66,7 +85,8 @@ export default class PartialTable extends Component {
             justifyContent: "flex-end",
             alignItems: "baseline",
             float: "right",
-            margin: "20px 0"
+            margin: "15px 0",
+            paddingRight: "17px",
           }}>
             <label htmlFor="page-menu">Page size:{'\u00A0'}</label>
             <select
