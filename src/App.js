@@ -9,6 +9,9 @@ class App extends Component {
         value: `google.com\ntrello.com\ngithub.com\nstackoverflow.com\nhabr.com`,
         arrayOfDomainNames: [],
 
+        isRegisteredChoice: 'table-cell',
+        isCheckedRegisteredChoice: true,
+
         isCreateChoice: 'table-cell',
         isCheckedCreateChoice: true,
 
@@ -33,8 +36,8 @@ class App extends Component {
         isCountryChoice: 'table-cell',
         isCheckedCountryChoice: true,
 
-        isRegisteredChoice: 'table-cell',
-        isCheckedRegisteredChoice: true,
+        isCityChoice: 'table-cell',
+        isCheckedCityChoice: true,
     }
 
     handleChange = e => this.setState({
@@ -71,21 +74,22 @@ class App extends Component {
     };
 
     render() {
-        const Create = "Create";
-        const Update = "Update";
-        const Expiry = "Expiry";
-        const Registrar = "Registrar";
-        const Servers = "Servers";
-        const Domain = "Domain";
+        const Create = 'Create';
+        const Update = 'Update';
+        const Expiry = 'Expiry';
+        const Registrar = 'Registrar';
+        const Servers = 'Servers';
+        const Domain = 'Domain';
         const Company = 'Company';
         const Country = 'Country';
         const Registered = 'Registered';
+        const City = 'City';
 
         return (
             <div className="grid-container">
                 <div className="header">
                     <div className="header-flex-items-first">
-                       
+
                         {/* три пробела перед и после*/}
                         <span className="legendForTextarea">{'\u00A0'}{'\u00A0'}{'\u00A0'}Add domains{'\u00A0'}{'\u00A0'}{'\u00A0'}</span>
                         <textarea
@@ -102,7 +106,7 @@ class App extends Component {
                             <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
                         </div>
 
-                         {/* <img className="logo" src={logo} alt="logo" /> */}
+                        {/* <img className="logo" src={logo} alt="logo" /> */}
 
                     </div>
 
@@ -123,6 +127,7 @@ class App extends Component {
                         isCompanyChoice={this.state.isCompanyChoice}
                         isCountryChoice={this.state.isCountryChoice}
                         isRegisteredChoice={this.state.isRegisteredChoice}
+                        isCityChoice={this.state.isCityChoice}
                     />
                 </div>
                 <div className="menu">
@@ -134,13 +139,13 @@ class App extends Component {
                             </div>
                         </div> */}
 
-                       <fieldset className="fieldsetApp">
-                            <legend style={{color: "white"}}>Technical metrics</legend>
+                        <fieldset className="fieldsetApp">
+                            <legend style={{ color: "white" }}>Technical metrics</legend>
 
                             <input type="checkbox" id="create" name="create"
                                 checked={this.state.isCheckedCreateChoice}
                                 onClick={() => this.toggle(Create)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create date</label>
                             <br />
@@ -149,7 +154,7 @@ class App extends Component {
                             <input type="checkbox" id="update" name="update"
                                 checked={this.state.isCheckedUpdateChoice}
                                 onClick={() => this.toggle(Update)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update date</label>
                             <br />
@@ -158,56 +163,58 @@ class App extends Component {
                             <input type="checkbox" id="expiry" name="expiry"
                                 checked={this.state.isCheckedExpiryChoice}
                                 onClick={() => this.toggle(Expiry)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="expiry">Expiry date</label>
                             <br />
 
-                            <input type="checkbox" id="registrar" name="registrar"
-                                checked={this.state.isCheckedRegistrarChoice}
-                                onClick={() => this.toggle(Registrar)}
-                                onChange={()=>{}}
+                            <input type="checkbox" id="registered" name="registered"
+                                checked={this.state.isCheckedRegisteredChoice}
+                                onClick={() => this.toggle(Registered)}
+                                onChange={() => { }}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registered">Registered?</label>
                             <br />
+
+
 
                         </fieldset>
 
                         <fieldset className="fieldsetApp">
-                            <legend style={{color: "white"}}>Technical metrics</legend>
+                            <legend style={{ color: "white" }}>Technical metrics</legend>
 
                             <input type="checkbox" id="servers" name="servers"
                                 checked={this.state.isCheckedServersChoice}
                                 onClick={() => this.toggle(Servers)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers name</label>
                             <br />
 
-                             <input type="checkbox" id="domain" name="domain"
+                            <input type="checkbox" id="domain" name="domain"
                                 checked={this.state.isCheckedDomainChoice}
                                 onClick={() => this.toggle(Domain)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domain">Domain status</label>
                             <br />
 
-                             <input type="checkbox" id="company" name="company"
+                            <input type="checkbox" id="company" name="company"
                                 checked={this.state.isCheckedCompanyChoice}
                                 onClick={() => this.toggle(Company)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="company">Company name</label>
                             <br />
 
-                             <input type="checkbox" id="country" name="country"
+                            <input type="checkbox" id="country" name="country"
                                 checked={this.state.isCheckedCountryChoice}
                                 onClick={() => this.toggle(Country)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
                             <br />
-                            
+
                         </fieldset>
                     </div>
                 </div>
@@ -220,28 +227,28 @@ class App extends Component {
                             </div>
                         </div> */}
 
-                       <fieldset className="fieldsetApp">
-                            <legend style={{color: "white"}}>Technical metrics</legend>
+                        <fieldset className="fieldsetApp">
+                            <legend style={{ color: "white" }}>Technical metrics</legend>
 
-                            <input type="checkbox" id="registered" name="registered"
-                                checked={this.state.isCheckedRegisteredChoice}
-                                onClick={() => this.toggle(Registered)}
-                                onChange={()=>{}}
+                            <input type="checkbox" id="registrar" name="registrar"
+                                checked={this.state.isCheckedRegistrarChoice}
+                                onClick={() => this.toggle(Registrar)}
+                                onChange={() => { }}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registered">Registered?</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
                             <br />
 
 
-                            {/* <input type="checkbox" id="update" name="update"
-                                checked={this.state.isCheckedUpdateChoice}
-                                onClick={() => this.toggle(Update)}
+                            <input type="checkbox" id="city" name="city"
+                                checked={this.state.isCheckedCityChoice}
+                                onClick={() => this.toggle(City)}
                                 onChange={()=>{}}
                             />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update date</label>
+                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="city">City name</label>
                             <br />
 
 
-                            <input type="checkbox" id="expiry" name="expiry"
+                            {/* <input type="checkbox" id="expiry" name="expiry"
                                 checked={this.state.isCheckedExpiryChoice}
                                 onClick={() => this.toggle(Expiry)}
                                 onChange={()=>{}}
@@ -260,7 +267,7 @@ class App extends Component {
                         </fieldset>
 
                         <fieldset className="fieldsetApp">
-                            <legend style={{color: "white"}}>Technical metrics</legend>
+                            <legend style={{ color: "white" }}>Technical metrics</legend>
 
                             {/* <input type="checkbox" id="servers" name="servers"
                                 checked={this.state.isCheckedServersChoice}
@@ -293,7 +300,7 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
                             <br /> */}
-                            
+
                         </fieldset>
                     </div>
                 </div>
