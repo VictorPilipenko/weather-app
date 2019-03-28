@@ -54,19 +54,29 @@ class WeatherDisplay extends Component {
     }
 
     render() {
-
-        const Registered = 'Registered';
         const Create = 'Create';
         const Update = 'Update';
         const Expiry = 'Expiry';
-        const Registrar = 'Registrar';
+        const Registered = 'Registered';
         const Servers = 'Servers';
         const Domain = 'Domain';
+        const Registrar = 'Registrar';
         const Company = 'Company';
         const Country = 'Country';
         const City = 'City';
 
-        const paramsForExport = [Registered, Create, Update, Expiry, Registrar, Servers, Domain, Company, Country, City];
+        const paramsForExport = [
+            Create,
+            Update,
+            Expiry,
+            Registered,
+            Servers,
+            Domain,
+            Registrar,
+            Company,
+            Country,
+            City,
+        ];
 
         const data = [];
         const dataForCSV = [];
@@ -74,33 +84,32 @@ class WeatherDisplay extends Component {
 
         let columnsForCVS = [
             { label: 'Name', key: 'name' },
-            { label: 'Registered', key: 'registered' },
             { label: 'Create date', key: 'create' },
             { label: 'Update date', key: 'update' },
             { label: 'Expiry date', key: 'expiry' },
-            { label: 'Registrar name', key: 'registrar' },
+            { label: 'Registered', key: 'registered' },
             { label: 'Servers name', key: 'servers' },
             { label: 'Domain status', key: 'domain' },
+            { label: 'Registrar name', key: 'registrar' },
             { label: 'Company name', key: 'company' },
             { label: 'Country name', key: 'country' },
             { label: 'City name', key: 'city' },
-
         ];
 
         if (this.state.domainsData.result) {
             this.state.domainsData.result.forEach((item, i) => {
-                 console.log(item.registrant_contact)
+                console.log(item.registrant_contact)
                 try {
                     data.push({
                         id: i,
                         name: item.domain_name === undefined ? 'no data' : item.domain_name,
-                        registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
                         create: item.create_date === undefined ? 'no data' : item.create_date,
                         update: item.update_date === undefined ? 'no data' : item.update_date,
                         expiry: item.expiry_date === undefined ? 'no data' : item.expiry_date,
-                        registrar: item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
+                        registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
                         servers: item.name_servers === undefined ? 'no data' : item.name_servers.join('\n'),
                         domain: item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
+                        registrar: item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
                         company: item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
                         country: item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
                         city: item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
@@ -109,13 +118,13 @@ class WeatherDisplay extends Component {
 
                     dataForCSV.push({
                         name: item.domain_name === undefined ? 'no data' : item.domain_name,
-                        registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
                         create: item.create_date === undefined ? 'no data' : item.create_date,
                         update: item.update_date === undefined ? 'no data' : item.update_date,
                         expiry: item.expiry_date === undefined ? 'no data' : item.expiry_date,
-                        registrar: item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
+                        registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
                         servers: item.name_servers === undefined ? 'no data' : item.name_servers.join('\n'),
                         domain: item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
+                        registrar: item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
                         company: item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
                         country: item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
                         city: item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
@@ -123,27 +132,22 @@ class WeatherDisplay extends Component {
 
                     dataForExcel.push({
                         'Domain name': item.domain_name === undefined ? 'no data' : item.domain_name,
-                        "Registered": item.domain_registered === undefined ? 'no data' : item.domain_registered,
                         'Create date': item.create_date === undefined ? 'no data' : item.create_date,
                         'Update date': item.update_date === undefined ? 'no data' : item.update_date,
                         'Expiry date': item.expiry_date === undefined ? 'no data' : item.expiry_date,
-                        'Registrar name': item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
+                        "Registered": item.domain_registered === undefined ? 'no data' : item.domain_registered,
                         'Servers name': item.name_servers === undefined ? 'no data' : item.name_servers.join('\n'),
                         'Domain status': item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
+                        'Registrar name': item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
                         'Company name': item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
                         'Country name': item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
                         'City name': item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
-
                     });
-
-                    
                 }
                 catch (e) {
                     console.log(e.message)
                 }
             })
-            // console.log(this.state.domainsData.result)
-           
         }
 
         const removeItemInColumnsForCVS = (key, value) => {
@@ -165,10 +169,7 @@ class WeatherDisplay extends Component {
                     if (this.props[`is${value[p]}Choice`] === 'none') {
 
                         dataForCSV.forEach(item => {
-                            if (value[p] === Registered) {
-                                delete item.registered
-                            }
-                            else if (value[p] === Create) {
+                            if (value[p] === Create) {
                                 delete item.create
                             }
                             else if (value[p] === Update) {
@@ -177,14 +178,17 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Expiry) {
                                 delete item.expiry
                             }
-                            else if (value[p] === Registrar) {
-                                delete item.registrar
+                            else if (value[p] === Registered) {
+                                delete item.registered
                             }
                             else if (value[p] === Servers) {
                                 delete item.servers
                             }
                             else if (value[p] === Domain) {
                                 delete item.domain
+                            }
+                            else if (value[p] === Registrar) {
+                                delete item.registrar
                             }
                             else if (value[p] === Company) {
                                 delete item.company
@@ -195,7 +199,6 @@ class WeatherDisplay extends Component {
                             else if (value[p] === City) {
                                 delete item.city
                             }
-
                         });
 
                         columnsForCVS.forEach(item => {
@@ -205,10 +208,7 @@ class WeatherDisplay extends Component {
                         });
 
                         dataForExcel.forEach(item => {
-                            if (value[p] === Registered) {
-                                delete item['Registered']
-                            }
-                            else if (value[p] === Create) {
+                            if (value[p] === Create) {
                                 delete item[`Create date`]
                             }
                             else if (value[p] === Update) {
@@ -217,14 +217,17 @@ class WeatherDisplay extends Component {
                             else if (value[p] === Expiry) {
                                 delete item[`Expiry date`]
                             }
-                            else if (value[p] === Registrar) {
-                                delete item[`Registrar name`]
+                            else if (value[p] === Registered) {
+                                delete item['Registered']
                             }
                             else if (value[p] === Servers) {
                                 delete item[`Servers`]
                             }
                             else if (value[p] === Domain) {
                                 delete item[`Domain status`]
+                            }
+                            else if (value[p] === Registrar) {
+                                delete item[`Registrar name`]
                             }
                             else if (value[p] === Company) {
                                 delete item[`Company name`]
@@ -235,7 +238,6 @@ class WeatherDisplay extends Component {
                             else if (value[p] === City) {
                                 delete item['City name']
                             }
-
                         });
                     }
                 }
@@ -248,17 +250,16 @@ class WeatherDisplay extends Component {
         const columns = [
             { title: 'Domain Name', prop: 'name' },
 
-            { title: 'Registered', prop: 'registered', display: this.props.isRegisteredChoice },
             { title: 'Create date', prop: 'create', display: this.props.isCreateChoice },
             { title: 'Update date', prop: 'update', display: this.props.isUpdateChoice },
             { title: 'Expiry date', prop: 'expiry', display: this.props.isExpiryChoice },
-            { title: 'Registrar name', prop: 'registrar', display: this.props.isRegistrarChoice },
+            { title: 'Registered', prop: 'registered', display: this.props.isRegisteredChoice },
             { title: 'Servers name', prop: 'servers', display: this.props.isServersChoice },
             { title: 'Domain status', prop: 'domain', display: this.props.isDomainChoice },
+            { title: 'Registrar name', prop: 'registrar', display: this.props.isRegistrarChoice },
             { title: 'Company name', prop: 'company', display: this.props.isCompanyChoice },
             { title: 'Country name', prop: 'country', display: this.props.isCountryChoice },
             { title: 'City name', prop: 'city', display: this.props.isCityChoice },
-
         ];
 
         preparationForExport(paramsForExport);
