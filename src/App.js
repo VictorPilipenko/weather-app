@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import WeatherDisplay from './WeatherDisplay'
-// import logo from './Logo_Final-01.png'
+import logo from './Logo_Final-01.png'
 
 class App extends Component {
     state = {
 
-        value: `google.com\ntrello.com\ngithub.com\nstackoverflow.com\nhabr.com`,
+        // value: `google.com\ntrello.com\ngithub.com\nstackoverflow.com\nhabr.com`,
+        value: '',
         arrayOfDomainNames: [],
 
         isCreateChoice: 'table-cell',
@@ -102,6 +103,8 @@ class App extends Component {
                             <p className="countCities">{this.state.arrayOfDomainNames.length} domains added</p>
                             <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
                         </div>
+
+                        <img className="logo" src={logo} />
                     </div>
 
                 </div>
@@ -234,7 +237,7 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="footer">
-                    2019
+                    Cubex, 2019
                 </div>
             </div>
         );

@@ -11,7 +11,7 @@ class WeatherDisplay extends Component {
     };
 
     static getDerivedStateFromProps(nextProps, prevState) {
-        console.log("nextProps", nextProps, "\nprevState", prevState)
+        // console.log("nextProps", nextProps, "\nprevState", prevState)
         if (nextProps.arrayOfDomainNames !== prevState.domainsNames)
             return {
                 domainsNames: nextProps.arrayOfDomainNames,
@@ -42,7 +42,7 @@ class WeatherDisplay extends Component {
                 fetch(dataUrlLoop)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data)
+                        // console.log(data)
                         return data;
                     })
                     .catch(error => {
@@ -98,7 +98,6 @@ class WeatherDisplay extends Component {
 
         if (this.state.domainsData.result) {
             this.state.domainsData.result.forEach((item, i) => {
-                console.log(item.registrant_contact)
                 try {
                     data.push({
                         id: i,
@@ -242,8 +241,8 @@ class WeatherDisplay extends Component {
                     }
                 }
             }
-            catch{
-                console.log("error")
+            catch(e){
+                console.log(e.message)
             }
         }
 

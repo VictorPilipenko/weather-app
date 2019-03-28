@@ -80,11 +80,6 @@ a{
   height: 100px;
 }
 
-h3{ 
-  text-align: center;
-  color: #fff;
-}
-
 .header-flex-items-first {
   position: relative;
   height: 1fr;
@@ -132,11 +127,6 @@ h3{
   margin: 5px 0;
 }
 
-.header-flex-items-second { 
-  margin: 20px;
-  display: flex;
-}
-
 .grid-container-content {
   display: grid;
   grid-gap: 10px;
@@ -155,102 +145,17 @@ h3{
   grid-auto-flow: column;
 }
 
-.grid-item-menu {
-  text-align: center;
-  font-size: 1.1em;
-  color: white;
-  margin: 0px 15px 0px 15px;
-  padding: 0.5em;
-}
-
-.grid-item-menu:hover{
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-.color1 {
-  display: flex;
-  background-color: #675BA7;
-  box-shadow: 0px 0px 38px -6px rgba(0,0,0,0.75); 
-  grid-area: auto / auto / span 2 / span 2; 
-}
-
 .logo{
-  width: 175px;
-  height: 68px;
-  opacity: 0.1;
+  width: 25%;
+  height: 21%;
+  opacity: 0.2;
   pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   user-select: none;
-}
-
-@keyframes text1
-{
-  0%{opacity: 1;}
-  80%{opacity: 0;}
-  100%{opacity: 1;}   
-}  
-@keyframes text2
-{
-  30%{opacity: 0;}
-  60%{opacity:1;}
-}
-@keyframes banner
-{
-  0%{background-color: #ffffff;}
-  20%{background-color: #126f86;}
-  60%{background-color: #000000;}
-  100%{background-color: #ffffff;}
-}
-.banner
-{
-    width: 200px;
-    height: 10vh;
-    -webkit-transition: all 2s ease;
-    transition: all 2s ease;
-    margin: 0 auto;
-}
-.banner:hover {
-  width: 600px;
-  height: 30vh;
-  transform: rotate(-360deg);
-  /* transform: translate(50px, 100px) skew(30deg, 10deg) scale(1.5) rotate(90deg); */
-  /* transform: scale(2); */
-}
-.text1,.text2
-{
-  width: 100%;
-  height: 100%;
-  line-height: 1em;
-  text-align: center;
-  font-size: 1.5em;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  font-family: monospace;
-}
-
-.text1
-{
-  animation : text1 6s infinite;
-  color: #000;
-}
-
-.text2
-{
-  animation : text2 6s infinite;
-  color: #fff;
-}
-
-.animated
-{
-  display: flex;
-  opacity: 0.8;
-  width: 100%;
-  height: 100%;  
-  animation: banner 6s infinite;
-  border-radius: 25px;
+  position: absolute;
+  bottom: 0;
 }
 
 @media all and (max-width: 1150px) { 
@@ -286,7 +191,7 @@ h3{
 @media all and (max-width: 425px) { 
 
   .textArea{
-    min-width: 350px;
+    min-width: 365px;
     min-height: 160px;
     padding: 5px;
     border-radius: 5px;
@@ -296,10 +201,15 @@ h3{
 @media all and (max-width: 375px) { 
 
   .textArea{
-    min-width: 300px;
+    min-width: 315px;
     min-height: 160px;
     padding: 5px;
     border-radius: 5px;
+  }
+
+  .logo {
+    width: 25%;
+    height: 18%;
   }
 }
 
@@ -310,5 +220,10 @@ h3{
     min-height: 160px;
     padding: 5px;
     border-radius: 5px;
+  }
+
+  .logo {
+    width: 34%;
+    height: 20%;
   }
 }
