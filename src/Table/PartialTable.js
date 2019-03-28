@@ -32,6 +32,36 @@ export default class PartialTable extends Component {
     return (
       <div className="container" style={{ width: "96%" }}>
 
+        <div
+          style={{
+            margin: "15px 0",
+            display: 'flex',
+            justifyContent: 'center',
+          }}>
+          <label
+            htmlFor="search-field"
+            style={{
+              margin: "5px 5px 5px 0px",
+            }}
+          ></label>
+          <input
+            id="search-field"
+            type="search"
+            placeholder="...find your domain"
+            spellCheck="false"
+            value={filterValues.globalSearch}
+            onChange={onFilter.bind(null, 'globalSearch')}
+            style={{
+              color: "black",
+              borderRadius: "4px",
+              border: "none",
+              outline: "none",
+              padding: "0 0 0 5px",
+              textAlign: 'center',
+            }}
+          />
+        </div>
+
         <div className="row">
 
           <div
@@ -39,6 +69,7 @@ export default class PartialTable extends Component {
             style={{
               display: "flex",
               // paddingLeft: "0px",
+              width: '60%'
             }}
           >
             <Pagination
@@ -49,36 +80,7 @@ export default class PartialTable extends Component {
             />
           </div>
 
-          <div
-            className="col-xs-4"
-            style={{
-              margin: "15px 0",
-              display: 'flex',
-              justifyContent: 'center',
-            }}>
-            <label
-              htmlFor="search-field"
-              style={{
-                margin: "5px 5px 5px 0px",
-              }}
-            ></label>
-            <input
-              id="search-field"
-              type="search"
-              placeholder="...find your domain"
-              spellCheck="false"
-              value={filterValues.globalSearch}
-              onChange={onFilter.bind(null, 'globalSearch')}
-              style={{
-                color: "black",
-                borderRadius: "4px",
-                border: "none",
-                outline: "none",
-                padding: "0 0 0 5px",
-                textAlign: 'center',
-              }}
-            />
-          </div>
+
 
           <div className="col-xs-4" style={{
             display: "flex",
@@ -87,6 +89,7 @@ export default class PartialTable extends Component {
             float: "right",
             margin: "15px 0",
             paddingRight: "17px",
+            width: "40%",
           }}>
             <label htmlFor="page-menu">Page size:{'\u00A0'}</label>
             <select
@@ -114,22 +117,27 @@ export default class PartialTable extends Component {
 
         </div>
 
-        <Table
-          className="table table-bordered"
-          dataArray={page}
-          columns={columns}
-          keys={keys}
-          buildRowOptions={buildRowOptions}
-          sortBy={sortBy}
-          onSort={onSort}
-          style={{ marginBottom: "0px" }}
-        />
+        <div style={{
+          maxWidth: '100',
+          overflowX: 'scroll'
+        }}>
+          <Table
+            className="table table-bordered"
+            dataArray={page}
+            columns={columns}
+            keys={keys}
+            buildRowOptions={buildRowOptions}
+            sortBy={sortBy}
+            onSort={onSort}
+            style={{
+              marginBottom: "0px"
+            }}
+          />
+        </div>
 
         <div
-          className="col-xs-4"
           style={{
             display: "flex",
-            paddingLeft: "0px",
           }}
         >
           <Pagination

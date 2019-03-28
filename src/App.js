@@ -89,15 +89,14 @@ class App extends Component {
             <div className="grid-container">
                 <div className="header">
                     <div className="header-flex-items-first">
-
                         {/* три пробела перед и после*/}
                         <span className="legendForTextarea">{'\u00A0'}{'\u00A0'}{'\u00A0'}Add domains{'\u00A0'}{'\u00A0'}{'\u00A0'}</span>
                         <textarea
                             value={this.state.value}
                             placeholder="...one per line"
                             onChange={this.handleChange}
-                            cols={50}
-                            rows={5}
+                            // cols={50}
+                            // rows={5}
                             className="textArea"
                             spellCheck="false"
                         />
@@ -105,14 +104,8 @@ class App extends Component {
                             <p className="countCities">{this.state.arrayOfDomainNames.length} domains added</p>
                             <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
                         </div>
-
-                        {/* <img className="logo" src={logo} alt="logo" /> */}
-
                     </div>
 
-                    <div className='header-flex-items-second'>
-                        {/* Реклама */}
-                    </div>
                 </div>
                 <div className="content">
                     <WeatherDisplay
@@ -130,15 +123,8 @@ class App extends Component {
                         isCityChoice={this.state.isCityChoice}
                     />
                 </div>
-                <div className="menu">
+                <div className="menu-uno">
                     <div className="grid-container-menu">
-                        {/* <div class="banner">
-                            <div class="animated">
-                                <div class="text1">Только в этом месяце</div>
-                                <div class="text2">Скидки по 20%</div>
-                            </div>
-                        </div> */}
-
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
 
@@ -150,7 +136,6 @@ class App extends Component {
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create date</label>
                             <br />
 
-
                             <input type="checkbox" id="update" name="update"
                                 checked={this.state.isCheckedUpdateChoice}
                                 onClick={() => this.toggle(Update)}
@@ -158,7 +143,6 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update date</label>
                             <br />
-
 
                             <input type="checkbox" id="expiry" name="expiry"
                                 checked={this.state.isCheckedExpiryChoice}
@@ -176,10 +160,11 @@ class App extends Component {
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registered">Registered?</label>
                             <br />
 
-
-
                         </fieldset>
-
+                    </div>
+                </div>
+                <div className="menu-dos">
+                    <div className="grid-container-menu">
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
 
@@ -214,19 +199,11 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
                             <br />
-
                         </fieldset>
                     </div>
                 </div>
-                <div className="menuf">
+                <div className="menu-tres">
                     <div className="grid-container-menu">
-                        {/* <div class="banner">
-                            <div class="animated">
-                                <div class="text1">Только в этом месяце</div>
-                                <div class="text2">Скидки по 20%</div>
-                            </div>
-                        </div> */}
-
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
 
@@ -238,11 +215,10 @@ class App extends Component {
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
                             <br />
 
-
                             <input type="checkbox" id="city" name="city"
                                 checked={this.state.isCheckedCityChoice}
                                 onClick={() => this.toggle(City)}
-                                onChange={()=>{}}
+                                onChange={() => { }}
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="city">City name</label>
                             <br />
@@ -263,9 +239,11 @@ class App extends Component {
                             />
                             <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
                             <br /> */}
-
                         </fieldset>
-
+                    </div>
+                </div>
+                <div className="menu-cuatro">
+                    <div className="grid-container-menu">
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
 
