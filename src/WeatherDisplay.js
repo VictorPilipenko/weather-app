@@ -21,7 +21,9 @@ class WeatherDisplay extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        this.p.style.display = 'none'
         if (prevProps.arrayOfDomainNames !== this.props.arrayOfDomainNames) {
+            this.p.style.display = 'flex'
             this.apiRequestLoop(this.state.domainsNames.length).then(result =>
                 this.setState(prevState => ({
                     domainsData: {
@@ -34,6 +36,7 @@ class WeatherDisplay extends Component {
     }
 
     apiRequestLoop = inp => {
+
         let promiseArray = [];
         for (let i = 0; i < inp; i++) {
             let dataUrlLoop = "http://api.whoxy.com/?key=35145562f9994dc4eg985789f45a1c304&whois=" +
@@ -54,6 +57,7 @@ class WeatherDisplay extends Component {
     }
 
     render() {
+
         const Create = 'Create';
         const Update = 'Update';
         const Expiry = 'Expiry';
@@ -241,7 +245,7 @@ class WeatherDisplay extends Component {
                     }
                 }
             }
-            catch(e){
+            catch (e) {
                 console.log(e.message)
             }
         }
@@ -268,6 +272,8 @@ class WeatherDisplay extends Component {
 
         return (
             <>
+                <div className="loader" ref={node => { this.p = node }} />
+
                 <DataTable
                     keys="id"
                     columns={columns}
@@ -276,7 +282,7 @@ class WeatherDisplay extends Component {
                     // initialSortBy={{ prop: 'name', order: 'descending' }}
                     pageLengthOptions={[5, 20, 30]}
                 />
-
+                
                 <div className="exportButtonsWrapper">
 
                     <CSVLink

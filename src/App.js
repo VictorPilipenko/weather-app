@@ -104,7 +104,7 @@ class App extends Component {
                             <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
                         </div>
 
-                        <img className="logo" src={logo} />
+                        <img className="logo" src={logo} alt="logo" />
                     </div>
 
                 </div>
