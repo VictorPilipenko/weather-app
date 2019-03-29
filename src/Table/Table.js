@@ -6,7 +6,7 @@ const keyGetter = keys => data => keys.map(key => data[key]);
 
 const isEmpty = value => value == null || value === '';
 
-const getCellValue = ({ prop, defaultContent, render }, row) => 
+const getCellValue = ({ prop, defaultContent, render }, row) =>
   // Return `defaultContent` if the value is empty.
   !isEmpty(prop) && isEmpty(row[prop])
     ? defaultContent
@@ -108,17 +108,23 @@ export default class Table extends Component {
         <th
           ref={c => (this._headers[idx] = c)}
           key={idx}
-          style={{ width: col.width, display: col.display }}
+          style={{ width: col.width, display: col.display, whiteSpace: 'pre' }}
           role="columnheader"
           scope="col"
           {...sortProps}
         >
-          <span>
+          <span style={{ whiteSpace: 'pre' }}>
             {col.title}
           </span>
           {!order
             ? null
-            : <span className={`sort-icon sort-${order}`} aria-hidden="true" />}
+            : <span
+              className={`sort-icon sort-${order}`}
+              aria-hidden="true"
+              style={{
+                display: "inline-flex",
+                padding: "0px 0px 0px 5px",
+              }} />}
         </th>
       );
     });
@@ -131,7 +137,7 @@ export default class Table extends Component {
       return (
         <tr key={getKeys(row)} {...trProps}>
           {columns.map((col, i) =>
-            <td key={i} className={getCellClass(col, row)} style={{ display: col.display, whiteSpace: 'pre-wrap' }} title={getCellValue(col, row)} >
+            <td key={i} className={getCellClass(col, row)} style={{ display: col.display, whiteSpace: 'pre' }} title={getCellValue(col, row)} >
               {getCellValue(col, row)}
               <br />
             </td>,
