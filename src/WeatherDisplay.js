@@ -21,9 +21,9 @@ class WeatherDisplay extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        this.p.style.display = 'none'
+        this.loaderSpinner.style.display = 'none'
         if (prevProps.arrayOfDomainNames !== this.props.arrayOfDomainNames) {
-            this.p.style.display = 'flex'
+            this.loaderSpinner.style.display = 'flex'
             this.apiRequestLoop(this.state.domainsNames.length).then(result =>
                 this.setState(prevState => ({
                     domainsData: {
@@ -272,7 +272,7 @@ class WeatherDisplay extends Component {
 
         return (
             <>
-                <div className="loader" ref={node => { this.p = node }} />
+                <div className="loader" ref={node => { this.loaderSpinner = node }} />
 
                 <DataTable
                     keys="id"

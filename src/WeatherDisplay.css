@@ -48,11 +48,11 @@
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   position: absolute;
-  top: 6%;
-  left: 13%;
+  top: 50px;
+  left: 165px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  /* display: none; */
+  display: none;
 }
 
 @keyframes spin {
