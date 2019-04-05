@@ -74,6 +74,20 @@ class App extends Component {
         });
     };
 
+    checkBox = (name, labelText) => {
+        return (
+            <>
+                <input type="checkbox" id={name} name={name}
+                    checked={this.state[`isChecked${name}Choice`]}
+                    onClick={() => this.toggle(name)}
+                    onChange={() => { }}
+                />
+                <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor={name}>{labelText}</label>
+                <br />
+            </>
+        );
+    }
+
     render() {
         const Create = 'Create';
         const Update = 'Update';
@@ -128,31 +142,9 @@ class App extends Component {
                     <div className="grid-container-menu">
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
-
-                            <input type="checkbox" id="create" name="create"
-                                checked={this.state.isCheckedCreateChoice}
-                                onClick={() => this.toggle(Create)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="create">Create date</label>
-                            <br />
-
-                            <input type="checkbox" id="update" name="update"
-                                checked={this.state.isCheckedUpdateChoice}
-                                onClick={() => this.toggle(Update)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="update">Update date</label>
-                            <br />
-
-                            <input type="checkbox" id="expiry" name="expiry"
-                                checked={this.state.isCheckedExpiryChoice}
-                                onClick={() => this.toggle(Expiry)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="expiry">Expiry date</label>
-                            <br />
-
+                            {this.checkBox(Create, 'Create date')}
+                            {this.checkBox(Update, 'Update date')}
+                            {this.checkBox(Expiry, 'Expiry date')}
                         </fieldset>
                     </div>
                 </div>
@@ -160,31 +152,9 @@ class App extends Component {
                     <div className="grid-container-menu">
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
-
-                            <input type="checkbox" id="registered" name="registered"
-                                checked={this.state.isCheckedRegisteredChoice}
-                                onClick={() => this.toggle(Registered)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registered">Registered?</label>
-                            <br />
-
-                            <input type="checkbox" id="servers" name="servers"
-                                checked={this.state.isCheckedServersChoice}
-                                onClick={() => this.toggle(Servers)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="servers">Servers name</label>
-                            <br />
-
-                            <input type="checkbox" id="domain" name="domain"
-                                checked={this.state.isCheckedDomainChoice}
-                                onClick={() => this.toggle(Domain)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="domain">Domain status</label>
-                            <br />
-
+                            {this.checkBox(Registered, 'Registered?')}
+                            {this.checkBox(Servers, 'Servers name')}
+                            {this.checkBox(Domain, 'Domain status')}
                         </fieldset>
                     </div>
                 </div>
@@ -192,23 +162,8 @@ class App extends Component {
                     <div className="grid-container-menu">
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
-
-                            <input type="checkbox" id="registrar" name="registrar"
-                                checked={this.state.isCheckedRegistrarChoice}
-                                onClick={() => this.toggle(Registrar)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="registrar">Registrar name</label>
-                            <br />
-
-                            <input type="checkbox" id="company" name="company"
-                                checked={this.state.isCheckedCompanyChoice}
-                                onClick={() => this.toggle(Company)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="company">Company name</label>
-                            <br />
-
+                            {this.checkBox(Registrar, 'Registrar name')}
+                            {this.checkBox(Company, 'Company name')}
                         </fieldset>
                     </div>
                 </div>
@@ -216,23 +171,8 @@ class App extends Component {
                     <div className="grid-container-menu">
                         <fieldset className="fieldsetApp">
                             <legend style={{ color: "white" }}>Technical metrics</legend>
-
-                            <input type="checkbox" id="country" name="country"
-                                checked={this.state.isCheckedCountryChoice}
-                                onClick={() => this.toggle(Country)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="country">Country name</label>
-                            <br />
-
-                            <input type="checkbox" id="city" name="city"
-                                checked={this.state.isCheckedCityChoice}
-                                onClick={() => this.toggle(City)}
-                                onChange={() => { }}
-                            />
-                            <label style={{ color: 'antiquewhite', margin: '10px' }} htmlFor="city">City name</label>
-                            <br />
-
+                            {this.checkBox(Country, 'Country name')}
+                            {this.checkBox(City, 'City name')}
                         </fieldset>
                     </div>
                 </div>
