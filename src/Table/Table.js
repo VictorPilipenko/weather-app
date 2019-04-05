@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+import arrData from './reducersTable';
+
 const simpleGet = key => data => data[key];
 const keyGetter = keys => data => keys.map(key => data[key]);
 
@@ -26,6 +29,7 @@ function buildSortProps(col, sortBy, onSort) {
   const nextOrder = order === 'ascending' ? 'descending' : 'ascending';
   const sortEvent = onSort.bind(null, { prop: col.prop, order: nextOrder });
 
+
   return {
     onClick: sortEvent,
     // Fire the sort event on enter.
@@ -37,10 +41,13 @@ function buildSortProps(col, sortBy, onSort) {
     tabIndex: 0,
     'aria-sort': order,
     'aria-label': `${col.title}: activate to sort column ${nextOrder}`,
+
   };
+
+
 }
 
-export default class Table extends Component {
+class Table extends Component {
   _headers = [];
 
   static propTypes = {
@@ -85,6 +92,12 @@ export default class Table extends Component {
     });
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.dataArray !== this.props.dataArray) {
+  //     this.props.dataDispatch(this.props.dataArray)
+  //   }
+  // }
+
   render() {
     const {
       columns,
@@ -93,8 +106,12 @@ export default class Table extends Component {
       sortBy,
       onSort,
       dataArray,
+      dataDispatch,
       ...otherProps
     } = this.props;
+
+    console.log(dataArray)
+    dataDispatch(dataArray)
 
     const headers = columns.map((col, idx) => {
       let sortProps, order;
@@ -171,3 +188,11 @@ export default class Table extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dataDispatch: arr => dispatch(arrData(arr)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Table);

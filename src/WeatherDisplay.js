@@ -4,6 +4,9 @@ import DataTable from './Table/DataTable';
 import { CSVLink } from "react-csv";
 import xlsExport from 'xlsexport';
 
+import { connect } from 'react-redux';
+// import { arrDataAction } from './Table/actionsTable';
+
 class WeatherDisplay extends Component {
     state = {
         domainsNames: [],
@@ -57,6 +60,9 @@ class WeatherDisplay extends Component {
     }
 
     render() {
+
+        const { dataGet } = this.props;
+        console.log(dataGet);
 
         const Create = 'Create';
         const Update = 'Update';
@@ -309,4 +315,11 @@ class WeatherDisplay extends Component {
     }
 }
 
-export default WeatherDisplay
+const mapStateToProps = store => {
+    // console.log(store)
+    return {
+        dataGet: store.arrData
+    }
+}
+
+export default connect(mapStateToProps)(WeatherDisplay);
