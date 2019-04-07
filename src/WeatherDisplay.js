@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import "./WeatherDisplay.css";
 import DataTable from './Table/DataTable';
-import { CSVLink } from "react-csv";
-import xlsExport from 'xlsexport';
-
-import { connect } from 'react-redux';
-// import { arrDataAction } from './Table/actionsTable';
+import CVS from './CSV'
+import XLS from './XLS'
 
 class WeatherDisplay extends Component {
     state = {
@@ -24,6 +21,7 @@ class WeatherDisplay extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        // console.log(this.props.dataGet);
         this.loaderSpinner.style.display = 'none'
         if (prevProps.arrayOfDomainNames !== this.props.arrayOfDomainNames) {
             this.loaderSpinner.style.display = 'flex'
@@ -61,33 +59,6 @@ class WeatherDisplay extends Component {
 
     render() {
 
-        const { dataGet } = this.props;
-        console.log(dataGet);
-
-        const Create = 'Create';
-        const Update = 'Update';
-        const Expiry = 'Expiry';
-        const Registered = 'Registered';
-        const Servers = 'Servers';
-        const Domain = 'Domain';
-        const Registrar = 'Registrar';
-        const Company = 'Company';
-        const Country = 'Country';
-        const City = 'City';
-
-        const paramsForExport = [
-            Create,
-            Update,
-            Expiry,
-            Registered,
-            Servers,
-            Domain,
-            Registrar,
-            Company,
-            Country,
-            City,
-        ];
-
         const data = [];
         const dataForCSV = [];
         const dataForExcel = [];
@@ -104,6 +75,21 @@ class WeatherDisplay extends Component {
             { label: 'Company name', key: 'company' },
             { label: 'Country name', key: 'country' },
             { label: 'City name', key: 'city' },
+        ];
+
+        const columns = [
+            { title: 'Domain Name', prop: 'name' },
+
+            { title: 'Create date', prop: 'create', display: this.props.isCreateChoice },
+            { title: 'Update date', prop: 'update', display: this.props.isUpdateChoice },
+            { title: 'Expiry date', prop: 'expiry', display: this.props.isExpiryChoice },
+            { title: 'Registered', prop: 'registered', display: this.props.isRegisteredChoice },
+            { title: 'Servers name', prop: 'servers', display: this.props.isServersChoice },
+            { title: 'Domain status', prop: 'domain', display: this.props.isDomainChoice },
+            { title: 'Registrar name', prop: 'registrar', display: this.props.isRegistrarChoice },
+            { title: 'Company name', prop: 'company', display: this.props.isCompanyChoice },
+            { title: 'Country name', prop: 'country', display: this.props.isCountryChoice },
+            { title: 'City name', prop: 'city', display: this.props.isCityChoice },
         ];
 
         if (this.state.domainsData.result) {
@@ -159,122 +145,7 @@ class WeatherDisplay extends Component {
             })
         }
 
-        const removeItemInColumnsForCVS = (key, value) => {
-            if (value === undefined)
-                return;
-
-            for (let i in columnsForCVS) {
-                if (columnsForCVS[i][key] === value) {
-                    columnsForCVS.splice(i, 1);
-                }
-            }
-        };
-
-        // for example: value[p]=Low; columnsForCVS = [{ label: 'Low temp', key: 'low' }]
-        // value[p] должно совпадать с key
-        const preparationForExport = value => {
-            try {
-                for (let p = 0; p < value.length; p++) {
-                    if (this.props[`is${value[p]}Choice`] === 'none') {
-
-                        dataForCSV.forEach(item => {
-                            if (value[p] === Create) {
-                                delete item.create
-                            }
-                            else if (value[p] === Update) {
-                                delete item.update
-                            }
-                            else if (value[p] === Expiry) {
-                                delete item.expiry
-                            }
-                            else if (value[p] === Registered) {
-                                delete item.registered
-                            }
-                            else if (value[p] === Servers) {
-                                delete item.servers
-                            }
-                            else if (value[p] === Domain) {
-                                delete item.domain
-                            }
-                            else if (value[p] === Registrar) {
-                                delete item.registrar
-                            }
-                            else if (value[p] === Company) {
-                                delete item.company
-                            }
-                            else if (value[p] === Country) {
-                                delete item.country
-                            }
-                            else if (value[p] === City) {
-                                delete item.city
-                            }
-                        });
-
-                        columnsForCVS.forEach(item => {
-                            if (item.label.includes(value[p])) {
-                                removeItemInColumnsForCVS("key", value[p].toLowerCase());
-                            }
-                        });
-
-                        dataForExcel.forEach(item => {
-                            if (value[p] === Create) {
-                                delete item[`Create date`]
-                            }
-                            else if (value[p] === Update) {
-                                delete item[`Update date`]
-                            }
-                            else if (value[p] === Expiry) {
-                                delete item[`Expiry date`]
-                            }
-                            else if (value[p] === Registered) {
-                                delete item['Registered']
-                            }
-                            else if (value[p] === Servers) {
-                                delete item[`Servers`]
-                            }
-                            else if (value[p] === Domain) {
-                                delete item[`Domain status`]
-                            }
-                            else if (value[p] === Registrar) {
-                                delete item[`Registrar name`]
-                            }
-                            else if (value[p] === Company) {
-                                delete item[`Company name`]
-                            }
-                            else if (value[p] === Country) {
-                                delete item['Country name']
-                            }
-                            else if (value[p] === City) {
-                                delete item['City name']
-                            }
-                        });
-                    }
-                }
-            }
-            catch (e) {
-                console.log(e.message)
-            }
-        }
-
-        const columns = [
-            { title: 'Domain Name', prop: 'name' },
-
-            { title: 'Create date', prop: 'create', display: this.props.isCreateChoice },
-            { title: 'Update date', prop: 'update', display: this.props.isUpdateChoice },
-            { title: 'Expiry date', prop: 'expiry', display: this.props.isExpiryChoice },
-            { title: 'Registered', prop: 'registered', display: this.props.isRegisteredChoice },
-            { title: 'Servers name', prop: 'servers', display: this.props.isServersChoice },
-            { title: 'Domain status', prop: 'domain', display: this.props.isDomainChoice },
-            { title: 'Registrar name', prop: 'registrar', display: this.props.isRegistrarChoice },
-            { title: 'Company name', prop: 'company', display: this.props.isCompanyChoice },
-            { title: 'Country name', prop: 'country', display: this.props.isCountryChoice },
-            { title: 'City name', prop: 'city', display: this.props.isCityChoice },
-        ];
-
-        preparationForExport(paramsForExport);
-
-        let xls = '';
-        dataForExcel.length > 0 ? xls = new xlsExport(dataForExcel) : xls = new xlsExport([paramsForExport]);
+       
 
         return (
             <>
@@ -288,26 +159,39 @@ class WeatherDisplay extends Component {
                     // initialSortBy={{ prop: 'name', order: 'descending' }}
                     pageLengthOptions={[5, 20, 30]}
                 />
-                
+
                 <div className="exportButtonsWrapper">
 
-                    <CSVLink
-                        filename={"domains.csv"}
+                    <CVS
                         data={dataForCSV}
                         headers={columnsForCVS}
-                        className="btn btn-primary"
-                    >
-                        Export to CVS
-                    </CSVLink>
 
-                    <button
-                        className="btn btn-primary"
-                        onClick={
-                            () => xls.exportToXLS('domains.xls')
-                        }
-                    >
-                        Export to XLS
-                    </button>
+                        isCreateChoice={this.props.isCreateChoice}
+                        isUpdateChoice={this.props.isUpdateChoice}
+                        isExpiryChoice={this.props.isExpiryChoice}
+                        isRegisteredChoice={this.props.isRegisteredChoice}
+                        isServersChoice={this.props.isServersChoice}
+                        isDomainChoice={this.props.isDomainChoice}
+                        isRegistrarChoice={this.props.isRegistrarChoice}
+                        isCompanyChoice={this.props.isCompanyChoice}
+                        isCountryChoice={this.props.isCountryChoice}
+                        isCityChoice={this.props.isCityChoice}
+                    />
+
+                    <XLS
+                        data={dataForExcel}
+
+                        isCreateChoice={this.props.isCreateChoice}
+                        isUpdateChoice={this.props.isUpdateChoice}
+                        isExpiryChoice={this.props.isExpiryChoice}
+                        isRegisteredChoice={this.props.isRegisteredChoice}
+                        isServersChoice={this.props.isServersChoice}
+                        isDomainChoice={this.props.isDomainChoice}
+                        isRegistrarChoice={this.props.isRegistrarChoice}
+                        isCompanyChoice={this.props.isCompanyChoice}
+                        isCountryChoice={this.props.isCountryChoice}
+                        isCityChoice={this.props.isCityChoice}
+                    />
 
                 </div>
             </>
@@ -315,11 +199,5 @@ class WeatherDisplay extends Component {
     }
 }
 
-const mapStateToProps = store => {
-    // console.log(store)
-    return {
-        dataGet: store.arrData
-    }
-}
 
-export default connect(mapStateToProps)(WeatherDisplay);
+export default WeatherDisplay;

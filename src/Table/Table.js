@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import arrData from './reducersTable';
+import arrData from './actTable';
 
 const simpleGet = key => data => data[key];
 const keyGetter = keys => data => keys.map(key => data[key]);
@@ -31,13 +31,19 @@ function buildSortProps(col, sortBy, onSort) {
 
 
   return {
-    onClick: sortEvent,
+    onClick: () => {
+      sortEvent()
+    },
     // Fire the sort event on enter.
     onKeyDown: e => {
-      if (e.keyCode === 13) sortEvent();
+      if (e.keyCode === 13) {
+        sortEvent()
+      }
     },
     // Prevents selection with mouse.
-    onMouseDown: e => e.preventDefault(),
+    onMouseDown: e => {
+      e.preventDefault()
+    },
     tabIndex: 0,
     'aria-sort': order,
     'aria-label': `${col.title}: activate to sort column ${nextOrder}`,
@@ -92,11 +98,11 @@ class Table extends Component {
     });
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.dataArray !== this.props.dataArray) {
-  //     this.props.dataDispatch(this.props.dataArray)
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.dataArray !== this.props.dataArray) {
+      this.props.datadispatch(this.props.dataArray)
+    }
+  }
 
   render() {
     const {
@@ -106,12 +112,9 @@ class Table extends Component {
       sortBy,
       onSort,
       dataArray,
-      dataDispatch,
+      datadispatch,
       ...otherProps
     } = this.props;
-
-    console.log(dataArray)
-    dataDispatch(dataArray)
 
     const headers = columns.map((col, idx) => {
       let sortProps, order;
@@ -191,7 +194,7 @@ class Table extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    dataDispatch: arr => dispatch(arrData(arr)),
+    datadispatch: arr => dispatch(arrData(arr)),
   }
 }
 
