@@ -15,6 +15,8 @@ export default class PartialTable extends Component {
       buildRowOptions,
     } = this.props;
 
+    // console.log(this.props)
+
     // Protect against unloaded data.
     if (!this.props.data) {
       return null;
@@ -132,6 +134,7 @@ export default class PartialTable extends Component {
             style={{
               marginBottom: "0px"
             }}
+            initialData={this.props.data.data}
           />
         </div>
 

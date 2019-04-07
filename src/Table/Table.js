@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import arrData from './actTable';
+import { arrData, arrDataAll} from './actTable';
 
 const simpleGet = key => data => data[key];
 const keyGetter = keys => data => keys.map(key => data[key]);
@@ -102,6 +102,9 @@ class Table extends Component {
     if (prevProps.dataArray !== this.props.dataArray) {
       this.props.datadispatch(this.props.dataArray)
     }
+    if (prevProps.initialData !== this.props.initialData) {
+      this.props.alldatadispatch(this.props.initialData)
+    }
   }
 
   render() {
@@ -113,6 +116,8 @@ class Table extends Component {
       onSort,
       dataArray,
       datadispatch,
+      alldatadispatch,
+      initialData,
       ...otherProps
     } = this.props;
 
@@ -195,6 +200,7 @@ class Table extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     datadispatch: arr => dispatch(arrData(arr)),
+    alldatadispatch: arr => dispatch(arrDataAll(arr)),
   }
 }
 

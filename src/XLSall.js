@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import xlsExport from 'xlsexport';
 
-class XLS extends React.Component {
+class XLSall extends React.Component {
     render() {
 
         const Create = 'Create';
@@ -129,22 +129,24 @@ class XLS extends React.Component {
 
                     <button
                         className="btn btn-primary"
+                        style={{whiteSpace:"pre"}}
                         onClick={
                             () => xlsDataFromStore.exportToXLS('domains.xls')
                         }
                     >
-                        Export to XLS
+                        {this.props.label}
                     </button>
 
                     :
 
                     <button
                         className="btn btn-primary"
+                        style={{whiteSpace:"pre"}}
                         onClick={
                             () => xlsData.exportToXLS('domains.xls')
                         }
                     >
-                        Export to XLS
+                        {this.props.label}
                     </button>
 
                 }
@@ -154,9 +156,10 @@ class XLS extends React.Component {
 }
 
 const mapStateToProps = store => {
+    // console.log(store)
     return {
-        dataFromStore: store.data
+        dataFromStore: store.dataAll
     }
 }
 
-export default connect(mapStateToProps)(XLS);
+export default connect(mapStateToProps)(XLSall);

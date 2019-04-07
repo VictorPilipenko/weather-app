@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { CSVLink } from "react-csv";
+import xlsExport from 'xlsexport';
 
-class CSV extends React.Component {
+class XLSpage extends React.Component {
     render() {
 
         const Create = 'Create';
@@ -29,33 +29,9 @@ class CSV extends React.Component {
             City,
         ];
 
-        let columnsForCVS = [
-            { label: 'Name', key: 'name' },
-            { label: 'Create date', key: 'create' },
-            { label: 'Update date', key: 'update' },
-            { label: 'Expiry date', key: 'expiry' },
-            { label: 'Registered', key: 'registered' },
-            { label: 'Servers name', key: 'servers' },
-            { label: 'Domain status', key: 'domain' },
-            { label: 'Registrar name', key: 'registrar' },
-            { label: 'Company name', key: 'company' },
-            { label: 'Country name', key: 'country' },
-            { label: 'City name', key: 'city' },
-        ];
-
         let data = this.props.data
         let dataFromStore = this.props.dataFromStore
 
-        const removeItemInColumnsForCVS = (key, value) => {
-            if (value === undefined)
-                return;
-
-            for (let i in columnsForCVS) {
-                if (columnsForCVS[i][key] === value) {
-                    columnsForCVS.splice(i, 1);
-                }
-            }
-        };
 
         // for example: value[p]=Low; columnsForCVS = [{ label: 'Low temp', key: 'low' }]
         // value[p] должно совпадать с key
@@ -66,73 +42,67 @@ class CSV extends React.Component {
 
                         data.forEach(item => {
                             if (value[p] === Create) {
-                                delete item.create
+                                delete item[`Create date`]
                             }
                             else if (value[p] === Update) {
-                                delete item.update
+                                delete item[`Update date`]
                             }
                             else if (value[p] === Expiry) {
-                                delete item.expiry
+                                delete item[`Expiry date`]
                             }
                             else if (value[p] === Registered) {
-                                delete item.registered
+                                delete item['Registered']
                             }
                             else if (value[p] === Servers) {
-                                delete item.servers
+                                delete item[`Servers`]
                             }
                             else if (value[p] === Domain) {
-                                delete item.domain
+                                delete item[`Domain status`]
                             }
                             else if (value[p] === Registrar) {
-                                delete item.registrar
+                                delete item[`Registrar name`]
                             }
                             else if (value[p] === Company) {
-                                delete item.company
+                                delete item[`Company name`]
                             }
                             else if (value[p] === Country) {
-                                delete item.country
+                                delete item['Country name']
                             }
                             else if (value[p] === City) {
-                                delete item.city
+                                delete item['City name']
                             }
                         });
 
                         dataFromStore.forEach(item => {
                             if (value[p] === Create) {
-                                delete item.create
+                                delete item[`Create date`]
                             }
                             else if (value[p] === Update) {
-                                delete item.update
+                                delete item[`Update date`]
                             }
                             else if (value[p] === Expiry) {
-                                delete item.expiry
+                                delete item[`Expiry date`]
                             }
                             else if (value[p] === Registered) {
-                                delete item.registered
+                                delete item['Registered']
                             }
                             else if (value[p] === Servers) {
-                                delete item.servers
+                                delete item[`Servers`]
                             }
                             else if (value[p] === Domain) {
-                                delete item.domain
+                                delete item[`Domain status`]
                             }
                             else if (value[p] === Registrar) {
-                                delete item.registrar
+                                delete item[`Registrar name`]
                             }
                             else if (value[p] === Company) {
-                                delete item.company
+                                delete item[`Company name`]
                             }
                             else if (value[p] === Country) {
-                                delete item.country
+                                delete item['Country name']
                             }
                             else if (value[p] === City) {
-                                delete item.city
-                            }
-                        });
-
-                        columnsForCVS.forEach(item => {
-                            if (item.label.includes(value[p])) {
-                                removeItemInColumnsForCVS("key", value[p].toLowerCase());
+                                delete item['City name']
                             }
                         });
 
@@ -146,29 +116,38 @@ class CSV extends React.Component {
 
         preparationForExport(paramsForExport)
 
+        let xlsData = '';
+        data.length > 0 ? xlsData = new xlsExport(data) : xlsData = new xlsExport([paramsForExport]);
+
+        let xlsDataFromStore = '';
+        data.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([paramsForExport]);
+
+
         return (
             <>
                 {this.props.data !== this.props.dataFromStore ?
 
-                    <CSVLink
-                        filename={"domains.csv"}
-                        data={dataFromStore}
-                        headers={this.props.headers}
+                    <button
                         className="btn btn-primary"
+                        style={{whiteSpace:"pre"}}
+                        onClick={
+                            () => xlsDataFromStore.exportToXLS('domains.xls')
+                        }
                     >
-                        Export to CVS
-                    </CSVLink>
+                        {this.props.label}
+                    </button>
 
                     :
 
-                    <CSVLink
-                        filename={"domains.csv"}
-                        data={data}
-                        headers={this.props.headers}
+                    <button
                         className="btn btn-primary"
+                        style={{whiteSpace:"pre"}}
+                        onClick={
+                            () => xlsData.exportToXLS('domains.xls')
+                        }
                     >
-                        Export to CVS
-                    </CSVLink>
+                        {this.props.label}
+                    </button>
 
                 }
             </>
@@ -177,9 +156,10 @@ class CSV extends React.Component {
 }
 
 const mapStateToProps = store => {
+    // console.log(store)
     return {
-        dataFromStore: store.data
+        dataFromStore: store.dataPage
     }
 }
 
-export default connect(mapStateToProps)(CSV);
+export default connect(mapStateToProps)(XLSpage);

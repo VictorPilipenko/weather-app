@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import "./WeatherDisplay.css";
 import DataTable from './Table/DataTable';
-import CVS from './CSV'
-import XLS from './XLS'
+
+import CVSpage from './CSVpage'
+import XLSpage from './XLSpage'
+import CVSall from './CSVall'
+import XLSall from './XLSall'
 
 class WeatherDisplay extends Component {
     state = {
@@ -145,7 +148,7 @@ class WeatherDisplay extends Component {
             })
         }
 
-       
+
 
         return (
             <>
@@ -162,9 +165,10 @@ class WeatherDisplay extends Component {
 
                 <div className="exportButtonsWrapper">
 
-                    <CVS
+                    <CVSpage
                         data={dataForCSV}
                         headers={columnsForCVS}
+                        label={'Export current page\nto CVS'}
 
                         isCreateChoice={this.props.isCreateChoice}
                         isUpdateChoice={this.props.isUpdateChoice}
@@ -178,8 +182,46 @@ class WeatherDisplay extends Component {
                         isCityChoice={this.props.isCityChoice}
                     />
 
-                    <XLS
+                    <XLSpage
                         data={dataForExcel}
+                        label={'Export current page\nto XLS'}
+
+                        isCreateChoice={this.props.isCreateChoice}
+                        isUpdateChoice={this.props.isUpdateChoice}
+                        isExpiryChoice={this.props.isExpiryChoice}
+                        isRegisteredChoice={this.props.isRegisteredChoice}
+                        isServersChoice={this.props.isServersChoice}
+                        isDomainChoice={this.props.isDomainChoice}
+                        isRegistrarChoice={this.props.isRegistrarChoice}
+                        isCompanyChoice={this.props.isCompanyChoice}
+                        isCountryChoice={this.props.isCountryChoice}
+                        isCityChoice={this.props.isCityChoice}
+                    />
+
+                </div>
+
+                <div className="exportButtonsWrapper">
+
+                    <CVSall
+                        data={dataForCSV}
+                        headers={columnsForCVS}
+                        label={'Export all data\nto CVS'}
+
+                        isCreateChoice={this.props.isCreateChoice}
+                        isUpdateChoice={this.props.isUpdateChoice}
+                        isExpiryChoice={this.props.isExpiryChoice}
+                        isRegisteredChoice={this.props.isRegisteredChoice}
+                        isServersChoice={this.props.isServersChoice}
+                        isDomainChoice={this.props.isDomainChoice}
+                        isRegistrarChoice={this.props.isRegistrarChoice}
+                        isCompanyChoice={this.props.isCompanyChoice}
+                        isCountryChoice={this.props.isCountryChoice}
+                        isCityChoice={this.props.isCityChoice}
+                    />
+
+                    <XLSall
+                        data={dataForExcel}
+                        label={'Export all data\nto XLS'}
 
                         isCreateChoice={this.props.isCreateChoice}
                         isUpdateChoice={this.props.isUpdateChoice}
