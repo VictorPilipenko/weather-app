@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import "./WeatherDisplay.css";
-import DataTable from './components/Table/DataTable';
+import "./DomainDisplay.css";
+import DataTable from '../../components/Table/DataTable';
 
-import CVSpage from './components/Export/CSV/CSVpage'
-import XLSpage from './components/Export/XLS/XLSpage'
-import CVSall from './components/Export/CSV/CSVall'
-import XLSall from './components/Export/XLS/XLSall'
+import CVSpage from '../../components/Export/CSV/CSVpage'
+import XLSpage from '../../components/Export/XLS/XLSpage'
+import CVSall from '../../components/Export/CSV/CSVall'
+import XLSall from '../../components/Export/XLS/XLSall'
 
 class WeatherDisplay extends Component {
     state = {

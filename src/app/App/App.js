@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
-import WeatherDisplay from './WeatherDisplay'
-import logo from './assets/Logo_Final-01.png'
+import WeatherDisplay from '../DomainDisplay/DomainDisplay'
+import logo from '../../assets/Logo_Final-01.png'
 
 class App extends Component {
     state = {
