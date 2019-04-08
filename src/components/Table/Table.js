@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
-import { arrData, arrDataAll} from './actTable';
+import { arrData, arrDataAll} from '../../store/actions/tableActions';
 
 const simpleGet = key => data => data[key];
 const keyGetter = keys => data => keys.map(key => data[key]);

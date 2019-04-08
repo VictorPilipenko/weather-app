@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import arrData from './Table/redTable';
+import arrData from './store/reducers/tableReducers';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 

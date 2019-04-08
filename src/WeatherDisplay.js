@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import "./WeatherDisplay.css";
-import DataTable from './Table/DataTable';
+import DataTable from './components/Table/DataTable';
 
-import CVSpage from './CSVpage'
-import XLSpage from './XLSpage'
-import CVSall from './CSVall'
-import XLSall from './XLSall'
+import CVSpage from './components/Export/CSV/CSVpage'
+import XLSpage from './components/Export/XLS/XLSpage'
+import CVSall from './components/Export/CSV/CSVall'
+import XLSall from './components/Export/XLS/XLSall'
 
 class WeatherDisplay extends Component {
     state = {
@@ -160,7 +160,7 @@ class WeatherDisplay extends Component {
                     initialData={data}
                     initialPageLength={5}
                     // initialSortBy={{ prop: 'name', order: 'descending' }}
-                    pageLengthOptions={[5, 20, 30]}
+                    pageLengthOptions={[5, 10, 20, 30]}
                 />
 
                 <div className="exportButtonsWrapper">
