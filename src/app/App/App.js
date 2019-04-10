@@ -6,8 +6,8 @@ import logo from '../../assets/Logo_Final-01.png'
 class App extends Component {
     state = {
 
-        // value: `google.com\ntrello.com\ngithub.com\nstackoverflow.com\nhabr.com`,
-        value: '',
+        value: `google.com\ntrello.com\ngithub.com\nstackoverflow.com\nhabr.com`,
+        // value: '',
         arrayOfDomainNames: [],
 
         isCreateChoice: 'table-cell',

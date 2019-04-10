@@ -8,7 +8,8 @@ import CVSall from '../../components/Export/CSV/CSVall'
 import XLSall from '../../components/Export/XLS/XLSall'
 
 
-import ReactTable from "react-table";
+// import ReactTable from "react-table";
+import ReactTable from '../../components/ReactTable';
 import "react-table/react-table.css";
 
 
@@ -28,11 +29,11 @@ class WeatherDisplay extends Component {
   resetState = () => {
     this.setState({
       sorted: [],
-      page: 0,
-      pageSize: 10,
-      expanded: {},
-      resized: [],
-      filtered: [],
+      // page: 0,
+      // pageSize: 10,
+      // expanded: {},
+      // resized: [],
+      // filtered: [],
     });
   }
 
@@ -202,12 +203,9 @@ class WeatherDisplay extends Component {
       for (let i in columns) {
         if (columns[i][key] === value) {
           columns.splice(i, 1);
-          // this.forceUpdate()
         }
       }
     };
-
-
 
     const preparationForExport = value => {
       try {
@@ -230,23 +228,11 @@ class WeatherDisplay extends Component {
 
     preparationForExport(paramsForExport)
 
-
-
-
     return (
       <>
         <div className="loader" ref={node => { this.loaderSpinner = node }} />
 
-
-
-        {/* <DataTable
-          keys="id"
-          columns={columns}
-          initialData={data}
-          initialPageLength={5}
-          // initialSortBy={{ prop: 'name', order: 'descending' }}
-          pageLengthOptions={[5, 10, 20, 30]}
-        /> */}
+        
 
         <ReactTable
           style={{ color: 'black' }}
@@ -272,6 +258,8 @@ class WeatherDisplay extends Component {
           onResizedChange={resized => this.setState({ resized })}
           onFilteredChange={filtered => this.setState({ filtered })}
         />
+
+        {console.log(this.state.page)}
 
         <div className="exportButtonsWrapper">
 
