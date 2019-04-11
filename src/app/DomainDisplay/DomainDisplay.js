@@ -20,7 +20,7 @@ class WeatherDisplay extends Component {
 
     sorted: [],
     page: 0,
-    pageSize: 10,
+    pageSize: 2,
     expanded: {},
     resized: [],
     filtered: [],
@@ -240,7 +240,7 @@ class WeatherDisplay extends Component {
           columns={columns}
           // pivotBy={["lastName"]}
           filterable
-          defaultPageSize={5}
+          // defaultPageSize={2}
           className="-striped -highlight"
           // Controlled props
           sorted={this.state.sorted}

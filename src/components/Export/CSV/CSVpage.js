@@ -179,6 +179,7 @@ class CSVpage extends React.Component {
 }
 
 const mapStateToProps = store => {
+    console.log(store.dataPage)
     return {
         dataFromStore: store.dataPage
     }

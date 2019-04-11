@@ -73,7 +73,7 @@ class XLSpage extends React.Component {
                             }
                         });
 
-                        dataFromStore.forEach(item => {
+                        dataFromStore._original.forEach(item => {
                             if (value[p] === Create) {
                                 delete item[`Create date`]
                             }
@@ -156,7 +156,7 @@ class XLSpage extends React.Component {
 }
 
 const mapStateToProps = store => {
-    // console.log(store)
+    console.log(store.dataPage)
     return {
         dataFromStore: store.dataPage
     }

@@ -179,6 +179,7 @@ class CSVall extends React.Component {
 }
 
 const mapStateToProps = store => {
+    console.log(store.dataAll)
     return {
         dataFromStore: store.dataAll
     }

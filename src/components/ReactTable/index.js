@@ -7,13 +7,16 @@ import Methods from './methods'
 import defaultProps from './defaultProps'
 import propTypes from './propTypes'
 
+import { connect } from 'react-redux';
+import { arrData, arrDataAll } from '../../store/actions/tableActions';
+
 export const ReactTableDefaults = defaultProps
 
-export default class ReactTable extends Methods(Lifecycle(Component)) {
+class ReactTable extends Methods(Lifecycle(Component)) {
   static propTypes = propTypes
   static defaultProps = defaultProps
 
-  constructor (props) {
+  constructor(props) {
     super()
 
     this.getResolvedState = this.getResolvedState.bind(this)
@@ -45,7 +48,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
     }
   }
 
-  render () {
+  render() {
     const resolvedState = this.getResolvedState()
     const {
       children,
@@ -187,6 +190,12 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
       canNext,
       rowMinWidth,
     }
+
+    // console.log('finalState', finalState)
+    this.props.datadispatch(finalState.pageRows)
+    this.props.alldatadispatch(finalState.sortedData)
+
+
 
     const rootProps = _.splitProps(getProps(finalState, undefined, undefined, this))
     const tableProps = _.splitProps(getTableProps(finalState, undefined, undefined, this))
@@ -418,14 +427,14 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
         >
           {isFilterable
             ? _.normalizeComponent(
-                ResolvedFilterComponent,
-                {
-                  column,
-                  filter,
-                  onChange: value => this.filterColumn(column, value),
-                },
-                defaultProps.column.Filter
-              )
+              ResolvedFilterComponent,
+              {
+                column,
+                filter,
+                onChange: value => this.filterColumn(column, value),
+              },
+              defaultProps.column.Filter
+            )
             : null}
         </ThComponent>
       )
@@ -611,7 +620,7 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
                 }
               }
 
-              const resolvedOnExpanderClick = useOnExpanderClick ? onExpanderClick : () => {}
+              const resolvedOnExpanderClick = useOnExpanderClick ? onExpanderClick : () => { }
 
               // If there are multiple onClick events, make sure they don't
               // override eachother. This should maybe be expanded to handle all
@@ -863,3 +872,12 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
     return children ? children(finalState, makeTable, this) : makeTable()
   }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    datadispatch: arr => dispatch(arrData(arr)),
+    alldatadispatch: arr => dispatch(arrDataAll(arr)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ReactTable);
