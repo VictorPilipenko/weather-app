@@ -129,6 +129,16 @@
     padding: 7px;
     font-size: 12px;
   }
+
+  .XLS-ExportButtonsWrapper{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .CSV-ExportButtonsWrapper{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 
 @media all and (max-width: 375px) { 
