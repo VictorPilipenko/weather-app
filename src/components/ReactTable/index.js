@@ -195,8 +195,6 @@ class ReactTable extends Methods(Lifecycle(Component)) {
     this.props.datadispatch(finalState.pageRows)
     this.props.alldatadispatch(finalState.sortedData)
 
-
-
     const rootProps = _.splitProps(getProps(finalState, undefined, undefined, this))
     const tableProps = _.splitProps(getTableProps(finalState, undefined, undefined, this))
     const tBodyProps = _.splitProps(getTbodyProps(finalState, undefined, undefined, this))

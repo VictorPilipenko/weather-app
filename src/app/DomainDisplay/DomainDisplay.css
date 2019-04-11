@@ -94,3 +94,21 @@
 /* .ReactTable .-pagination .-center{
   justify-content: space-between !important;
 } */
+
+.ReactTable .-pagination .-pageInfo {
+  color: white;
+}
+
+.ReactTable .-pagination .-pageJump input {
+  color: black;
+}
+
+.ReactTable .rt-thead .rt-resizable-header-content {
+  color: white;
+}
+
+.ReactTable .rt-tbody .rt-td {
+  color: white;
+  width: 100%;
+  white-space: pre;
+}

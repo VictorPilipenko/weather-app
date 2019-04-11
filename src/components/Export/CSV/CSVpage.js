@@ -46,6 +46,8 @@ class CSVpage extends React.Component {
         let data = this.props.data
         let dataFromStore = this.props.dataFromStore
 
+        // console.log(dataFromStore);
+
         const removeItemInColumnsForCVS = (key, value) => {
             if (value === undefined)
                 return;
@@ -153,7 +155,7 @@ class CSVpage extends React.Component {
                     <CSVLink
                         filename={"domains.csv"}
                         data={dataFromStore}
-                        headers={this.props.headers}
+                        headers={columnsForCVS}
                         className="btn btn-primary"
                         style={{whiteSpace:"pre"}}
                     >
@@ -179,7 +181,7 @@ class CSVpage extends React.Component {
 }
 
 const mapStateToProps = store => {
-    console.log(store.dataPage)
+    // console.log(store.dataPage)
     return {
         dataFromStore: store.dataPage
     }

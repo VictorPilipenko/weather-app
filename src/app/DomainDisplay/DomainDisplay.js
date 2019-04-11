@@ -20,7 +20,7 @@ class WeatherDisplay extends Component {
 
     sorted: [],
     page: 0,
-    pageSize: 2,
+    pageSize: 10,
     expanded: {},
     resized: [],
     filtered: [],
@@ -232,15 +232,13 @@ class WeatherDisplay extends Component {
       <>
         <div className="loader" ref={node => { this.loaderSpinner = node }} />
 
-        
-
         <ReactTable
           style={{ color: 'black' }}
           data={data}
           columns={columns}
           // pivotBy={["lastName"]}
           filterable
-          // defaultPageSize={2}
+          defaultPageSize={5}
           className="-striped -highlight"
           // Controlled props
           sorted={this.state.sorted}
@@ -258,8 +256,6 @@ class WeatherDisplay extends Component {
           onResizedChange={resized => this.setState({ resized })}
           onFilteredChange={filtered => this.setState({ filtered })}
         />
-
-        {console.log(this.state.page)}
 
         <div className="exportButtonsWrapper">
 
@@ -298,14 +294,6 @@ class WeatherDisplay extends Component {
 
         </div>
 
-        <button
-          className="btn btn-primary"
-          style={{ whiteSpace: "pre", display: 'flex', margin: 'auto' }}
-          onClick={this.resetState}
-        >
-          Reset Sort
-        </button>
-
         <div className="exportButtonsWrapper">
 
           <CVSall
@@ -342,6 +330,14 @@ class WeatherDisplay extends Component {
           />
 
         </div>
+
+        <button
+          className="btn btn-primary"
+          style={{ whiteSpace: "pre", display: 'flex', margin: 'auto', marginBottom: '20px' }}
+          onClick={this.resetState}
+        >
+          Reset Sort
+        </button>
       </>
     )
   }
