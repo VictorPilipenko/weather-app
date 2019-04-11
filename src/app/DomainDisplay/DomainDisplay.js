@@ -26,7 +26,18 @@ class WeatherDisplay extends Component {
     filtered: [],
   };
 
-  resetState = () => {
+  resetFiltered = () => {
+    this.setState({
+      // sorted: [],
+      // page: 0,
+      // pageSize: 10,
+      // expanded: {},
+      // resized: [],
+      filtered: [],
+    });
+  }
+
+  resetSorted = () => {
     this.setState({
       sorted: [],
       // page: 0,
@@ -232,6 +243,100 @@ class WeatherDisplay extends Component {
       <>
         <div className="loader" ref={node => { this.loaderSpinner = node }} />
 
+        <div className="buttons">
+
+          <div className="CSV-ExportButtonsWrapper">
+            <CVSpage
+              data={dataForCSV}
+              headers={columnsForCVS}
+              label={'Export current page\nto CVS'}
+              isCreateChoice={this.props.isCreateChoice}
+              isUpdateChoice={this.props.isUpdateChoice}
+              isExpiryChoice={this.props.isExpiryChoice}
+              isRegisteredChoice={this.props.isRegisteredChoice}
+              isServersChoice={this.props.isServersChoice}
+              isDomainChoice={this.props.isDomainChoice}
+              isRegistrarChoice={this.props.isRegistrarChoice}
+              isCompanyChoice={this.props.isCompanyChoice}
+              isCountryChoice={this.props.isCountryChoice}
+              isCityChoice={this.props.isCityChoice}
+            />
+            <CVSall
+              data={dataForCSV}
+              headers={columnsForCVS}
+              label={'Export all data\nto CVS'}
+              isCreateChoice={this.props.isCreateChoice}
+              isUpdateChoice={this.props.isUpdateChoice}
+              isExpiryChoice={this.props.isExpiryChoice}
+              isRegisteredChoice={this.props.isRegisteredChoice}
+              isServersChoice={this.props.isServersChoice}
+              isDomainChoice={this.props.isDomainChoice}
+              isRegistrarChoice={this.props.isRegistrarChoice}
+              isCompanyChoice={this.props.isCompanyChoice}
+              isCountryChoice={this.props.isCountryChoice}
+              isCityChoice={this.props.isCityChoice}
+            />
+
+          </div>
+
+          <div className="reset-table">
+            <button
+              className="btn btn-primary"
+              onClick={this.resetSorted}
+              style={{
+                whiteSpace: 'pre',
+                outline: 'none',
+                // backgroundColor: 'cornflowerblue',
+              }}
+            >
+              {`Reset\nSort`}
+            </button>
+
+            <button
+              className="btn btn-primary"
+              onClick={this.resetFiltered}
+              style={{
+                whiteSpace: 'pre',
+                outline: 'none',
+                // backgroundColor: 'cornflowerblue',
+              }}
+            >
+              {`Reset\nSearch`}
+            </button>
+          </div>
+
+          <div className="XLS-ExportButtonsWrapper">
+            <XLSpage
+              data={dataForExcel}
+              label={'Export current page\nto XLS'}
+              isCreateChoice={this.props.isCreateChoice}
+              isUpdateChoice={this.props.isUpdateChoice}
+              isExpiryChoice={this.props.isExpiryChoice}
+              isRegisteredChoice={this.props.isRegisteredChoice}
+              isServersChoice={this.props.isServersChoice}
+              isDomainChoice={this.props.isDomainChoice}
+              isRegistrarChoice={this.props.isRegistrarChoice}
+              isCompanyChoice={this.props.isCompanyChoice}
+              isCountryChoice={this.props.isCountryChoice}
+              isCityChoice={this.props.isCityChoice}
+            />
+            <XLSall
+              data={dataForExcel}
+              label={'Export all data\nto XLS'}
+              isCreateChoice={this.props.isCreateChoice}
+              isUpdateChoice={this.props.isUpdateChoice}
+              isExpiryChoice={this.props.isExpiryChoice}
+              isRegisteredChoice={this.props.isRegisteredChoice}
+              isServersChoice={this.props.isServersChoice}
+              isDomainChoice={this.props.isDomainChoice}
+              isRegistrarChoice={this.props.isRegistrarChoice}
+              isCompanyChoice={this.props.isCompanyChoice}
+              isCountryChoice={this.props.isCountryChoice}
+              isCityChoice={this.props.isCityChoice}
+            />
+          </div>
+        </div>
+
         <ReactTable
           style={{ color: 'black' }}
           data={data}
@@ -256,88 +361,6 @@ class WeatherDisplay extends Component {
           onResizedChange={resized => this.setState({ resized })}
           onFilteredChange={filtered => this.setState({ filtered })}
         />
-
-        <div className="exportButtonsWrapper">
-
-          <CVSpage
-            data={dataForCSV}
-            headers={columnsForCVS}
-            label={'Export current page\nto CVS'}
-
-            isCreateChoice={this.props.isCreateChoice}
-            isUpdateChoice={this.props.isUpdateChoice}
-            isExpiryChoice={this.props.isExpiryChoice}
-            isRegisteredChoice={this.props.isRegisteredChoice}
-            isServersChoice={this.props.isServersChoice}
-            isDomainChoice={this.props.isDomainChoice}
-            isRegistrarChoice={this.props.isRegistrarChoice}
-            isCompanyChoice={this.props.isCompanyChoice}
-            isCountryChoice={this.props.isCountryChoice}
-            isCityChoice={this.props.isCityChoice}
-          />
-
-          <XLSpage
-            data={dataForExcel}
-            label={'Export current page\nto XLS'}
-
-            isCreateChoice={this.props.isCreateChoice}
-            isUpdateChoice={this.props.isUpdateChoice}
-            isExpiryChoice={this.props.isExpiryChoice}
-            isRegisteredChoice={this.props.isRegisteredChoice}
-            isServersChoice={this.props.isServersChoice}
-            isDomainChoice={this.props.isDomainChoice}
-            isRegistrarChoice={this.props.isRegistrarChoice}
-            isCompanyChoice={this.props.isCompanyChoice}
-            isCountryChoice={this.props.isCountryChoice}
-            isCityChoice={this.props.isCityChoice}
-          />
-
-        </div>
-
-        <div className="exportButtonsWrapper">
-
-          <CVSall
-            data={dataForCSV}
-            headers={columnsForCVS}
-            label={'Export all data\nto CVS'}
-
-            isCreateChoice={this.props.isCreateChoice}
-            isUpdateChoice={this.props.isUpdateChoice}
-            isExpiryChoice={this.props.isExpiryChoice}
-            isRegisteredChoice={this.props.isRegisteredChoice}
-            isServersChoice={this.props.isServersChoice}
-            isDomainChoice={this.props.isDomainChoice}
-            isRegistrarChoice={this.props.isRegistrarChoice}
-            isCompanyChoice={this.props.isCompanyChoice}
-            isCountryChoice={this.props.isCountryChoice}
-            isCityChoice={this.props.isCityChoice}
-          />
-
-          <XLSall
-            data={dataForExcel}
-            label={'Export all data\nto XLS'}
-
-            isCreateChoice={this.props.isCreateChoice}
-            isUpdateChoice={this.props.isUpdateChoice}
-            isExpiryChoice={this.props.isExpiryChoice}
-            isRegisteredChoice={this.props.isRegisteredChoice}
-            isServersChoice={this.props.isServersChoice}
-            isDomainChoice={this.props.isDomainChoice}
-            isRegistrarChoice={this.props.isRegistrarChoice}
-            isCompanyChoice={this.props.isCompanyChoice}
-            isCountryChoice={this.props.isCountryChoice}
-            isCityChoice={this.props.isCityChoice}
-          />
-
-        </div>
-
-        <button
-          className="btn btn-primary"
-          style={{ whiteSpace: "pre", display: 'flex', margin: 'auto', marginBottom: '20px' }}
-          onClick={this.resetState}
-        >
-          Reset Sort
-        </button>
       </>
     )
   }

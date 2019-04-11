@@ -30,14 +30,42 @@
 .sort-icon.sort-descending:after { content: '\f0dd'; }
 .sort-icon.sort-none:after  { content: '\f0dc'; }
 
-.exportButtonsWrapper{
+.buttons{
   display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.reset-table{
+  /* display: flex; */
+  /* margin: auto */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.CSV-ExportButtonsWrapper{
+  /* display: flex;
   max-width: 310px;
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  margin: 20px auto;
+  margin: 20px auto; */
+  padding-left: 10px;
+  padding-right: 10px;
 }
+
+.XLS-ExportButtonsWrapper{
+  /* display: flex;
+  max-width: 310px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between; 
+  margin: 20px auto; */
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 
 .loader {
   border: 16px solid #f3f3f3;
@@ -48,7 +76,7 @@
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   position: absolute;
-  top: 50px;
+  top: 155px;
   left: 165px;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -67,6 +95,25 @@
   }
 }
 
+@media all and (max-width: 768px) { 
+ .CSV-ExportButtonsWrapper{
+   display: flex;
+   flex-direction: column;
+   justify-content: center
+ }
+
+  .XLS-ExportButtonsWrapper{
+   display: flex;
+   flex-direction: column;
+   justify-content: center
+ }
+
+ .reset-table {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 @media all and (max-width: 468px) { 
   .loader {
       left: 42%;
@@ -77,6 +124,11 @@
   .loader {
       left: 36%;
   }
+
+  .btn{
+    padding: 7px;
+    font-size: 12px;
+  }
 }
 
 @media all and (max-width: 375px) { 
@@ -85,10 +137,22 @@
   }
 }
 
+@media all and (max-width: 340px) { 
+  .btn{
+    padding: 2px;
+  }
+}
+
 @media all and (max-width: 320px) { 
   .loader {
       left: 31%;
   }
+}
+
+.reset-buttons{
+  display: flex;
+  max-width: 200px;
+  margin: auto;
 }
 
 /* .ReactTable .-pagination .-center{

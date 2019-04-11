@@ -75,7 +75,7 @@ class ReactTable extends Methods(Lifecycle(Component)) {
       getPaginationProps,
       getLoadingProps,
       getNoDataProps,
-      getResizerProps,
+      // getResizerProps,
       showPagination,
       showPaginationTop,
       showPaginationBottom,
@@ -118,7 +118,7 @@ class ReactTable extends Methods(Lifecycle(Component)) {
       LoadingComponent,
       SubComponent,
       NoDataComponent,
-      ResizerComponent,
+      // ResizerComponent,
       ExpanderComponent,
       PivotValueComponent,
       PivotComponent,
@@ -191,7 +191,7 @@ class ReactTable extends Methods(Lifecycle(Component)) {
       rowMinWidth,
     }
 
-    // console.log('finalState', finalState)
+    console.log('finalState', finalState)
     this.props.datadispatch(finalState.pageRows)
     this.props.alldatadispatch(finalState.sortedData)
 
@@ -311,13 +311,13 @@ class ReactTable extends Methods(Lifecycle(Component)) {
       }
 
       const isResizable = _.getFirstDefined(column.resizable, resizable, false)
-      const resizer = isResizable ? (
-        <ResizerComponent
-          onMouseDown={e => this.resizeColumnStart(e, column, false)}
-          onTouchStart={e => this.resizeColumnStart(e, column, true)}
-          {...getResizerProps('finalState', undefined, column, this)}
-        />
-      ) : null
+      // const resizer = isResizable ? (
+      //   <ResizerComponent
+      //     onMouseDown={e => this.resizeColumnStart(e, column, false)}
+      //     onTouchStart={e => this.resizeColumnStart(e, column, true)}
+      //     {...getResizerProps('finalState', undefined, column, this)}
+      //   />
+      // ) : null
 
       const isSortable = _.getFirstDefined(column.sortable, sortable, false)
 
@@ -343,13 +343,13 @@ class ReactTable extends Methods(Lifecycle(Component)) {
           }}
           {...rest}
         >
-          <div className={classnames(isResizable && 'rt-resizable-header-content')}>
+          <div title={'click to sort'} className={classnames(isResizable && 'rt-resizable-header-content')}>
             {_.normalizeComponent(column.Header, {
               data: sortedData,
               column,
             })}
           </div>
-          {resizer}
+          {/* {resizer} */}
         </ThComponent>
       )
     }

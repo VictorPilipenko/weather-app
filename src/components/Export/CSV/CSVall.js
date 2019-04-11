@@ -43,7 +43,6 @@ class CSVall extends React.Component {
       { label: 'City name', key: 'city' },
     ];
 
-    let data = this.props.data
     let dataFromStore = this.props.dataFromStore
 
     // console.log(dataFromStore);
@@ -73,39 +72,6 @@ class CSVall extends React.Component {
       try {
         for (let p = 0; p < value.length; p++) {
           if (this.props[`is${value[p]}Choice`] === 'none') {
-
-            data.forEach(item => {
-              if (value[p] === Create) {
-                delete item.create
-              }
-              else if (value[p] === Update) {
-                delete item.update
-              }
-              else if (value[p] === Expiry) {
-                delete item.expiry
-              }
-              else if (value[p] === Registered) {
-                delete item.registered
-              }
-              else if (value[p] === Servers) {
-                delete item.servers
-              }
-              else if (value[p] === Domain) {
-                delete item.domain
-              }
-              else if (value[p] === Registrar) {
-                delete item.registrar
-              }
-              else if (value[p] === Company) {
-                delete item.company
-              }
-              else if (value[p] === Country) {
-                delete item.country
-              }
-              else if (value[p] === City) {
-                delete item.city
-              }
-            });
 
             dataFromStore.forEach(item => {
               if (value[p] === Create) {
@@ -157,33 +123,15 @@ class CSVall extends React.Component {
     preparationForExport(paramsForExport)
 
     return (
-      <>
-        {this.props.data !== this.props.dataFromStore ?
-
-          <CSVLink
-            filename={"domains.csv"}
-            data={dataFromStore}
-            headers={this.props.headers}
-            className="btn btn-primary"
-            style={{ whiteSpace: "pre" }}
-          >
-            {this.props.label}
-          </CSVLink>
-
-          :
-
-          <CSVLink
-            filename={"domains.csv"}
-            data={data}
-            headers={this.props.headers}
-            className="btn btn-primary"
-            style={{ whiteSpace: "pre" }}
-          >
-            {this.props.label}
-          </CSVLink>
-
-        }
-      </>
+      <CSVLink
+        filename={"domains.csv"}
+        data={dataFromStore}
+        headers={this.props.headers}
+        className="btn btn-primary"
+        style={{ whiteSpace: "pre", outline: 'none' }}
+      >
+        {this.props.label}
+      </CSVLink>
     )
   }
 }

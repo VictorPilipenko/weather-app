@@ -219,7 +219,7 @@ export default {
   TdComponent: ({
     toggleSort, className, children, ...rest
   }) => (
-    <div className={classnames('rt-td', className)} role="gridcell" {...rest}>
+    <div className={classnames('rt-td', className)} role="gridcell" title={children} {...rest}>
       {children}
     </div>
   ),
@@ -230,7 +230,8 @@ export default {
       style={{
         width: '100%',
       }}
-      placeholder={column.Placeholder}
+      // placeholder={column.Placeholder}
+      placeholder={'search..'}
       value={filter ? filter.value : ''}
       onChange={event => onChange(event.target.value)}
     />

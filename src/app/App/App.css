@@ -18,21 +18,38 @@ a{
   color: #fff;
 }
 
+a:hover{
+  color: aqua;
+}
+
+a:visited{
+  color: #fff;
+}
+
 .grid-container {
   height: 100vh;
   display: grid;
   padding: 5px;
-  grid-template-areas:"header . menu-uno . menu-dos . menu-tres . menu-cuatro"
+  grid-template-areas:"header header header header header header header header header"
+                      ". . . . . . . . ."
+                      "input-bar . menu-uno . menu-dos . menu-tres . menu-cuatro"
                       ". . . . . . . . ."
                       "content content content content content content content content content"
                       ". . . . . . . . ."
                       "footer footer footer footer footer footer footer footer footer";
   grid-template-columns: 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr;
-  grid-template-rows: 1fr 5px 100fr 5px 1fr;
+  grid-template-rows: 100px 5px 1fr 5px 100fr 5px 1fr;
 }
 
-.header {
+.header{
   grid-area: header;
+  background-color: #37474f;
+  display: flex;
+  border-radius: 5px;
+}
+
+.input-bar {
+  grid-area: input-bar;
   background-color: #37474f;
   display: flex;
   border-radius: 5px;
@@ -78,6 +95,7 @@ a{
   align-items: center;
   justify-content: center;
   height: 100px;
+  flex-direction: column;
 }
 
 .header-flex-items-first {
@@ -148,7 +166,7 @@ a{
 .logo{
   width: 110px;
   height: 45px;
-  opacity: 0.2;
+  opacity: 0.7;
   pointer-events: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -162,19 +180,23 @@ a{
   .grid-container {
       grid-template-areas:"header header header header header header header"
                           ". . . . . . ."
+                          "input-bar input-bar input-bar input-bar input-bar input-bar input-bar"
+                          ". . . . . . ."
                           "menu-uno . menu-dos . menu-tres . menu-cuatro"
                           ". . . . . . ."
                           "content content content content content content content"
                           ". . . . . . ."
                           "footer footer footer footer footer footer footer";
       grid-template-columns: 1fr 5px 1fr 5px 1fr 5px 1fr;
-      grid-template-rows: 1fr 5px 1fr 5px 100fr 5px 1fr;
+      grid-template-rows: 100px 5px 1fr 5px 1fr 5px 100fr 5px 1fr;
   }
 }
 
 @media all and (max-width: 468px) { 
   .grid-container {
       grid-template-areas:"header header header"
+                          ". . . "
+                          "input-bar input-bar input-bar"
                           ". . . "
                           "menu-uno . menu-dos"
                           ". . ."
@@ -184,7 +206,7 @@ a{
                           ". . ."
                           "footer footer footer";
       grid-template-columns: 1fr 5px 1fr;
-      grid-template-rows: 1fr 5px 1fr 5px 1fr 5px 100fr 5px 1fr;
+      grid-template-rows: 100px 5px 1fr 5px 1fr 5px 1fr 5px 100fr 5px 1fr;
   }
 }
 
@@ -194,7 +216,7 @@ a{
     min-width: 100%;
   }
 
-  .header{
+  .input-bar{
     display: block;
   }
 

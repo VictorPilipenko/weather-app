@@ -29,7 +29,6 @@ class XLSpage extends React.Component {
       City,
     ];
 
-    let data = this.props.data
     let dataFromStore = this.props.dataFromStore
 
     dataFromStore.forEach(item => {
@@ -46,39 +45,6 @@ class XLSpage extends React.Component {
       try {
         for (let p = 0; p < value.length; p++) {
           if (this.props[`is${value[p]}Choice`] === 'none') {
-
-            data.forEach(item => {
-              if (value[p] === Create) {
-                delete item[`Create date`]
-              }
-              else if (value[p] === Update) {
-                delete item[`Update date`]
-              }
-              else if (value[p] === Expiry) {
-                delete item[`Expiry date`]
-              }
-              else if (value[p] === Registered) {
-                delete item['Registered']
-              }
-              else if (value[p] === Servers) {
-                delete item[`Servers`]
-              }
-              else if (value[p] === Domain) {
-                delete item[`Domain status`]
-              }
-              else if (value[p] === Registrar) {
-                delete item[`Registrar name`]
-              }
-              else if (value[p] === Company) {
-                delete item[`Company name`]
-              }
-              else if (value[p] === Country) {
-                delete item['Country name']
-              }
-              else if (value[p] === City) {
-                delete item['City name']
-              }
-            });
 
             dataFromStore._original.forEach(item => {
               if (value[p] === Create) {
@@ -123,41 +89,19 @@ class XLSpage extends React.Component {
 
     preparationForExport(paramsForExport)
 
-    let xlsData = '';
-    data.length > 0 ? xlsData = new xlsExport(data) : xlsData = new xlsExport([paramsForExport]);
-
     let xlsDataFromStore = '';
-    data.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([paramsForExport]);
-
+    xlsDataFromStore.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([paramsForExport]);
 
     return (
-      <>
-        {this.props.data !== this.props.dataFromStore ?
-
-          <button
-            className="btn btn-primary"
-            style={{ whiteSpace: "pre" }}
-            onClick={
-              () => xlsDataFromStore.exportToXLS('domains.xls')
-            }
-          >
-            {this.props.label}
-          </button>
-
-          :
-
-          <button
-            className="btn btn-primary"
-            style={{ whiteSpace: "pre" }}
-            onClick={
-              () => xlsData.exportToXLS('domains.xls')
-            }
-          >
-            {this.props.label}
-          </button>
-
+      <button
+        className="btn btn-primary"
+        style={{ whiteSpace: "pre", outline: 'none' }}
+        onClick={
+          () => xlsDataFromStore.exportToXLS('domains.xls')
         }
-      </>
+      >
+        {this.props.label}
+      </button>
     )
   }
 }
