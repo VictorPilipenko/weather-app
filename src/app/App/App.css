@@ -98,7 +98,7 @@ a:visited{
   flex-direction: column;
 }
 
-.header-flex-items-first {
+.input-bar-items {
   position: relative;
   height: 1fr;
   display: flex;

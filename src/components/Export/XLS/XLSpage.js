@@ -90,7 +90,7 @@ class XLSpage extends React.Component {
     preparationForExport(paramsForExport)
 
     let xlsDataFromStore = '';
-    xlsDataFromStore.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([paramsForExport]);
+    dataFromStore.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([paramsForExport]);
 
     return (
       <button

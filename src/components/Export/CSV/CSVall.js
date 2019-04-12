@@ -126,7 +126,7 @@ class CSVall extends React.Component {
       <CSVLink
         filename={"domains.csv"}
         data={dataFromStore}
-        headers={this.props.headers}
+        headers={columnsForCVS}
         className="btn btn-primary"
         style={{ whiteSpace: "pre", outline: 'none' }}
       >

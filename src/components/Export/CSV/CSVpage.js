@@ -115,7 +115,6 @@ class CSVpage extends React.Component {
     preparationForExport(paramsForExport)
 
     return (
-
       <CSVLink
         filename={"domains.csv"}
         data={dataFromStore}
@@ -125,7 +124,6 @@ class CSVpage extends React.Component {
       >
         {this.props.label}
       </CSVLink>
-
     )
   }
 }

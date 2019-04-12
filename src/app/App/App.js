@@ -106,7 +106,7 @@ class App extends Component {
           Ето хЕдЕр
         </div>
         <div className="input-bar">
-          <div className="header-flex-items-first">
+          <div className="input-bar-items">
             {/* три пробела перед и после*/}
             <span className="legendForTextarea">{'\u00A0'}{'\u00A0'}{'\u00A0'}Add domains{'\u00A0'}{'\u00A0'}{'\u00A0'}</span>
             <textarea

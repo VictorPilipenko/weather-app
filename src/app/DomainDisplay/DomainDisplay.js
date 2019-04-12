@@ -20,7 +20,7 @@ class WeatherDisplay extends Component {
 
     sorted: [],
     page: 0,
-    pageSize: 10,
+    pageSize: 5,
     expanded: {},
     resized: [],
     filtered: [],
@@ -59,7 +59,6 @@ class WeatherDisplay extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    // console.log(this.props.dataGet);
     this.loaderSpinner.style.display = 'none'
     if (prevProps.arrayOfDomainNames !== this.props.arrayOfDomainNames) {
       this.loaderSpinner.style.display = 'flex'
@@ -75,7 +74,6 @@ class WeatherDisplay extends Component {
   }
 
   apiRequestLoop = inp => {
-
     let promiseArray = [];
     for (let i = 0; i < inp; i++) {
       let dataUrlLoop = "http://api.whoxy.com/?key=35145562f9994dc4eg985789f45a1c304&whois=" +
@@ -84,7 +82,6 @@ class WeatherDisplay extends Component {
         fetch(dataUrlLoop)
           .then(response => response.json())
           .then(data => {
-            // console.log(data)
             return data;
           })
           .catch(error => {
@@ -108,7 +105,7 @@ class WeatherDisplay extends Component {
     const Country = 'Country';
     const City = 'City';
 
-    const paramsForExport = [
+    const paramsForDisplay = [
       Create,
       Update,
       Expiry,
@@ -122,22 +119,6 @@ class WeatherDisplay extends Component {
     ];
 
     const data = [];
-    const dataForCSV = [];
-    const dataForExcel = [];
-
-    let columnsForCVS = [
-      { label: 'Name', key: 'name' },
-      { label: 'Create date', key: 'create' },
-      { label: 'Update date', key: 'update' },
-      { label: 'Expiry date', key: 'expiry' },
-      { label: 'Registered', key: 'registered' },
-      { label: 'Servers name', key: 'servers' },
-      { label: 'Domain status', key: 'domain' },
-      { label: 'Registrar name', key: 'registrar' },
-      { label: 'Company name', key: 'company' },
-      { label: 'Country name', key: 'country' },
-      { label: 'City name', key: 'city' },
-    ];
 
     if (this.state.domainsData.result) {
       this.state.domainsData.result.forEach((item, i) => {
@@ -155,35 +136,6 @@ class WeatherDisplay extends Component {
             company: item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
             country: item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
             city: item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
-
-          });
-
-          dataForCSV.push({
-            name: item.domain_name === undefined ? 'no data' : item.domain_name,
-            create: item.create_date === undefined ? 'no data' : item.create_date,
-            update: item.update_date === undefined ? 'no data' : item.update_date,
-            expiry: item.expiry_date === undefined ? 'no data' : item.expiry_date,
-            registered: item.domain_registered === undefined ? 'no data' : item.domain_registered,
-            servers: item.name_servers === undefined ? 'no data' : item.name_servers.join('\n'),
-            domain: item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
-            registrar: item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
-            company: item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
-            country: item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
-            city: item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
-          });
-
-          dataForExcel.push({
-            'Domain name': item.domain_name === undefined ? 'no data' : item.domain_name,
-            'Create date': item.create_date === undefined ? 'no data' : item.create_date,
-            'Update date': item.update_date === undefined ? 'no data' : item.update_date,
-            'Expiry date': item.expiry_date === undefined ? 'no data' : item.expiry_date,
-            "Registered": item.domain_registered === undefined ? 'no data' : item.domain_registered,
-            'Servers name': item.name_servers === undefined ? 'no data' : item.name_servers.join('\n'),
-            'Domain status': item.domain_status === undefined ? 'no data' : item.domain_status.join('\n'),
-            'Registrar name': item.domain_registrar === undefined || item.domain_registrar.registrar_name === undefined ? 'no data' : item.domain_registrar.registrar_name,
-            'Company name': item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
-            'Country name': item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
-            'City name': item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
           });
         }
         catch (e) {
@@ -218,7 +170,7 @@ class WeatherDisplay extends Component {
       }
     };
 
-    const preparationForExport = value => {
+    const preparationForDisplay = value => {
       try {
         for (let p = 0; p < value.length; p++) {
           if (this.props[`is${value[p]}Choice`] === 'none') {
@@ -237,7 +189,7 @@ class WeatherDisplay extends Component {
       }
     }
 
-    preparationForExport(paramsForExport)
+    preparationForDisplay(paramsForDisplay)
 
     return (
       <>
@@ -247,8 +199,6 @@ class WeatherDisplay extends Component {
 
           <div className="CSV-ExportButtonsWrapper">
             <CVSpage
-              data={dataForCSV}
-              headers={columnsForCVS}
               label={'Export current page\nto CVS'}
               isCreateChoice={this.props.isCreateChoice}
               isUpdateChoice={this.props.isUpdateChoice}
@@ -262,8 +212,6 @@ class WeatherDisplay extends Component {
               isCityChoice={this.props.isCityChoice}
             />
             <CVSall
-              data={dataForCSV}
-              headers={columnsForCVS}
               label={'Export all data\nto CVS'}
               isCreateChoice={this.props.isCreateChoice}
               isUpdateChoice={this.props.isUpdateChoice}
@@ -307,7 +255,6 @@ class WeatherDisplay extends Component {
 
           <div className="XLS-ExportButtonsWrapper">
             <XLSpage
-              data={dataForExcel}
               label={'Export current page\nto XLS'}
               isCreateChoice={this.props.isCreateChoice}
               isUpdateChoice={this.props.isUpdateChoice}
@@ -321,7 +268,6 @@ class WeatherDisplay extends Component {
               isCityChoice={this.props.isCityChoice}
             />
             <XLSall
-              data={dataForExcel}
               label={'Export all data\nto XLS'}
               isCreateChoice={this.props.isCreateChoice}
               isUpdateChoice={this.props.isUpdateChoice}
