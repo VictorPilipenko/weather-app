@@ -3,6 +3,12 @@ import "./App.css";
 import WeatherDisplay from '../DomainDisplay/DomainDisplay'
 import logo from '../../assets/Logo_Final-01.png'
 
+import SideNav, { /*Toggle, Nav,*/ NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import ClickOutside from '../../components/ClickOutside'
+
+// Be sure to include styles at some point, probably during your bootstraping
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+
 class App extends Component {
   state = {
 
@@ -102,8 +108,61 @@ class App extends Component {
 
     return (
       <div className="grid-container">
-        <div className="header">
-          Ето хЕдЕр
+        <header className="header">
+          {/* Ето хЕдЕр */}
+          {/* <img className="logo" src={logo} alt="logo" /> */}
+        </header>
+        <div className='side-nav'>
+          <ClickOutside
+            onClickOutside={() => {
+              this.setState({ expanded: false });
+            }}
+          >
+            <SideNav
+              expanded={this.state.expanded}
+              onToggle={(expanded) => {
+                this.setState({ expanded });
+              }}
+            >
+              <SideNav.Toggle />
+              <SideNav.Nav defaultSelected="home">
+
+                <NavItem eventKey="home">
+                  <NavIcon>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Our team" /></a>
+                  </NavIcon>
+                  <NavText>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team">
+                      Our team
+                  </a>
+                  </NavText>
+                </NavItem>
+
+                <NavItem eventKey="home">
+                  <NavIcon>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Portfolio" /></a>
+                  </NavIcon>
+                  <NavText>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio">
+                      Portfolio
+                  </a>
+                  </NavText>
+                </NavItem>
+
+                <NavItem eventKey="home">
+                  <NavIcon>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Contact" /></a>
+                  </NavIcon>
+                  <NavText>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact">
+                      Contact us
+                  </a>
+                  </NavText>
+                </NavItem>
+
+              </SideNav.Nav>
+            </SideNav>
+          </ClickOutside>
         </div>
         <div className="input-bar">
           <div className="input-bar-items">
@@ -178,12 +237,10 @@ class App extends Component {
             isCityChoice={this.state.isCityChoice}
           />
         </div>
-        <div className="footer">
+        <footer className="footer">
+          <img className="logo-footer" src={logo} alt="logo" />
           © Cubex, 2019
-          <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/">
-            about us
-            </a>
-        </div>
+        </footer>
       </div>
     );
   }

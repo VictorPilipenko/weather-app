@@ -30,15 +30,21 @@ a:visited{
   height: 100vh;
   display: grid;
   padding: 5px;
-  grid-template-areas:"header header header header header header header header header"
-                      ". . . . . . . . ."
-                      "input-bar . menu-uno . menu-dos . menu-tres . menu-cuatro"
-                      ". . . . . . . . ."
-                      "content content content content content content content content content"
-                      ". . . . . . . . ."
-                      "footer footer footer footer footer footer footer footer footer";
-  grid-template-columns: 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr;
+  grid-template-areas:"header header header header header header header header header . side-nav"
+                      ". . . . . . . . . . side-nav"
+                      "input-bar . menu-uno . menu-dos . menu-tres . menu-cuatro . side-nav"
+                      ". . . . . . . . . . ."
+                      "content content content content content content content content content content content"
+                      ". . . . . . . . . . ."
+                      "footer footer footer footer footer footer footer footer footer footer footer";
+  grid-template-columns: 1fr 5px 1fr 5px 1fr 5px 1fr 5px 1fr 5px max-content;
   grid-template-rows: 100px 5px 1fr 5px 100fr 5px 1fr;
+}
+
+.side-nav{
+  grid-area: side-nav;
+  background-color: #37474f;
+  border-radius: 5px;
 }
 
 .header{
@@ -94,8 +100,9 @@ a:visited{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100px;
+  height: 70px;
   flex-direction: column;
+  /* position: relative; */
 }
 
 .input-bar-items {
@@ -176,6 +183,23 @@ a:visited{
   bottom: 0;
 }
 
+.logo-footer{
+  width: 80px;
+  height: 35px;
+  opacity: 0.7;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom: 5px;
+  /* position: absolute; */
+  /* bottom: 10px; */
+  /* display: flex; */
+  /* justify-content: ; */
+  /* position: absolute; */
+}
+
 @media all and (max-width: 1150px) { 
   .grid-container {
       grid-template-areas:"header header header header header header header"
@@ -223,4 +247,89 @@ a:visited{
   .logo {
     left: 0;
   }
+}
+
+
+/*burger*/
+
+.sidenav---sidenav---_2tBP {
+  position: relative !important;
+  background: #455a64 !important;
+  right: 0 !important;
+  left: auto !important;
+  transition: min-width 0.65s !important;
+}
+
+.sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
+    min-width: 200px !important;
+}
+
+.sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- .sidenav---navicon---3gCRo + .sidenav---navtext---1AE_f{
+  overflow-x: hidden;
+  animation: imageAnimation 1s;
+  overflow: hidden;
+  padding-left: 15px;
+}
+
+@keyframes imageAnimation {
+  0% {
+    opacity: 0;
+    z-index: -100;
+    visibility: hidden !important;
+    display: none !important;
+    position: fixed;
+    overflow: hidden;
+    overflow-x: hidden;
+
+  }
+  5% {
+    opacity: 0;
+    -webkit-animation-timing-function: ease-in;
+    z-index: -100;
+    z-index: -100;
+    visibility: hidden !important;
+    display: none !important;
+    overflow: hidden;
+    overflow-x: hidden;
+  }
+  8% {
+    opacity: 0;
+    -webkit-animation-timing-function: ease-out;
+    z-index: -100;
+    visibility: hidden !important;
+    display: none !important;
+    overflow: hidden;
+    overflow-x: hidden;
+  }
+  17% {
+    opacity: 0;
+    z-index: -100;
+    visibility: hidden !important;
+    display: none !important;
+    overflow: hidden;
+    overflow-x: hidden;
+
+  }
+  25% {
+    opacity: 0;
+    z-index: -100;
+    visibility: hidden !important;
+    display: none !important;
+    overflow: hidden;
+    overflow-x: hidden;
+
+  }
+  100% {
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1;
+    z-index: 100;
+    overflow: hidden;
+    overflow-x: hidden;
+
+  }
+}
+
+.sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T {
+    margin-top: 5px;
 }

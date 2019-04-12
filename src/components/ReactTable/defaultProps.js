@@ -205,24 +205,82 @@ export default {
   ThComponent: ({
     toggleSort, className, children, ...rest
   }) => (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-    <div
-      className={classnames('rt-th', className)}
-      onClick={e => toggleSort && toggleSort(e)}
-      role="columnheader"
-      tabIndex="-1" // Resolves eslint issues without implementing keyboard navigation incorrectly
-      {...rest}
-    >
-      {children}
-    </div>
-  ),
+      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+      <div
+        className={classnames('rt-th', className)}
+        onClick={e => toggleSort && toggleSort(e)}
+        role="columnheader"
+        tabIndex="-1" // Resolves eslint issues without implementing keyboard navigation incorrectly
+        {...rest}
+      >
+        {children}
+      </div>
+    ),
   TdComponent: ({
     toggleSort, className, children, ...rest
   }) => (
-    <div className={classnames('rt-td', className)} role="gridcell" title={children} {...rest}>
-      {children}
-    </div>
-  ),
+      <div className={classnames('rt-td', className)} role="gridcell" title={children} {...rest}>
+        {/* {children} */}
+
+
+        { 
+          // children.toString().indexOf('.com, Inc.') !== -1 ?
+          // <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/.com, Inc./g,"")}.com`}>
+          //   {children}
+          // </a>
+          // :
+          // children
+
+          // ||
+          
+          children.toString().indexOf('.com') !== -1 ?
+          <a target="_blank" rel="noopener noreferrer" href={`https://${children}`}>
+            {children}
+          </a>
+          :
+          children
+
+          &&
+
+          children.toString().indexOf('Inc') !== -1 ?
+          <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/, Inc./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
+            {children}
+          </a>
+          :
+          children
+
+          &&
+
+          children.toString().indexOf('LLC') !== -1 ?
+          <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/, LLC./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
+            {children}
+          </a>
+          :
+          children
+
+          
+        }
+
+        {/* <a target="_blank" rel="noopener noreferrer" href={`https://${children}`}>
+          {children}
+        </a> */}
+
+        {/* {console.log(children)} */}
+
+        {/* {
+          {children}.indexOf('.com') !== -1 ?
+
+            <a target="_blank" rel="noopener noreferrer" href={`https://${children}`}>
+              {children}
+            </a> 
+            : 
+            {children}
+          }; */}
+
+
+
+      </div>
+    ),
   TfootComponent: _.makeTemplateComponent('rt-tfoot', 'Tfoot'),
   FilterComponent: ({ filter, onChange, column }) => (
     <input
@@ -262,10 +320,10 @@ export default {
   LoadingComponent: ({
     className, loading, loadingText, ...rest
   }) => (
-    <div className={classnames('-loading', { '-active': loading }, className)} {...rest}>
-      <div className="-loading-inner">{loadingText}</div>
-    </div>
-  ),
+      <div className={classnames('-loading', { '-active': loading }, className)} {...rest}>
+        <div className="-loading-inner">{loadingText}</div>
+      </div>
+    ),
   NoDataComponent: _.makeTemplateComponent('rt-noData', 'NoData'),
   ResizerComponent: _.makeTemplateComponent('rt-resizer', 'Resizer'),
   PadRowComponent: () => <span>&nbsp;</span>,
