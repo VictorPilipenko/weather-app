@@ -219,7 +219,7 @@ export default {
   TdComponent: ({
     toggleSort, className, children, ...rest
   }) => (
-      <div className={classnames('rt-td', className)} role="gridcell" title={children} {...rest}>
+      <div className={classnames('rt-td', className)} role="gridcell" title={children.toString() !== '[object Object]' ? children : null} {...rest}>
         {/* {children} */}
 
 
@@ -233,30 +233,30 @@ export default {
 
           // ||
           
-          children.toString().indexOf('.com') !== -1 ?
-          <a target="_blank" rel="noopener noreferrer" href={`https://${children}`}>
-            {children}
-          </a>
-          :
-          children
+          // children.toString().includes('.com') ?
+          // <a target="_blank" rel="noopener noreferrer" href={`https://${children}`}>
+          //   {children}
+          // </a>
+          // :
+          // children
 
-          &&
+          // &&
 
           children.toString().indexOf('Inc') !== -1 ?
-          <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/, Inc./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
+          <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/Inc./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
             {children}
           </a>
           :
           children
 
-          &&
+          // &&
 
-          children.toString().indexOf('LLC') !== -1 ?
-          <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/, LLC./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
-            {children}
-          </a>
-          :
-          children
+          // children.toString().indexOf('LLC') !== -1 ?
+          // <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/LLC./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
+          //   {children}
+          // </a>
+          // :
+          // children
 
           
         }

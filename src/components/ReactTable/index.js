@@ -191,7 +191,7 @@ class ReactTable extends Methods(Lifecycle(Component)) {
       rowMinWidth,
     }
 
-    console.log('finalState', finalState)
+    // console.log('finalState', finalState)
     this.props.datadispatch(finalState.pageRows)
     this.props.alldatadispatch(finalState.sortedData)
 

@@ -16,6 +16,11 @@ class CSVpage extends React.Component {
     const Country = 'Country';
     const City = 'City';
 
+    const Issuer = 'Issuer';
+    const Days = 'Days';
+    const From = 'From';
+    const To = 'To';
+
     const paramsForExport = [
       Create,
       Update,
@@ -27,6 +32,10 @@ class CSVpage extends React.Component {
       Company,
       Country,
       City,
+      Issuer,
+      Days,
+      From,
+      To,
     ];
 
     let columnsForCVS = [
@@ -41,6 +50,11 @@ class CSVpage extends React.Component {
       { label: 'Company name', key: 'company' },
       { label: 'Country name', key: 'country' },
       { label: 'City name', key: 'city' },
+
+      { label: 'Issuer name', key: 'issuer', },
+      { label: 'Days left', key: 'days', },
+      { label: 'From', key: 'from', },
+      { label: 'To', key: 'to', },
     ];
 
     let dataFromStore = this.props.dataFromStore
@@ -96,6 +110,19 @@ class CSVpage extends React.Component {
               else if (value[p] === City) {
                 delete item.city
               }
+
+              else if (value[p] === Issuer) {
+                delete item.issuer
+              }
+              else if (value[p] === Days) {
+                delete item.days
+              }
+              else if (value[p] === From) {
+                delete item.from
+              }
+              else if (value[p] === To) {
+                delete item.to
+              }
             });
 
             columnsForCVS.forEach(item => {
@@ -129,7 +156,7 @@ class CSVpage extends React.Component {
 }
 
 const mapStateToProps = store => {
-  console.log(store.dataPage)
+  // console.log(store.dataPage)
   return {
     dataFromStore: store.dataPage
   }

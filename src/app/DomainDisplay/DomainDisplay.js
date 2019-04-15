@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
 import "./DomainDisplay.css";
-// import DataTable from '../../components/Table/DataTable';
 
 import CVSpage from '../../components/Export/CSV/CSVpage'
 import XLSpage from '../../components/Export/XLS/XLSpage'
 import CVSall from '../../components/Export/CSV/CSVall'
 import XLSall from '../../components/Export/XLS/XLSall'
 
-
-// import ReactTable from "react-table";
 import ReactTable from '../../components/ReactTable';
-import "react-table/react-table.css";
+import "../../components/ReactTable/react-table.css";
 
 
 class WeatherDisplay extends Component {
@@ -75,18 +72,33 @@ class WeatherDisplay extends Component {
 
   apiRequestLoop = inp => {
     let promiseArray = [];
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+
     for (let i = 0; i < inp; i++) {
+
       let dataUrlLoop = "http://api.whoxy.com/?key=35145562f9994dc4eg985789f45a1c304&whois=" +
         this.state.domainsNames[i];
+      let SSLUrlLoop = "https://endpoint.apivoid.com/sslinfo/v1/pay-as-you-go/?key=c028bf0b1127e7a2494c038144285a9e53b3f51e&host=" +
+        this.state.domainsNames[i];
+
       promiseArray.push(
         fetch(dataUrlLoop)
           .then(response => response.json())
-          .then(data => {
-            return data;
-          })
+          .then(data1 =>
+
+            fetch(proxyurl + SSLUrlLoop)
+              .then(response => response.json())
+              .then(data2 => {
+                return Object.assign(data1, data2);
+              })
+              .catch(error => {
+                console.log(error.message)
+              })
+
+          )
           .catch(error => {
             console.log(error.message)
-          })
+          }),
       );
     }
     return Promise.all(promiseArray)
@@ -104,6 +116,10 @@ class WeatherDisplay extends Component {
     const Company = 'Company';
     const Country = 'Country';
     const City = 'City';
+    const Issuer = 'Issuer';
+    const Days = 'Days';
+    const From = 'From';
+    const To = 'To';
 
     const paramsForDisplay = [
       Create,
@@ -116,6 +132,10 @@ class WeatherDisplay extends Component {
       Company,
       Country,
       City,
+      Issuer,
+      Days,
+      From,
+      To,
     ];
 
     const data = [];
@@ -136,6 +156,31 @@ class WeatherDisplay extends Component {
             company: item.registrant_contact === undefined || item.registrant_contact.company_name === undefined ? 'no data' : item.registrant_contact.company_name,
             country: item.registrant_contact === undefined || item.registrant_contact.country_name === undefined ? 'no data' : item.registrant_contact.country_name,
             city: item.registrant_contact === undefined || item.registrant_contact.city_name === undefined ? 'no data' : item.registrant_contact.city_name,
+
+            issuer: item.data === undefined ||
+              item.data.certificate === undefined ||
+              item.data.certificate.details === undefined ||
+              item.data.certificate.details.issuer === undefined ||
+              item.data.certificate.details.issuer.common_name === undefined
+              ? 'no data' : item.data.certificate.details.issuer.common_name,
+            days: item.data === undefined ||
+              item.data.certificate === undefined ||
+              item.data.certificate.details === undefined ||
+              item.data.certificate.details.validity === undefined ||
+              item.data.certificate.details.validity.days_left === undefined
+              ? 'no data' : item.data.certificate.details.validity.days_left,
+            from: item.data === undefined ||
+              item.data.certificate === undefined ||
+              item.data.certificate.details === undefined ||
+              item.data.certificate.details.validity === undefined ||
+              item.data.certificate.details.validity.valid_from === undefined
+              ? 'no data' : item.data.certificate.details.validity.valid_from,
+            to: item.data === undefined ||
+              item.data.certificate === undefined ||
+              item.data.certificate.details === undefined ||
+              item.data.certificate.details.validity === undefined ||
+              item.data.certificate.details.validity.valid_to === undefined
+              ? 'no data' : item.data.certificate.details.validity.valid_to,
           });
         }
         catch (e) {
@@ -144,28 +189,50 @@ class WeatherDisplay extends Component {
       })
     }
 
-    const columns = [
+    const domain = [
       { Header: 'Domain Name', accessor: 'name' },
+    ];
 
+    const technical1 = [
       { Header: 'Create date', accessor: 'create', },
       { Header: 'Update date', accessor: 'update', },
       { Header: 'Expiry date', accessor: 'expiry', },
+    ];
+
+    const technical2 = [
       { Header: 'Registered', accessor: 'registered', },
       { Header: 'Servers name', accessor: 'servers', },
       { Header: 'Domain status', accessor: 'domain', },
+    ]
+    const technical3 = [
       { Header: 'Registrar name', accessor: 'registrar', },
       { Header: 'Company name', accessor: 'company', },
       { Header: 'Country name', accessor: 'country', },
       { Header: 'City name', accessor: 'city', },
     ];
 
-    const removeItemInColumns = (key, value) => {
+    const ssl = [
+      { Header: 'Issuer name', accessor: 'issuer', },
+      { Header: 'Days left', accessor: 'days', },
+      { Header: 'From date', accessor: 'from', },
+      { Header: 'To date', accessor: 'to', },
+    ];
+
+    const columns = [
+      { Header: 'Domain', columns: domain },
+      { Header: 'Time Stamps', columns: technical1 },
+      { Header: 'Status', columns: technical2 },
+      { Header: 'Located', columns: technical3 },
+      { Header: 'SSL Checker', columns: ssl }
+    ];
+
+    const removeItemInColumns = (key, value, body) => {
       if (value === undefined)
         return;
 
-      for (let i in columns) {
-        if (columns[i][key] === value) {
-          columns.splice(i, 1);
+      for (let i in body) {
+        if (body[i][key] === value) {
+          body.splice(i, 1);
         }
       }
     };
@@ -175,9 +242,27 @@ class WeatherDisplay extends Component {
         for (let p = 0; p < value.length; p++) {
           if (this.props[`is${value[p]}Choice`] === 'none') {
 
-            columns.forEach(item => {
+            technical1.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase());
+                removeItemInColumns("accessor", value[p].toLowerCase(), technical1);
+              }
+            });
+
+            technical2.forEach(item => {
+              if (item.Header.includes(value[p])) {
+                removeItemInColumns("accessor", value[p].toLowerCase(), technical2);
+              }
+            });
+
+            technical3.forEach(item => {
+              if (item.Header.includes(value[p])) {
+                removeItemInColumns("accessor", value[p].toLowerCase(), technical3);
+              }
+            });
+
+            ssl.forEach(item => {
+              if (item.Header.includes(value[p])) {
+                removeItemInColumns("accessor", value[p].toLowerCase(), ssl);
               }
             });
 
@@ -210,6 +295,11 @@ class WeatherDisplay extends Component {
               isCompanyChoice={this.props.isCompanyChoice}
               isCountryChoice={this.props.isCountryChoice}
               isCityChoice={this.props.isCityChoice}
+
+              isIssuerChoice={this.props.isIssuerChoice}
+              isDaysChoice={this.props.isDaysChoice}
+              isFromChoice={this.props.isFromChoice}
+              isToChoice={this.props.isToChoice}
             />
             <CVSall
               label={'Export all data\nto CVS'}
@@ -223,6 +313,11 @@ class WeatherDisplay extends Component {
               isCompanyChoice={this.props.isCompanyChoice}
               isCountryChoice={this.props.isCountryChoice}
               isCityChoice={this.props.isCityChoice}
+
+              isIssuerChoice={this.props.isIssuerChoice}
+              isDaysChoice={this.props.isDaysChoice}
+              isFromChoice={this.props.isFromChoice}
+              isToChoice={this.props.isToChoice}
             />
 
           </div>
@@ -266,6 +361,11 @@ class WeatherDisplay extends Component {
               isCompanyChoice={this.props.isCompanyChoice}
               isCountryChoice={this.props.isCountryChoice}
               isCityChoice={this.props.isCityChoice}
+
+              isIssuerChoice={this.props.isIssuerChoice}
+              isDaysChoice={this.props.isDaysChoice}
+              isFromChoice={this.props.isFromChoice}
+              isToChoice={this.props.isToChoice}
             />
             <XLSall
               label={'Export all data\nto XLS'}
@@ -279,6 +379,11 @@ class WeatherDisplay extends Component {
               isCompanyChoice={this.props.isCompanyChoice}
               isCountryChoice={this.props.isCountryChoice}
               isCityChoice={this.props.isCityChoice}
+
+              isIssuerChoice={this.props.isIssuerChoice}
+              isDaysChoice={this.props.isDaysChoice}
+              isFromChoice={this.props.isFromChoice}
+              isToChoice={this.props.isToChoice}
             />
           </div>
         </div>
@@ -289,7 +394,7 @@ class WeatherDisplay extends Component {
           columns={columns}
           // pivotBy={["lastName"]}
           filterable
-          defaultPageSize={5}
+          defaultPageSize={10}
           className="-striped -highlight"
           // Controlled props
           sorted={this.state.sorted}

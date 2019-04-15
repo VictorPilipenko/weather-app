@@ -16,6 +16,11 @@ class XLSpage extends React.Component {
     const Country = 'Country';
     const City = 'City';
 
+    const Issuer = 'Issuer';
+    const Days = 'Days';
+    const From = 'From';
+    const To = 'To';
+
     const paramsForExport = [
       Create,
       Update,
@@ -27,6 +32,10 @@ class XLSpage extends React.Component {
       Company,
       Country,
       City,
+      Issuer,
+      Days,
+      From,
+      To,
     ];
 
     let dataFromStore = this.props.dataFromStore
@@ -76,6 +85,19 @@ class XLSpage extends React.Component {
               }
               else if (value[p] === City) {
                 delete item['City name']
+              }
+
+              else if (value[p] === Issuer) {
+                delete item['Issuer']
+              }
+              else if (value[p] === Days) {
+                delete item['Days left']
+              }
+              else if (value[p] === From) {
+                delete item['From']
+              }
+              else if (value[p] === To) {
+                delete item['To']
               }
             });
 

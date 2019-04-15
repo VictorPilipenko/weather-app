@@ -2,17 +2,12 @@ import React, { Component } from "react";
 import "./App.css";
 import WeatherDisplay from '../DomainDisplay/DomainDisplay'
 import logo from '../../assets/Logo_Final-01.png'
-
-import SideNav, { /*Toggle, Nav,*/ NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import ClickOutside from '../../components/ClickOutside'
-
-// Be sure to include styles at some point, probably during your bootstraping
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import SidePanel from '../SidePanel/SidePanel'
 
 class App extends Component {
   state = {
 
-    value: `google.com\ntrello.com\ngithub.com`,
+    value: `google.com`,
     // value: '',
     arrayOfDomainNames: [],
 
@@ -45,6 +40,18 @@ class App extends Component {
 
     isCityChoice: 'table-cell',
     isCheckedCityChoice: true,
+
+    isIssuerChoice: 'table-cell',
+    isCheckedIssuerChoice: true,
+
+    isDaysChoice: 'table-cell',
+    isCheckedDaysChoice: true,
+
+    isFromChoice: 'table-cell',
+    isCheckedFromChoice: true,
+
+    isToChoice: 'table-cell',
+    isCheckedToChoice: true,
   }
 
   handleChange = e => this.setState({
@@ -105,65 +112,17 @@ class App extends Component {
     const Country = 'Country';
     const Registered = 'Registered';
     const City = 'City';
+    const Issuer = 'Issuer';
+    const Days = 'Days';
+    const From = 'From';
+    const To = 'To';
+
 
     return (
       <div className="grid-container">
         <header className="header">
-          {/* Ето хЕдЕр */}
-          {/* <img className="logo" src={logo} alt="logo" /> */}
+           <SidePanel />
         </header>
-        <div className='side-nav'>
-          <ClickOutside
-            onClickOutside={() => {
-              this.setState({ expanded: false });
-            }}
-          >
-            <SideNav
-              expanded={this.state.expanded}
-              onToggle={(expanded) => {
-                this.setState({ expanded });
-              }}
-            >
-              <SideNav.Toggle />
-              <SideNav.Nav defaultSelected="home">
-
-                <NavItem eventKey="home">
-                  <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Our team" /></a>
-                  </NavIcon>
-                  <NavText>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team">
-                      Our team
-                  </a>
-                  </NavText>
-                </NavItem>
-
-                <NavItem eventKey="home">
-                  <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Portfolio" /></a>
-                  </NavIcon>
-                  <NavText>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio">
-                      Portfolio
-                  </a>
-                  </NavText>
-                </NavItem>
-
-                <NavItem eventKey="home">
-                  <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Contact" /></a>
-                  </NavIcon>
-                  <NavText>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact">
-                      Contact us
-                  </a>
-                  </NavText>
-                </NavItem>
-
-              </SideNav.Nav>
-            </SideNav>
-          </ClickOutside>
-        </div>
         <div className="input-bar">
           <div className="input-bar-items">
             {/* три пробела перед и после*/}
@@ -179,7 +138,6 @@ class App extends Component {
               <p className="countCities">{this.state.arrayOfDomainNames.length} domains added</p>
               <button className="btn btn-primary buttonGetDomains" onClick={this.handleClick}>Push</button>
             </div>
-
             <img className="logo" src={logo} alt="logo" />
           </div>
         </div>
@@ -209,22 +167,25 @@ class App extends Component {
               <legend style={{ color: "white" }}>Technical metrics</legend>
               {this.checkBox(Registrar, 'Registrar name')}
               {this.checkBox(Company, 'Company name')}
+              {this.checkBox(Country, 'Country name')}
+              {this.checkBox(City, 'City name')}
             </fieldset>
           </div>
         </div>
         <div className="menu-cuatro">
           <div className="grid-container-menu">
             <fieldset className="fieldsetApp">
-              <legend style={{ color: "white" }}>Technical metrics</legend>
-              {this.checkBox(Country, 'Country name')}
-              {this.checkBox(City, 'City name')}
+              <legend style={{ color: "white" }}>SSL metrics</legend>
+              {this.checkBox(Issuer, 'Issuer')}
+              {this.checkBox(Days, 'Days left')}
+              {this.checkBox(From, 'Valid from')}
+              {this.checkBox(To, 'Valid to')}
             </fieldset>
           </div>
         </div>
         <div className="content">
           <WeatherDisplay
             arrayOfDomainNames={this.state.arrayOfDomainNames}
-
             isCreateChoice={this.state.isCreateChoice}
             isUpdateChoice={this.state.isUpdateChoice}
             isExpiryChoice={this.state.isExpiryChoice}
@@ -235,6 +196,10 @@ class App extends Component {
             isCompanyChoice={this.state.isCompanyChoice}
             isCountryChoice={this.state.isCountryChoice}
             isCityChoice={this.state.isCityChoice}
+            isIssuerChoice={this.state.isIssuerChoice}
+            isDaysChoice={this.state.isDaysChoice}
+            isFromChoice={this.state.isFromChoice}
+            isToChoice={this.state.isToChoice}
           />
         </div>
         <footer className="footer">
