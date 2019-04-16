@@ -7,8 +7,8 @@ import SidePanel from '../SidePanel/SidePanel'
 class App extends Component {
   state = {
 
-    value: `google.com`,
-    // value: '',
+    // value: `google.com`,
+    value: '',
     arrayOfDomainNames: [],
 
     isCreateChoice: true,
