@@ -88,9 +88,9 @@ export default class SidePanel extends React.Component {
        <img className="logo-header" src={logo} alt="logo" onClick={this.button} />
         <button
           onClick={this.button}
-          className="btn btn-primary headr-btn"
+          className="btn btn-primary header-btn"
         >
-        {!this.state.toggle ? `show menu` : 'hide menu'} 
+        {!this.state.toggle ? `P` : 'H'} 
         </button>
         {this.ret()}
       </>

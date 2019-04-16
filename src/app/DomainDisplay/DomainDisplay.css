@@ -42,6 +42,8 @@
   /* margin: auto */
   padding-left: 10px;
   padding-right: 10px;
+  /* white-space: pre;
+  outline: none; */
 }
 
 .CSV-ExportButtonsWrapper{

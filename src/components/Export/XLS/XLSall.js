@@ -5,39 +5,6 @@ import xlsExport from 'xlsexport';
 class XLSall extends React.Component {
   render() {
 
-    const Create = 'Create';
-    const Update = 'Update';
-    const Expiry = 'Expiry';
-    const Registered = 'Registered';
-    const Servers = 'Servers';
-    const Domain = 'Domain';
-    const Registrar = 'Registrar';
-    const Company = 'Company';
-    const Country = 'Country';
-    const City = 'City';
-
-    const Issuer = 'Issuer';
-    const Days = 'Days';
-    const From = 'From';
-    const To = 'To';
-
-    const paramsForExport = [
-      Create,
-      Update,
-      Expiry,
-      Registered,
-      Servers,
-      Domain,
-      Registrar,
-      Company,
-      Country,
-      City,
-      Issuer,
-      Days,
-      From,
-      To,
-    ];
-
     let dataFromStore = this.props.dataFromStore
 
     dataFromStore.forEach(item => {
@@ -53,51 +20,11 @@ class XLSall extends React.Component {
     const preparationForExport = value => {
       try {
         for (let p = 0; p < value.length; p++) {
-          if (this.props[`is${value[p]}Choice`] === 'none') {
-
+          if (!this.props[`is${value[p]}Choice`]) {
             dataFromStore.forEach(item => {
-              if (value[p] === Create) {
-                delete item[`Create date`]
-              }
-              else if (value[p] === Update) {
-                delete item[`Update date`]
-              }
-              else if (value[p] === Expiry) {
-                delete item[`Expiry date`]
-              }
-              else if (value[p] === Registered) {
-                delete item['Registered']
-              }
-              else if (value[p] === Servers) {
-                delete item[`Servers`]
-              }
-              else if (value[p] === Domain) {
-                delete item[`Domain status`]
-              }
-              else if (value[p] === Registrar) {
-                delete item[`Registrar name`]
-              }
-              else if (value[p] === Company) {
-                delete item[`Company name`]
-              }
-              else if (value[p] === Country) {
-                delete item['Country name']
-              }
-              else if (value[p] === City) {
-                delete item['City name']
-              }
-
-              else if (value[p] === Issuer) {
-                delete item['Issuer']
-              }
-              else if (value[p] === Days) {
-                delete item['Days left']
-              }
-              else if (value[p] === From) {
-                delete item['From']
-              }
-              else if (value[p] === To) {
-                delete item['To']
+               switch (value[p]) {
+                case value: delete item.value; break;
+                default: console.log('lol')
               }
             });
 
@@ -109,10 +36,10 @@ class XLSall extends React.Component {
       }
     }
 
-    preparationForExport(paramsForExport)
+    preparationForExport(this.props.paramsForExport)
 
     let xlsDataFromStore = '';
-    dataFromStore.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([paramsForExport]);
+    dataFromStore.length > 0 ? xlsDataFromStore = new xlsExport(dataFromStore) : xlsDataFromStore = new xlsExport([this.props.paramsForExport]);
 
 
     return (

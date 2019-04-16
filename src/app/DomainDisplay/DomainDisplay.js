@@ -76,17 +76,17 @@ class WeatherDisplay extends Component {
 
     for (let i = 0; i < inp; i++) {
 
-      let dataUrlLoop = "http://api.whoxy.com/?key=35145562f9994dc4eg985789f45a1c304&whois=" +
+      let whoxyUrlLoop = "http://api.whoxy.com/?key=35145562f9994dc4eg985789f45a1c304&whois=" +
         this.state.domainsNames[i];
-      let SSLUrlLoop = "https://endpoint.apivoid.com/sslinfo/v1/pay-as-you-go/?key=c028bf0b1127e7a2494c038144285a9e53b3f51e&host=" +
+      let sslUrlLoop = "https://endpoint.apivoid.com/sslinfo/v1/pay-as-you-go/?key=c028bf0b1127e7a2494c038144285a9e53b3f51e&host=" +
         this.state.domainsNames[i];
 
       promiseArray.push(
-        fetch(dataUrlLoop)
+        fetch(whoxyUrlLoop)
           .then(response => response.json())
           .then(data1 =>
 
-            fetch(proxyurl + SSLUrlLoop)
+            fetch(proxyurl + sslUrlLoop)
               .then(response => response.json())
               .then(data2 => {
                 return Object.assign(data1, data2);
@@ -189,22 +189,40 @@ class WeatherDisplay extends Component {
       })
     }
 
+    let columnsForCVS = [
+      { label: 'Name', key: 'name' },
+      { label: 'Create date', key: 'create' },
+      { label: 'Update date', key: 'update' },
+      { label: 'Expiry date', key: 'expiry' },
+      { label: 'Registered', key: 'registered' },
+      { label: 'Servers name', key: 'servers' },
+      { label: 'Domain status', key: 'domain' },
+      { label: 'Registrar name', key: 'registrar' },
+      { label: 'Company name', key: 'company' },
+      { label: 'Country name', key: 'country' },
+      { label: 'City name', key: 'city' },
+      { label: 'Issuer name', key: 'issuer', },
+      { label: 'Days left', key: 'days', },
+      { label: 'From', key: 'from', },
+      { label: 'To', key: 'to', },
+    ];
+
     const domain = [
       { Header: 'Domain Name', accessor: 'name' },
     ];
 
-    const technical1 = [
+    const timeStamps = [
       { Header: 'Create date', accessor: 'create', },
       { Header: 'Update date', accessor: 'update', },
       { Header: 'Expiry date', accessor: 'expiry', },
     ];
 
-    const technical2 = [
+    const status = [
       { Header: 'Registered', accessor: 'registered', },
       { Header: 'Servers name', accessor: 'servers', },
       { Header: 'Domain status', accessor: 'domain', },
     ]
-    const technical3 = [
+    const located = [
       { Header: 'Registrar name', accessor: 'registrar', },
       { Header: 'Company name', accessor: 'company', },
       { Header: 'Country name', accessor: 'country', },
@@ -220,9 +238,9 @@ class WeatherDisplay extends Component {
 
     const columns = [
       { Header: 'Domain', columns: domain },
-      { Header: 'Time Stamps', columns: technical1 },
-      { Header: 'Status', columns: technical2 },
-      { Header: 'Located', columns: technical3 },
+      { Header: 'Time Stamps', columns: timeStamps },
+      { Header: 'Status', columns: status },
+      { Header: 'Located', columns: located },
       { Header: 'SSL Checker', columns: ssl }
     ];
 
@@ -240,23 +258,23 @@ class WeatherDisplay extends Component {
     const preparationForDisplay = value => {
       try {
         for (let p = 0; p < value.length; p++) {
-          if (this.props[`is${value[p]}Choice`] === 'none') {
+          if (!this.props[`is${value[p]}Choice`]) {
 
-            technical1.forEach(item => {
+            timeStamps.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), technical1);
+                removeItemInColumns("accessor", value[p].toLowerCase(), timeStamps);
               }
             });
 
-            technical2.forEach(item => {
+            status.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), technical2);
+                removeItemInColumns("accessor", value[p].toLowerCase(), status);
               }
             });
 
-            technical3.forEach(item => {
+            located.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), technical3);
+                removeItemInColumns("accessor", value[p].toLowerCase(), located);
               }
             });
 
@@ -300,6 +318,9 @@ class WeatherDisplay extends Component {
               isDaysChoice={this.props.isDaysChoice}
               isFromChoice={this.props.isFromChoice}
               isToChoice={this.props.isToChoice}
+
+              paramsForExport={paramsForDisplay}
+              columnsForCVS={columnsForCVS}
             />
             <CVSall
               label={'Export all data\nto CVS'}
@@ -318,6 +339,9 @@ class WeatherDisplay extends Component {
               isDaysChoice={this.props.isDaysChoice}
               isFromChoice={this.props.isFromChoice}
               isToChoice={this.props.isToChoice}
+
+              paramsForExport={paramsForDisplay}
+              columnsForCVS={columnsForCVS}
             />
 
           </div>
@@ -326,11 +350,10 @@ class WeatherDisplay extends Component {
             <button
               className="btn btn-primary"
               onClick={this.resetSorted}
-              style={{
-                whiteSpace: 'pre',
-                outline: 'none',
-                // backgroundColor: 'cornflowerblue',
-              }}
+            // style={{
+            //   whiteSpace: 'pre',
+            //   outline: 'none',
+            // }}
             >
               {`Reset\nSort`}
             </button>
@@ -338,11 +361,10 @@ class WeatherDisplay extends Component {
             <button
               className="btn btn-primary"
               onClick={this.resetFiltered}
-              style={{
-                whiteSpace: 'pre',
-                outline: 'none',
-                // backgroundColor: 'cornflowerblue',
-              }}
+            // style={{
+            //   whiteSpace: 'pre',
+            //   outline: 'none',
+            // }}
             >
               {`Reset\nSearch`}
             </button>
@@ -366,6 +388,8 @@ class WeatherDisplay extends Component {
               isDaysChoice={this.props.isDaysChoice}
               isFromChoice={this.props.isFromChoice}
               isToChoice={this.props.isToChoice}
+
+              paramsForExport={paramsForDisplay}
             />
             <XLSall
               label={'Export all data\nto XLS'}
@@ -384,6 +408,8 @@ class WeatherDisplay extends Component {
               isDaysChoice={this.props.isDaysChoice}
               isFromChoice={this.props.isFromChoice}
               isToChoice={this.props.isToChoice}
+
+              paramsForExport={paramsForDisplay}
             />
           </div>
         </div>

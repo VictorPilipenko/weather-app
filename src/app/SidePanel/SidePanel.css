@@ -21,12 +21,13 @@
   animation: imageAnimation 1s;
 }
 
-.headr-btn{
-  padding: 20px;
-  width: 200px;
-  margin-left: 58px;
+.header-btn{
+    margin-left: 58px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    outline: none;
 }
-
 
 /*burger*/
 
@@ -54,7 +55,7 @@
     visibility: hidden !important;
     display: none !important;
     opacity: 0;
-    z-index: -100; 
+    z-index: 100; 
     overflow: hidden;
     overflow-x: hidden;
     position: fixed;

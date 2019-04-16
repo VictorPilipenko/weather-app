@@ -11,47 +11,20 @@ class App extends Component {
     // value: '',
     arrayOfDomainNames: [],
 
-    isCreateChoice: 'table-cell',
-    isCheckedCreateChoice: true,
-
-    isUpdateChoice: 'table-cell',
-    isCheckedUpdateChoice: true,
-
-    isExpiryChoice: 'table-cell',
-    isCheckedExpiryChoice: true,
-
-    isRegisteredChoice: 'table-cell',
-    isCheckedRegisteredChoice: true,
-
-    isServersChoice: 'table-cell',
-    isCheckedServersChoice: true,
-
-    isDomainChoice: 'table-cell',
-    isCheckedDomainChoice: true,
-
-    isRegistrarChoice: 'table-cell',
-    isCheckedRegistrarChoice: true,
-
-    isCompanyChoice: 'table-cell',
-    isCheckedCompanyChoice: true,
-
-    isCountryChoice: 'table-cell',
-    isCheckedCountryChoice: true,
-
-    isCityChoice: 'table-cell',
-    isCheckedCityChoice: true,
-
-    isIssuerChoice: 'table-cell',
-    isCheckedIssuerChoice: true,
-
-    isDaysChoice: 'table-cell',
-    isCheckedDaysChoice: true,
-
-    isFromChoice: 'table-cell',
-    isCheckedFromChoice: true,
-
-    isToChoice: 'table-cell',
-    isCheckedToChoice: true,
+    isCreateChoice: true,
+    isUpdateChoice: true,
+    isExpiryChoice: true,
+    isRegisteredChoice: true,
+    isServersChoice: true,
+    isDomainChoice: true,
+    isRegistrarChoice: true,
+    isCompanyChoice: true,
+    isCountryChoice: true,
+    isCityChoice: true,
+    isIssuerChoice: true,
+    isDaysChoice: true,
+    isFromChoice: true,
+    isToChoice: true,
   }
 
   handleChange = e => this.setState({
@@ -72,26 +45,15 @@ class App extends Component {
     }
   }
 
-  toggle = name => {
-    this.state[`is${name}Choice`] === 'table-cell' ?
-      this.setState({
-        [`is${name}Choice`]: 'none',
-      })
-      :
-      this.setState({
-        [`is${name}Choice`]: 'table-cell',
-      })
-
-    this.setState({
-      [`isChecked${name}Choice`]: !this.state[`isChecked${name}Choice`],
-    });
-  };
+  toggle = name => this.setState({
+    [`is${name}Choice`]: !this.state[`is${name}Choice`]
+  });
 
   checkBox = (name, labelText) => {
     return (
       <>
         <input type="checkbox" id={name} name={name}
-          checked={this.state[`isChecked${name}Choice`]}
+          checked={this.state[`is${name}Choice`]}
           onClick={() => this.toggle(name)}
           onChange={() => { }}
         />
@@ -121,7 +83,7 @@ class App extends Component {
     return (
       <div className="grid-container">
         <header className="header">
-           <SidePanel />
+          <SidePanel />
         </header>
         <div className="input-bar">
           <div className="input-bar-items">
