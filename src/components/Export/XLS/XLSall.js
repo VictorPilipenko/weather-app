@@ -24,7 +24,7 @@ class XLSall extends React.Component {
             dataFromStore.forEach(item => {
                switch (value[p]) {
                 case value: delete item.value; break;
-                default: console.log('lol')
+                default: break;
               }
             });
 
