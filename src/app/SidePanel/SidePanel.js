@@ -10,17 +10,14 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 export default class SidePanel extends React.Component {
-
   state = {
     expanded: false,
     toggle: false,
   }
 
-  button = () => {
-    this.setState({
-      toggle: !this.state.toggle
-    })
-  }
+  button = () => this.setState({
+    toggle: !this.state.toggle
+  })
 
   ret = () => {
     // console.log(this.state.toggle)
@@ -28,22 +25,22 @@ export default class SidePanel extends React.Component {
       this.state.toggle ?
         <div className='side-nav'>
           <ClickOutside
-            onClickOutside={() => {
-              this.setState({ expanded: false });
-            }}
+            onClickOutside={() => this.setState({ expanded: false })}
           >
             <SideNav
               expanded={this.state.expanded}
-              onToggle={(expanded) => {
-                this.setState({ expanded });
-              }}
+              onToggle={expanded => this.setState({ expanded })}
             >
               <SideNav.Toggle />
-              <SideNav.Nav defaultSelected="home">
+              <SideNav.Nav /*defaultSelected="Our team"*/>
 
-                <NavItem eventKey="home">
+                <NavItem
+                  eventKey="Our team"
+                  onClick={() => window.open('https://qbex.io/our-team', '_blank') }
+
+                >
                   <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Our team" /></a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team"><img src={logo} className='image' alt="Our team" /></a>
                   </NavIcon>
                   <NavText>
                     <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team">
@@ -52,9 +49,9 @@ export default class SidePanel extends React.Component {
                   </NavText>
                 </NavItem>
 
-                <NavItem eventKey="home">
+                <NavItem eventKey="Portfolio" onClick={() => window.open('https://qbex.io/portfolio', '_blank') }>
                   <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Portfolio" /></a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio"><img src={logo} className='image' alt="Portfolio" /></a>
                   </NavIcon>
                   <NavText>
                     <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio">
@@ -63,9 +60,9 @@ export default class SidePanel extends React.Component {
                   </NavText>
                 </NavItem>
 
-                <NavItem eventKey="home">
+                <NavItem eventKey="Contact us" onClick={() => window.open('https://qbex.io/contact', '_blank') }>
                   <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact"><img src={logo} style={{ height: '25px', width: '50px' }} alt="Contact" /></a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact"><img src={logo} className='image' alt="Contact" /></a>
                   </NavIcon>
                   <NavText>
                     <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact">
@@ -85,12 +82,12 @@ export default class SidePanel extends React.Component {
   render() {
     return (
       <>
-       <img className="logo-header" src={logo} alt="logo" onClick={this.button} />
+        <img className="logo-header" src={logo} alt="logo" onClick={this.button} />
         <button
           onClick={this.button}
           className="btn btn-primary header-btn"
         >
-        {!this.state.toggle ? `P` : 'H'} 
+          {!this.state.toggle ? `P` : 'H'}
         </button>
         {this.ret()}
       </>

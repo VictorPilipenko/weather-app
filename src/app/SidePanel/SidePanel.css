@@ -21,12 +21,25 @@
   animation: imageAnimation 1s;
 }
 
+.image{
+  height: 25px;
+}
+
 .header-btn{
     margin-left: 58px;
     border-radius: 50%;
     width: 60px;
     height: 60px;
     outline: none;
+}
+
+.header-btn:hover{
+    margin-left: 58px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    outline: none;
+    box-shadow: 0px 0px 47px -8px rgba(0,0,0,0.75);
 }
 
 /*burger*/

@@ -1,4 +1,4 @@
-.table th {
+/* .table th {
   cursor: pointer;
   text-align: center;
   -webkit-user-select: none;
@@ -28,7 +28,7 @@
 }
 .sort-icon.sort-ascending:after  { content: '\f0de'; }
 .sort-icon.sort-descending:after { content: '\f0dd'; }
-.sort-icon.sort-none:after  { content: '\f0dc'; }
+.sort-icon.sort-none:after  { content: '\f0dc'; } */
 
 .buttons{
   display: flex;
