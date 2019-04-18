@@ -238,13 +238,13 @@ class WeatherDisplay extends Component {
       { Header: 'Time Stamps', columns: timeStamps },
       { Header: 'Status', columns: status },
       { Header: 'Located', columns: located },
-      { Header: 'SSL Checker', columns: ssl }
+      { Header: 'SSL metrics', columns: ssl }
     ];
 
     const preparationForDisplay = value => {
       try {
         for (let p = 0; p < value.length; p++) {
-          if (!this.props[`is${value[p]}Choice`]) {
+          if (!this.props[`is${value[p]}Choiced`]) {
 
             timeStamps.forEach(item => {
               if (item.Header.includes(value[p])) {
@@ -289,42 +289,42 @@ class WeatherDisplay extends Component {
           <div className="CSV-ExportButtonsWrapper">
             <CVSpage
               label={'Export current page\nto CVS'}
-              isCreateChoice={this.props.isCreateChoice}
-              isUpdateChoice={this.props.isUpdateChoice}
-              isExpiryChoice={this.props.isExpiryChoice}
-              isRegisteredChoice={this.props.isRegisteredChoice}
-              isServersChoice={this.props.isServersChoice}
-              isDomainChoice={this.props.isDomainChoice}
-              isRegistrarChoice={this.props.isRegistrarChoice}
-              isCompanyChoice={this.props.isCompanyChoice}
-              isCountryChoice={this.props.isCountryChoice}
-              isCityChoice={this.props.isCityChoice}
+              isCreateChoiced={this.props.isCreateChoiced}
+              isUpdateChoiced={this.props.isUpdateChoiced}
+              isExpiryChoiced={this.props.isExpiryChoiced}
+              isRegisteredChoiced={this.props.isRegisteredChoiced}
+              isServersChoiced={this.props.isServersChoiced}
+              isDomainChoiced={this.props.isDomainChoiced}
+              isRegistrarChoiced={this.props.isRegistrarChoiced}
+              isCompanyChoiced={this.props.isCompanyChoiced}
+              isCountryChoiced={this.props.isCountryChoiced}
+              isCityChoiced={this.props.isCityChoiced}
 
-              isIssuerChoice={this.props.isIssuerChoice}
-              isDaysChoice={this.props.isDaysChoice}
-              isFromChoice={this.props.isFromChoice}
-              isToChoice={this.props.isToChoice}
+              isIssuerChoiced={this.props.isIssuerChoiced}
+              isDaysChoiced={this.props.isDaysChoiced}
+              isFromChoiced={this.props.isFromChoiced}
+              isToChoiced={this.props.isToChoiced}
 
               paramsForExport={paramsForDisplay}
               columnsForCVS={columnsForCVS}
             />
             <CVSall
               label={'Export all data\nto CVS'}
-              isCreateChoice={this.props.isCreateChoice}
-              isUpdateChoice={this.props.isUpdateChoice}
-              isExpiryChoice={this.props.isExpiryChoice}
-              isRegisteredChoice={this.props.isRegisteredChoice}
-              isServersChoice={this.props.isServersChoice}
-              isDomainChoice={this.props.isDomainChoice}
-              isRegistrarChoice={this.props.isRegistrarChoice}
-              isCompanyChoice={this.props.isCompanyChoice}
-              isCountryChoice={this.props.isCountryChoice}
-              isCityChoice={this.props.isCityChoice}
+              isCreateChoiced={this.props.isCreateChoiced}
+              isUpdateChoiced={this.props.isUpdateChoiced}
+              isExpiryChoiced={this.props.isExpiryChoiced}
+              isRegisteredChoiced={this.props.isRegisteredChoiced}
+              isServersChoiced={this.props.isServersChoiced}
+              isDomainChoiced={this.props.isDomainChoiced}
+              isRegistrarChoiced={this.props.isRegistrarChoiced}
+              isCompanyChoiced={this.props.isCompanyChoiced}
+              isCountryChoiced={this.props.isCountryChoiced}
+              isCityChoiced={this.props.isCityChoiced}
 
-              isIssuerChoice={this.props.isIssuerChoice}
-              isDaysChoice={this.props.isDaysChoice}
-              isFromChoice={this.props.isFromChoice}
-              isToChoice={this.props.isToChoice}
+              isIssuerChoiced={this.props.isIssuerChoiced}
+              isDaysChoiced={this.props.isDaysChoiced}
+              isFromChoiced={this.props.isFromChoiced}
+              isToChoiced={this.props.isToChoiced}
 
               paramsForExport={paramsForDisplay}
               columnsForCVS={columnsForCVS}
@@ -351,41 +351,41 @@ class WeatherDisplay extends Component {
           <div className="XLS-ExportButtonsWrapper">
             <XLSpage
               label={'Export current page\nto XLS'}
-              isCreateChoice={this.props.isCreateChoice}
-              isUpdateChoice={this.props.isUpdateChoice}
-              isExpiryChoice={this.props.isExpiryChoice}
-              isRegisteredChoice={this.props.isRegisteredChoice}
-              isServersChoice={this.props.isServersChoice}
-              isDomainChoice={this.props.isDomainChoice}
-              isRegistrarChoice={this.props.isRegistrarChoice}
-              isCompanyChoice={this.props.isCompanyChoice}
-              isCountryChoice={this.props.isCountryChoice}
-              isCityChoice={this.props.isCityChoice}
+              isCreateChoiced={this.props.isCreateChoiced}
+              isUpdateChoiced={this.props.isUpdateChoiced}
+              isExpiryChoiced={this.props.isExpiryChoiced}
+              isRegisteredChoiced={this.props.isRegisteredChoiced}
+              isServersChoiced={this.props.isServersChoiced}
+              isDomainChoiced={this.props.isDomainChoiced}
+              isRegistrarChoiced={this.props.isRegistrarChoiced}
+              isCompanyChoiced={this.props.isCompanyChoiced}
+              isCountryChoiced={this.props.isCountryChoiced}
+              isCityChoiced={this.props.isCityChoiced}
 
-              isIssuerChoice={this.props.isIssuerChoice}
-              isDaysChoice={this.props.isDaysChoice}
-              isFromChoice={this.props.isFromChoice}
-              isToChoice={this.props.isToChoice}
+              isIssuerChoiced={this.props.isIssuerChoiced}
+              isDaysChoiced={this.props.isDaysChoiced}
+              isFromChoiced={this.props.isFromChoiced}
+              isToChoiced={this.props.isToChoiced}
 
               paramsForExport={paramsForDisplay}
             />
             <XLSall
               label={'Export all data\nto XLS'}
-              isCreateChoice={this.props.isCreateChoice}
-              isUpdateChoice={this.props.isUpdateChoice}
-              isExpiryChoice={this.props.isExpiryChoice}
-              isRegisteredChoice={this.props.isRegisteredChoice}
-              isServersChoice={this.props.isServersChoice}
-              isDomainChoice={this.props.isDomainChoice}
-              isRegistrarChoice={this.props.isRegistrarChoice}
-              isCompanyChoice={this.props.isCompanyChoice}
-              isCountryChoice={this.props.isCountryChoice}
-              isCityChoice={this.props.isCityChoice}
+              isCreateChoiced={this.props.isCreateChoiced}
+              isUpdateChoiced={this.props.isUpdateChoiced}
+              isExpiryChoiced={this.props.isExpiryChoiced}
+              isRegisteredChoiced={this.props.isRegisteredChoiced}
+              isServersChoiced={this.props.isServersChoiced}
+              isDomainChoiced={this.props.isDomainChoiced}
+              isRegistrarChoiced={this.props.isRegistrarChoiced}
+              isCompanyChoiced={this.props.isCompanyChoiced}
+              isCountryChoiced={this.props.isCountryChoiced}
+              isCityChoiced={this.props.isCityChoiced}
 
-              isIssuerChoice={this.props.isIssuerChoice}
-              isDaysChoice={this.props.isDaysChoice}
-              isFromChoice={this.props.isFromChoice}
-              isToChoice={this.props.isToChoice}
+              isIssuerChoiced={this.props.isIssuerChoiced}
+              isDaysChoiced={this.props.isDaysChoiced}
+              isFromChoiced={this.props.isFromChoiced}
+              isToChoiced={this.props.isToChoiced}
 
               paramsForExport={paramsForDisplay}
             />

@@ -11,20 +11,20 @@ class App extends Component {
     value: '',
     arrayOfDomainNames: [],
 
-    isCreateChoice: true,
-    isUpdateChoice: true,
-    isExpiryChoice: true,
-    isRegisteredChoice: true,
-    isServersChoice: true,
-    isDomainChoice: true,
-    isRegistrarChoice: true,
-    isCompanyChoice: true,
-    isCountryChoice: true,
-    isCityChoice: true,
-    isIssuerChoice: true,
-    isDaysChoice: true,
-    isFromChoice: true,
-    isToChoice: true,
+    isCreateChoiced: true,
+    isUpdateChoiced: true,
+    isExpiryChoiced: true,
+    isRegisteredChoiced: true,
+    isServersChoiced: true,
+    isDomainChoiced: true,
+    isRegistrarChoiced: true,
+    isCompanyChoiced: true,
+    isCountryChoiced: true,
+    isCityChoiced: true,
+    isIssuerChoiced: true,
+    isDaysChoiced: true,
+    isFromChoiced: true,
+    isToChoiced: true,
   }
 
   handleChange = e => this.setState({
@@ -46,14 +46,14 @@ class App extends Component {
   }
 
   toggle = name => this.setState({
-    [`is${name}Choice`]: !this.state[`is${name}Choice`]
+    [`is${name}Choiced`]: !this.state[`is${name}Choiced`]
   });
 
   checkBox = (name, labelText) => {
     return (
       <>
         <input type="checkbox" id={name} name={name}
-          checked={this.state[`is${name}Choice`]}
+          checked={this.state[`is${name}Choiced`]}
           onClick={() => this.toggle(name)}
           onChange={() => { }}
         />
@@ -106,7 +106,7 @@ class App extends Component {
         <div className="menu-uno">
           <div className="grid-container-menu">
             <fieldset className="fieldsetApp">
-              <legend style={{ color: "white" }}>Technical metrics</legend>
+              <legend style={{ color: "white" }}>Time Stamps</legend>
               {this.checkBox(Create, 'Create date')}
               {this.checkBox(Update, 'Update date')}
               {this.checkBox(Expiry, 'Expiry date')}
@@ -116,7 +116,7 @@ class App extends Component {
         <div className="menu-dos">
           <div className="grid-container-menu">
             <fieldset className="fieldsetApp">
-              <legend style={{ color: "white" }}>Technical metrics</legend>
+              <legend style={{ color: "white" }}>Status</legend>
               {this.checkBox(Registered, 'Registered?')}
               {this.checkBox(Servers, 'Servers name')}
               {this.checkBox(Domain, 'Domain status')}
@@ -126,7 +126,7 @@ class App extends Component {
         <div className="menu-tres">
           <div className="grid-container-menu">
             <fieldset className="fieldsetApp">
-              <legend style={{ color: "white" }}>Technical metrics</legend>
+              <legend style={{ color: "white" }}>Located</legend>
               {this.checkBox(Registrar, 'Registrar name')}
               {this.checkBox(Company, 'Company name')}
               {this.checkBox(Country, 'Country name')}
@@ -148,20 +148,20 @@ class App extends Component {
         <div className="content">
           <WeatherDisplay
             arrayOfDomainNames={this.state.arrayOfDomainNames}
-            isCreateChoice={this.state.isCreateChoice}
-            isUpdateChoice={this.state.isUpdateChoice}
-            isExpiryChoice={this.state.isExpiryChoice}
-            isRegisteredChoice={this.state.isRegisteredChoice}
-            isServersChoice={this.state.isServersChoice}
-            isDomainChoice={this.state.isDomainChoice}
-            isRegistrarChoice={this.state.isRegistrarChoice}
-            isCompanyChoice={this.state.isCompanyChoice}
-            isCountryChoice={this.state.isCountryChoice}
-            isCityChoice={this.state.isCityChoice}
-            isIssuerChoice={this.state.isIssuerChoice}
-            isDaysChoice={this.state.isDaysChoice}
-            isFromChoice={this.state.isFromChoice}
-            isToChoice={this.state.isToChoice}
+            isCreateChoiced={this.state.isCreateChoiced}
+            isUpdateChoiced={this.state.isUpdateChoiced}
+            isExpiryChoiced={this.state.isExpiryChoiced}
+            isRegisteredChoiced={this.state.isRegisteredChoiced}
+            isServersChoiced={this.state.isServersChoiced}
+            isDomainChoiced={this.state.isDomainChoiced}
+            isRegistrarChoiced={this.state.isRegistrarChoiced}
+            isCompanyChoiced={this.state.isCompanyChoiced}
+            isCountryChoiced={this.state.isCountryChoiced}
+            isCityChoiced={this.state.isCityChoiced}
+            isIssuerChoiced={this.state.isIssuerChoiced}
+            isDaysChoiced={this.state.isDaysChoiced}
+            isFromChoiced={this.state.isFromChoiced}
+            isToChoiced={this.state.isToChoiced}
           />
         </div>
         <footer className="footer">

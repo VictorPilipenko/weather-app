@@ -35,7 +35,7 @@ class CSVall extends React.Component {
     const preparationForExport = value => {
       try {
         for (let p = 0; p < value.length; p++) {
-          if (!this.props[`is${value[p]}Choice`]) {
+          if (!this.props[`is${value[p]}Choiced`]) {
             dataFromStore.forEach(item => {
               switch (value[p]) {
                 case value: delete item.value; break;
