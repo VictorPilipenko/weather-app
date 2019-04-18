@@ -84,12 +84,12 @@ class WeatherDisplay extends Component {
       promiseArray.push(
         fetch(whoxyUrlLoop)
           .then(response => response.json())
-          .then(data1 =>
+          .then(whoxyData =>
 
             fetch(proxyurl + sslUrlLoop)
               .then(response => response.json())
-              .then(data2 => {
-                return Object.assign(data1, data2);
+              .then(sslData => {
+                return Object.assign(whoxyData, sslData);
               })
               .catch(error => {
                 console.log(error.message)
@@ -104,38 +104,34 @@ class WeatherDisplay extends Component {
     return Promise.all(promiseArray)
   }
 
+  removeItemInColumns = (key, value, body) => {
+    if (value === undefined)
+      return;
+
+    for (let i in body) {
+      if (body[i][key] === value) {
+        body.splice(i, 1);
+      }
+    }
+  };
+
   render() {
 
-    const Create = 'Create';
-    const Update = 'Update';
-    const Expiry = 'Expiry';
-    const Registered = 'Registered';
-    const Servers = 'Servers';
-    const Domain = 'Domain';
-    const Registrar = 'Registrar';
-    const Company = 'Company';
-    const Country = 'Country';
-    const City = 'City';
-    const Issuer = 'Issuer';
-    const Days = 'Days';
-    const From = 'From';
-    const To = 'To';
-
     const paramsForDisplay = [
-      Create,
-      Update,
-      Expiry,
-      Registered,
-      Servers,
-      Domain,
-      Registrar,
-      Company,
-      Country,
-      City,
-      Issuer,
-      Days,
-      From,
-      To,
+      'Create',
+      'Update',
+      'Expiry',
+      'Registered',
+      'Servers',
+      'Domain',
+      'Registrar',
+      'Company',
+      'Country',
+      'City',
+      'Issuer',
+      'Days',
+      'From',
+      'To',
     ];
 
     const data = [];
@@ -207,53 +203,43 @@ class WeatherDisplay extends Component {
       { label: 'To', key: 'to', },
     ];
 
-    const domain = [
+    let domain = [
       { Header: 'Domain Name', accessor: 'name' },
     ];
 
-    const timeStamps = [
+    let timeStamps = [
       { Header: 'Create date', accessor: 'create', },
       { Header: 'Update date', accessor: 'update', },
       { Header: 'Expiry date', accessor: 'expiry', },
     ];
 
-    const status = [
+    let status = [
       { Header: 'Registered', accessor: 'registered', },
       { Header: 'Servers name', accessor: 'servers', },
       { Header: 'Domain status', accessor: 'domain', },
-    ]
-    const located = [
+    ];
+
+    let located = [
       { Header: 'Registrar name', accessor: 'registrar', },
       { Header: 'Company name', accessor: 'company', },
       { Header: 'Country name', accessor: 'country', },
       { Header: 'City name', accessor: 'city', },
     ];
 
-    const ssl = [
+    let ssl = [
       { Header: 'Issuer name', accessor: 'issuer', },
       { Header: 'Days left', accessor: 'days', },
       { Header: 'From date', accessor: 'from', },
       { Header: 'To date', accessor: 'to', },
     ];
 
-    const columns = [
+    let columns = [
       { Header: 'Domain', columns: domain },
       { Header: 'Time Stamps', columns: timeStamps },
       { Header: 'Status', columns: status },
       { Header: 'Located', columns: located },
       { Header: 'SSL Checker', columns: ssl }
     ];
-
-    const removeItemInColumns = (key, value, body) => {
-      if (value === undefined)
-        return;
-
-      for (let i in body) {
-        if (body[i][key] === value) {
-          body.splice(i, 1);
-        }
-      }
-    };
 
     const preparationForDisplay = value => {
       try {
@@ -262,25 +248,25 @@ class WeatherDisplay extends Component {
 
             timeStamps.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), timeStamps);
+                this.removeItemInColumns("accessor", value[p].toLowerCase(), timeStamps);
               }
             });
 
             status.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), status);
+                this.removeItemInColumns("accessor", value[p].toLowerCase(), status);
               }
             });
 
             located.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), located);
+                this.removeItemInColumns("accessor", value[p].toLowerCase(), located);
               }
             });
 
             ssl.forEach(item => {
               if (item.Header.includes(value[p])) {
-                removeItemInColumns("accessor", value[p].toLowerCase(), ssl);
+                this.removeItemInColumns("accessor", value[p].toLowerCase(), ssl);
               }
             });
 
@@ -350,10 +336,6 @@ class WeatherDisplay extends Component {
             <button
               className="btn btn-primary"
               onClick={this.resetSorted}
-            // style={{
-            //   whiteSpace: 'pre',
-            //   outline: 'none',
-            // }}
             >
               {`Reset\nSort`}
             </button>
@@ -361,10 +343,6 @@ class WeatherDisplay extends Component {
             <button
               className="btn btn-primary"
               onClick={this.resetFiltered}
-            // style={{
-            //   whiteSpace: 'pre',
-            //   outline: 'none',
-            // }}
             >
               {`Reset\nSearch`}
             </button>
