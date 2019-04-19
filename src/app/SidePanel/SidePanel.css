@@ -21,7 +21,7 @@
 }
 
 .hide-nav{
-  opacity: 0 !important; 
+  opacity: 0; 
   grid-area: side-nav;
   background-color: #37474f;
   border-radius: 5px;
