@@ -1,4 +1,3 @@
-
 /* .grid-container {
   height: 100vh;
   display: grid;
@@ -21,35 +20,43 @@
   animation: imageAnimation 1s;
 }
 
+.hide-nav{
+  opacity: 0 !important; 
+  grid-area: side-nav;
+  background-color: #37474f;
+  border-radius: 5px;
+  animation: imageAnimation-revert 1s;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 .image{
-  height: 25px;
+  height: 22px;
 }
 
 .header-btn{
-    margin-left: 58px;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    outline: none;
+  margin-left: 58px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  outline: none;
 }
 
-.header-btn:hover{
-    margin-left: 58px;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    outline: none;
+/* .header-btn:hover{
     box-shadow: 0px 0px 47px -8px rgba(0,0,0,0.75);
-}
+} */
 
 /*burger*/
 
 .sidenav---sidenav---_2tBP {
-  position: absolute !important;
+  position: fixed !important;
   background: #455a64 !important;
-  /* right: 0 !important; */
-  /* left: auto !important; */
   transition: min-width 0.65s !important;
+  top: 0;
+  overflow-y: auto;
 }
 
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
@@ -57,10 +64,17 @@
 }
 
 .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- .sidenav---navicon---3gCRo + .sidenav---navtext---1AE_f{
-  overflow-x: hidden;
   animation: imageAnimation 1s;
-  overflow: hidden;
-  padding-left: 15px;
+  padding-left: 30px;
+}
+
+.sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo{
+  display: flex !important;
+  justify-content: center;
+}
+
+.sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navicon---3gCRo > *, .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- > .sidenav---navitem---9uL5T .sidenav---navtext---1AE_f > *{
+  align-self: center;
 }
 
 @keyframes imageAnimation {
@@ -69,8 +83,6 @@
     display: none !important;
     opacity: 0;
     z-index: 100; 
-    overflow: hidden;
-    overflow-x: hidden;
     position: fixed;
   }
   100% {
@@ -78,8 +90,21 @@
     display: block !important;
     opacity: 1;
     z-index: 100;
-    overflow: hidden;
-    overflow-x: hidden;
+  }
+}
+
+@keyframes imageAnimation-revert {
+  0% {
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1;
+    z-index: 100;
+  }
+  100% {
+    visibility: hidden !important;
+    display: none !important;
+    opacity: 0;
+    z-index: 100; 
   }
 }
 
@@ -92,54 +117,23 @@
   
   /*burger*/
 
-  .sidenav---sidenav---_2tBP {
-    position: absolute !important;
-    background: #455a64 !important;
-    right: 0 !important;
-    left: auto !important;
-    transition: min-width 0.65s !important;
-  }
-
   .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL {
       min-width: 200px !important;
   }
 
   .sidenav---sidenav---_2tBP.sidenav---expanded---1KdUL .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ- .sidenav---navicon---3gCRo + .sidenav---navtext---1AE_f{
-    overflow-x: hidden;
     animation: imageAnimation 1s;
-    overflow: hidden;
     padding-left: 15px;
   }
 
-  @keyframes imageAnimation {
-    0% {
-      visibility: hidden !important;
-      display: none !important;
-      opacity: 0;
-      z-index: -100; 
-      overflow: hidden;
-      overflow-x: hidden;
-      position: fixed;
-    }
-    100% {
-      visibility: visible !important;
-      display: block !important;
-      opacity: 1;
-      z-index: 100;
-      overflow: hidden;
-      overflow-x: hidden;
-    }
-  }
-
+  
   .sidenav---sidenav-nav---3tvij > .sidenav---sidenav-navitem---uwIJ-.sidenav---highlighted---oUx9u > .sidenav---navitem---9uL5T {
       margin-top: 5px;
   }
 }
 
 @media all and (max-width: 430px){
-  .headr-btn{
-    padding: 20px;
-    width: 120px;
+  .header-btn{
     margin-left: 0px;
   }
 }

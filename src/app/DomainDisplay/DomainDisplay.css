@@ -141,6 +141,11 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+
+  .reset-table {
+    padding-left: 3px;
+    padding-right: 3px;
+  }
 }
 
 @media all and (max-width: 375px) { 

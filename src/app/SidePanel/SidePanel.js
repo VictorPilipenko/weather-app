@@ -1,13 +1,20 @@
 import React from 'react'
 import SideNav, { /*Toggle, Nav,*/ NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import ClickOutside from '../../components/ClickOutside'
-import logo from '../../assets/Logo_Final-01.png'
 import "./SidePanel.css";
 import '../App/App.css'
-
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
+import logo from '../../assets/Logo_Final-01.png'
+
+import behance from '../../assets/behance.svg'
+import dribbble from '../../assets/dribbble.svg'
+import clutch from '../../assets/clutch.webp'
+import designrush from '../../assets/designrush.jpg'
+import linkedin from '../../assets/linkedin.png'
+import instagram from '../../assets/instagram.png'
+import facebook from '../../assets/facebook.png'
 
 export default class SidePanel extends React.Component {
   state = {
@@ -19,11 +26,25 @@ export default class SidePanel extends React.Component {
     toggle: !this.state.toggle
   })
 
-  ret = () => {
-    // console.log(this.state.toggle)
+  navItem = (text, url, logo) => {
     return (
-      this.state.toggle ?
-        <div className='side-nav'>
+      <>
+        <NavItem eventKey={text} onClick={() => window.open(url, '_blank')}>
+          <NavIcon>
+            <img src={logo} className='image' alt={text} />
+          </NavIcon>
+          <NavText>
+            {text}
+          </NavText>
+        </NavItem>
+      </>
+    );
+  }
+
+  sideNav = () => {
+    return (
+      // this.state.toggle ?
+        <div className= {this.state.toggle ? 'side-nav' : 'hide-nav'}>
           <ClickOutside
             onClickOutside={() => this.setState({ expanded: false })}
           >
@@ -33,49 +54,22 @@ export default class SidePanel extends React.Component {
             >
               <SideNav.Toggle />
               <SideNav.Nav /*defaultSelected="Our team"*/>
-
-                <NavItem
-                  eventKey="Our team"
-                  onClick={() => window.open('https://qbex.io/our-team', '_blank') }
-
-                >
-                  <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team"><img src={logo} className='image' alt="Our team" /></a>
-                  </NavIcon>
-                  <NavText>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/our-team">
-                      Our team
-                  </a>
-                  </NavText>
-                </NavItem>
-
-                <NavItem eventKey="Portfolio" onClick={() => window.open('https://qbex.io/portfolio', '_blank') }>
-                  <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio"><img src={logo} className='image' alt="Portfolio" /></a>
-                  </NavIcon>
-                  <NavText>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/portfolio">
-                      Portfolio
-                  </a>
-                  </NavText>
-                </NavItem>
-
-                <NavItem eventKey="Contact us" onClick={() => window.open('https://qbex.io/contact', '_blank') }>
-                  <NavIcon>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact"><img src={logo} className='image' alt="Contact" /></a>
-                  </NavIcon>
-                  <NavText>
-                    <a target="_blank" rel="noopener noreferrer" href="https://qbex.io/contact">
-                      Contact us
-                  </a>
-                  </NavText>
-                </NavItem>
-
+                {this.navItem('Our team', 'https://qbex.io/our-team', logo)}
+                {this.navItem('Portfolio', 'https://qbex.io/portfolio', logo)}
+                {this.navItem('Contact us', 'https://qbex.io/contact', logo)}
+                <br />
+                {this.navItem('behance', 'https://www.behance.net/office6784/', behance)}
+                {this.navItem('dribbble', 'https://dribbble.com/CubeX', dribbble)}
+                {this.navItem('clutch', 'https://clutch.co/profile/cubex-ukraine', clutch)}
+                {this.navItem('designrush', 'https://www.designrush.com/agency/profile/cubex', designrush)}
+                {this.navItem('linkedin', 'https://www.linkedin.com/company/cubex-ukraine/?viewAsMember=true', linkedin)}
+                {this.navItem('instagram', 'https://www.instagram.com/cubex_team/', instagram)}
+                {this.navItem('facebook', 'https://www.facebook.com/cubex.group/', facebook)}
               </SideNav.Nav>
             </SideNav>
           </ClickOutside>
         </div>
-        : null
+        // : null
     )
   }
 
@@ -89,7 +83,7 @@ export default class SidePanel extends React.Component {
         >
           {!this.state.toggle ? `P` : 'H'}
         </button>
-        {this.ret()}
+        {this.sideNav()}
       </>
     )
   }
