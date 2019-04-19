@@ -16,15 +16,34 @@ import linkedin from '../../assets/linkedin.png'
 import instagram from '../../assets/instagram.png'
 import facebook from '../../assets/facebook.png'
 
-export default class SidePanel extends React.Component {
+export default class SidePanel extends React.PureComponent {
   state = {
     expanded: false,
     toggle: false,
-  }
+  };
 
   button = () => this.setState({
-    toggle: !this.state.toggle
-  })
+      toggle: !this.state.toggle
+  });
+
+  handleSidePanel = toggle => {
+    if (!toggle) {
+      this.panel.style.animation = "hidePanel .5s";
+      setTimeout(() => {
+        this.panel.style.display = "none";
+      }, 300);
+    }
+    else {
+      this.panel.style.display = "block";
+      this.panel.style.animation = "showPanel .5s";
+    };
+  };
+
+  componentDidUpdate = prevState => {
+    if (prevState.toggle !== this.state.toggle) {
+      this.handleSidePanel(this.state.toggle);
+    };
+  };
 
   navItem = (text, url, logo) => {
     return (
@@ -43,33 +62,34 @@ export default class SidePanel extends React.Component {
 
   sideNav = () => {
     return (
-      // this.state.toggle ?
-        <div className= {this.state.toggle ? 'side-nav' : 'hide-nav'}>
-          <ClickOutside
-            onClickOutside={() => this.setState({ expanded: false })}
+      <div
+        style={{ display: 'none', zIndex: 101 }}
+        ref={node => { this.panel = node }}
+      >
+        <ClickOutside
+          onClickOutside={() => this.setState({ expanded: false })}
+        >
+          <SideNav
+            expanded={this.state.expanded}
+            onToggle={expanded => this.setState({ expanded })}
           >
-            <SideNav
-              expanded={this.state.expanded}
-              onToggle={expanded => this.setState({ expanded })}
-            >
-              <SideNav.Toggle />
-              <SideNav.Nav /*defaultSelected="Our team"*/>
-                {this.navItem('Our team', 'https://qbex.io/our-team', logo)}
-                {this.navItem('Portfolio', 'https://qbex.io/portfolio', logo)}
-                {this.navItem('Contact us', 'https://qbex.io/contact', logo)}
-                <br />
-                {this.navItem('behance', 'https://www.behance.net/office6784/', behance)}
-                {this.navItem('dribbble', 'https://dribbble.com/CubeX', dribbble)}
-                {this.navItem('clutch', 'https://clutch.co/profile/cubex-ukraine', clutch)}
-                {this.navItem('designrush', 'https://www.designrush.com/agency/profile/cubex', designrush)}
-                {this.navItem('linkedin', 'https://www.linkedin.com/company/cubex-ukraine/?viewAsMember=true', linkedin)}
-                {this.navItem('instagram', 'https://www.instagram.com/cubex_team/', instagram)}
-                {this.navItem('facebook', 'https://www.facebook.com/cubex.group/', facebook)}
-              </SideNav.Nav>
-            </SideNav>
-          </ClickOutside>
-        </div>
-        // : null
+            <SideNav.Toggle />
+            <SideNav.Nav /*defaultSelected="Our team"*/>
+              {this.navItem('Our team', 'https://qbex.io/our-team', logo)}
+              {this.navItem('Portfolio', 'https://qbex.io/portfolio', logo)}
+              {this.navItem('Contact us', 'https://qbex.io/contact', logo)}
+              <br />
+              {this.navItem('behance', 'https://www.behance.net/office6784/', behance)}
+              {this.navItem('dribbble', 'https://dribbble.com/CubeX', dribbble)}
+              {this.navItem('clutch', 'https://clutch.co/profile/cubex-ukraine', clutch)}
+              {this.navItem('designrush', 'https://www.designrush.com/agency/profile/cubex', designrush)}
+              {this.navItem('linkedin', 'https://www.linkedin.com/company/cubex-ukraine/?viewAsMember=true', linkedin)}
+              {this.navItem('instagram', 'https://www.instagram.com/cubex_team/', instagram)}
+              {this.navItem('facebook', 'https://www.facebook.com/cubex.group/', facebook)}
+            </SideNav.Nav>
+          </SideNav>
+        </ClickOutside>
+      </div>
     )
   }
 
