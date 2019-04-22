@@ -415,11 +415,19 @@ class WeatherDisplay extends Component {
           onExpandedChange={expanded => this.setState({ expanded })}
           onResizedChange={resized => this.setState({ resized })}
           onFilteredChange={filtered => this.setState({ filtered })}
-        />
+        >
+          {(state, makeTable, instance) => {
+            // this.props.datadispatch(state.pageRows)
+            // this.props.alldatadispatch(state.sortedData)
+            // console.log(state.sortedData, state.pageRows);
+            return (
+              makeTable()
+            );
+          }}
+        </ReactTable>
       </>
     )
   }
 }
-
 
 export default WeatherDisplay;

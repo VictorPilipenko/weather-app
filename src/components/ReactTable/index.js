@@ -48,6 +48,39 @@ class ReactTable extends Methods(Lifecycle(Component)) {
     }
   }
 
+  componentDidUpdate = () => {
+    // Pagination
+    const startRow = this.state.pageSize * this.state.page
+    const endRow = startRow + this.state.pageSize
+    let pageRows = this.state.manual ? this.state.resolvedData : this.state.sortedData.slice(startRow, endRow)
+
+    const recurseRowsViewIndex = (rows, path = [], index = -1) => [
+      rows.map((row, i) => {
+        index += 1
+        const rowWithViewIndex = {
+          ...row,
+          _viewIndex: index,
+        }
+        const newPath = path.concat([i])
+        if (rowWithViewIndex[this.state.subRowsKey] && _.get(this.state.expanded, newPath)) {
+          [rowWithViewIndex[this.state.subRowsKey], index] = recurseRowsViewIndex(
+            rowWithViewIndex[this.state.subRowsKey],
+            newPath,
+            index
+          )
+        }
+        return rowWithViewIndex
+      }),
+      index,
+    ];
+    [pageRows] = recurseRowsViewIndex(pageRows)
+
+    this.props.datadispatch(pageRows)
+    this.props.alldatadispatch(this.state.sortedData)
+  }
+
+
+
   render() {
     const resolvedState = this.getResolvedState()
     const {
@@ -190,10 +223,6 @@ class ReactTable extends Methods(Lifecycle(Component)) {
       canNext,
       rowMinWidth,
     }
-
-    // console.log('finalState', finalState)
-    this.props.datadispatch(finalState.pageRows)
-    this.props.alldatadispatch(finalState.sortedData)
 
     const rootProps = _.splitProps(getProps(finalState, undefined, undefined, this))
     const tableProps = _.splitProps(getTableProps(finalState, undefined, undefined, this))
@@ -868,6 +897,8 @@ class ReactTable extends Methods(Lifecycle(Component)) {
 
     // childProps are optionally passed to a function-as-a-child
     return children ? children(finalState, makeTable, this) : makeTable()
+
+
   }
 }
 

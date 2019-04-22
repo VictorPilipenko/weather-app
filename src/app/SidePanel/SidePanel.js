@@ -23,7 +23,7 @@ export default class SidePanel extends React.PureComponent {
   };
 
   button = () => this.setState({
-      toggle: !this.state.toggle
+    toggle: !this.state.toggle
   });
 
   handleSidePanel = toggle => {
@@ -50,7 +50,7 @@ export default class SidePanel extends React.PureComponent {
       <>
         <NavItem eventKey={text} onClick={() => window.open(url, '_blank')}>
           <NavIcon>
-            <img src={logo} className='image' alt={text} />
+            <img src={logo} className='NavIcon' alt={text} />
           </NavIcon>
           <NavText>
             {text}

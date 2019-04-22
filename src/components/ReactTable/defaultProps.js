@@ -242,7 +242,7 @@ export default {
 
           // &&
 
-          children.toString().indexOf('Inc') !== -1 ?
+          children.toString().includes('Inc') ?
           <a target="_blank" rel="noopener noreferrer" href={`https://${children.toString().replace(/Inc./g,"").replace(/[\s{2,}]+/g, '')}.com`}>
             {children}
           </a>
